@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'DM Sans';
+  src: url(../fonts/DMSans-VariableFont_opsz\wght.ttf) format('truetype'),
+    url(../fonts/DMSans-Italic-VariableFont_opsz\wght.ttf) format('truetype');
+}
+
+body {
+  color: var(--black);
+  background-color: var(--white-smoke);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
