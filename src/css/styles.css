@@ -1,13 +1,13 @@
 /* BASE */
-@import url('./reset.css');
-@import url('./common.css');
-@import url('./container.css');
-@import url('./colors.css');
+@import url('./base/reset.css');
+@import url('./base/common.css');
+@import url('./base/container.css');
+@import url('./base/colors.css');
 
 /* lAYOUT */
-@import url('./header.css');
-@import url('./hero.css');
-@import url('./quote.css');
-@import url('./exerciselist.css');
-@import url('./information.css');
-@import url('./footer.css');
+@import url('./layout/header.css');
+@import url('./layout/hero.css');
+@import url('./layout/quote.css');
+@import url('./layout/exerciselist.css');
+@import url('./layout/information.css');
+@import url('./layout/footer.css');
