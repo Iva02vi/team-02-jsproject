@@ -8,7 +8,7 @@
     height: 387px;
     width: 335px;
     border-radius: 30px;
-    background: url('../img/hero/mob-hero-min.jpg') center no-repeat;
+    background: url('/img/hero/mob-hero-min.jpg') center no-repeat;
   }
 
   @media (min-device-pixel-ratio: 2),
@@ -19,7 +19,7 @@
       height: 387px;
       width: 335px;
       border-radius: 30px;
-      background: url('../img/hero/mob-hero@2-min.jpg') center no-repeat;
+      background: url('/img/hero/mob-hero@2-min.jpg') center no-repeat;
       background-size: 335px;
     }
   }
@@ -86,7 +86,7 @@
   }
 
   .hero-foto-tag {
-    background-image: url(../img/hero/tabl-hero-min.jpg);
+    background-image: url(/img/hero/tabl-hero-min.jpg);
   }
 
   .hero-foto-tag {
@@ -96,7 +96,7 @@
     border-radius: 30px;
     flex-shrink: 0;
     border-radius: 50px 0px 50px 50px;
-    background: url('../img/hero/tabl-hero-min.jpg') no-repeat #e8e8e8;
+    background: url('/img/hero/tabl-hero-min.jpg') no-repeat #e8e8e8;
     background-size: cover;
   }
 
@@ -109,7 +109,7 @@
       width: 248px;
       flex-shrink: 0;
       border-radius: 50px 0px 50px 50px;
-      background: url('../img/hero/tabl-hero@2-min.jpg') no-repeat #e8e8e8;
+      background: url('/img/hero/tabl-hero@2-min.jpg') no-repeat #e8e8e8;
       background-size: cover;
     }
   }
@@ -185,14 +185,14 @@
   }
   .hero-foto-tag {
     width: 704px;
-    background-image: url(../img/hero/desktop-hero-min.jpg);
+    background-image: url('/img/hero/desktop-hero-min.jpg');
   }
   .hero-foto-tag {
     margin-bottom: 20px;
     height: 884px;
     width: 704px;
     border-radius: 50px 0px 50px 50px;
-    background: url('../img/hero/desktop-hero-min.jpg') center no-repeat;
+    background: url('/img/hero/desktop-hero-min.jpg') center no-repeat;
   }
 
   @media (min-device-pixel-ratio: 2),
@@ -202,8 +202,8 @@
       margin-bottom: 20px;
       height: 884px;
       width: 704px;
-      border-radius: 30px;
-      background: url('../img/hero/desktop-hero@2-min.jpg') center no-repeat;
+      border-radius: 50px 0px 50px 50px;
+      background: url('/img/hero/desktop-hero@2-min.jpg') center no-repeat;
       background-size: 704px;
     }
   }
