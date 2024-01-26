@@ -1,3 +1,7 @@
+.information-section {
+  margin-right: 20px;
+  margin-left: 20px;
+}
 .information-section-img {
   border-radius: 30px;
   background: url(<path-to-image>),
@@ -78,6 +82,11 @@
     line-height: 1.5;
     width: 520px;
     height: 97px;
+  }
+
+  .information-section {
+    margin-right: 16px;
+    margin-left: 16px;
   }
 }
 
