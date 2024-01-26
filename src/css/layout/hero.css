@@ -1,4 +1,3 @@
-
 @media screen and (max-width: 767px) {
   .hero-container {
     padding: 20px;
@@ -86,7 +85,7 @@
   }
 
   .hero-foto-tag {
-    background-image: url(../img/hero/tabl-hero-min.jpg);
+    background-image: url('/img/hero/tabl-hero-min.jpg');
   }
 
   .hero-foto-tag {
