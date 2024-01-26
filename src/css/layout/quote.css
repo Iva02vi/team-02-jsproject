@@ -1,34 +1,31 @@
 .quote-section {
   margin-bottom: 20px;
 }
-
 .quote-container {
   display: flex;
   flex-direction: column;
 }
-
 .quote-for-today {
-  width: 335px;
+  width: 100%;
   height: 272px;
   border-radius: 30px;
   background-color: var(--dark-gray);
-
   display: flex;
   gap: 14px;
   position: relative;
-
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 40px;
   padding-bottom: 40px;
 }
-
+.quote-icon {
+  display: block;
+}
 .quote-display {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-
 .quote-title {
   color: var(--white);
   font-family: 'DM Sans';
@@ -37,7 +34,6 @@
   font-weight: 500;
   line-height: 28px; /* 140% */
 }
-
 .quote-text {
   color: rgba(246, 246, 246, 0.6);
   font-family: 'DM Sans';
@@ -46,7 +42,6 @@
   font-weight: 400;
   line-height: 18px; /* 128.571% */
 }
-
 .quote-autor {
   color: var(--white);
   font-family: 'DM Sans';
@@ -55,19 +50,71 @@
   font-weight: 500;
   line-height: 24px; /* 150% */
 }
-
-.icon-quote-commas {
+.quote-icon-commas {
   position: absolute;
   right: 20px;
 }
-
 .quote-bg-image {
   width: 100%;
   height: 272px;
-  border-radius: 30px;
 }
-
 .quote-img {
   background-repeat: no-repeat;
   background-size: contain;
+  border-radius: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-section {
+    margin-bottom: 16px;
+  }
+  .quote-for-today {
+    height: 272px;
+    border-radius: 50px;
+    gap: 18px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .quote-display {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .quote-title {
+    font-size: 24px;
+    line-height: 32px; /* 133.333% */
+  }
+  .quote-text {
+    font-size: 16px;
+    line-height: 24px; /* 150% */
+  }
+  .quote-icon-commas {
+    right: 80px;
+  }
+  .quote-bg-image {
+    width: 100%;
+    height: 302px;
+  }
+  .quote-img {
+    border-radius: 50px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .quote-container {
+    flex-direction: row;
+  }
+  .quote-for-today {
+    width: 704px;
+    height: 302px;
+    gap: 18px;
+    padding: 64px;
+  }
+  .quote-display {
+    gap: 16px;
+  }
+  .quote-icon-commas {
+    right: 32px;
+  }
 }
