@@ -52,3 +52,47 @@
   width: 230px;
   letter-spacing: 0.04em;
 }
+
+@media screen and (min-width: 768px) {
+  .information-section-img {
+    border-radius: 50px;
+    width: 736px;
+    height: 302px;
+  }
+
+  .information-section-text-container {
+    border-radius: 50px;
+    width: 736px;
+    height: 302px;
+    padding: 64px 96px 64px 64px;
+  }
+
+  .info-first-text {
+    font-size: 24px;
+    line-height: 1.33;
+    width: 81px;
+  }
+
+  .info-third-text {
+    font-size: 16px;
+    line-height: 1.5;
+    width: 520px;
+    height: 97px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .information-section-img {
+    width: 704px;
+  }
+
+  .information-section-text-container {
+    width: 704px;
+    column-gap: 16px;
+    padding: 64px;
+  }
+
+  .information-section {
+    display: flex;
+  }
+}
