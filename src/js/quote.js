@@ -8,11 +8,20 @@ document.addEventListener('DOMContentLoaded', function () {
     return JSON.parse(localStorage.getItem('quoteData')) || {};
   }
 
-  // Функція збереження цитати в локальному сховищі
-  function saveQuoteToLocalStorage(quote, author, date) {
-    const quoteData = { quote, author, date };
-    localStorage.setItem('quoteData', JSON.stringify(quoteData));
+  // Функція відображення збереженої цитати при завантаженні сторінки
+  function displayStoredQuote() {
+    const storedQuoteData = getStoredQuote();
+    displayQuote(storedQuoteData.quote, storedQuoteData.author);
   }
+
+  // Функція відображення цитати
+  function displayQuote(quote, author) {
+    quoteTextElement.textContent = quote || 'No quote available.';
+    quoteAuthorElement.textContent = author || 'Unknown author';
+  }
+
+  // Виклик функції відображення збереженої цитати при завантаженні сторінки
+  displayStoredQuote();
 
   // Асинхронна функція отримання цитати з backend
   async function fetchQuote() {
@@ -40,15 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Функція відображення цитати
-  function displayQuote(quote, author) {
-    quoteTextElement.textContent = quote;
-    quoteAuthorElement.textContent = author;
-  }
-
   // Періодичний виклик функції отримання цитати (раз на добу)
   setInterval(fetchQuote, 24 * 60 * 60 * 1000);
-
-  // Виклик функції отримання цитати при завантаженні сторінки
-  fetchQuote();
 });
