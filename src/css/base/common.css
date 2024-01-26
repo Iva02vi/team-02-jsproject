@@ -1,7 +1,9 @@
 @font-face {
   font-family: 'DM Sans';
-  src: url(../fonts/DMSans-VariableFont_opsz\wght.ttf) format('truetype'),
-    url(../fonts/DMSans-Italic-VariableFont_opsz\wght.ttf) format('truetype');
+  src: local('DM Sans'), url('./fonts/DMSans-Regular.ttf') format('truetype'),
+    url('./fonts/DMSans-Medium.ttf') format('truetype'),
+    url('./fonts/DMSans-Bold.ttf') format('truetype'),
+    url('./fonts/DMSans-Italic.ttf') format('truetype');
 }
 
 body {
