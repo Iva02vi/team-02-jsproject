@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
           new Date().toDateString()
         );
         displayQuote(data.quote, data.author);
+      } else {
+        // Якщо цитата не змінилась, відображаємо збережену цитату
+        displayStoredQuote();
       }
     } catch (error) {
       console.error('Error fetching quote:', error);
