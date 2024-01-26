@@ -13,10 +13,19 @@
   border-radius: 30px;
   background-color: var(--dark-gray);
 
+  display: flex;
+  gap: 14px;
+
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 40px;
   padding-bottom: 40px;
+}
+
+.quote-display {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .quote-title {
@@ -44,6 +53,15 @@
   font-style: normal;
   font-weight: 500;
   line-height: 24px; /* 150% */
+}
+
+.icon-quote {
+  position: relative;
+}
+
+.icon-quote-commas {
+  position: absolute;
+  right: 0%;
 }
 
 .quote-bg-image {
