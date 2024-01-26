@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="./css/header.css"></script>
+  <script src="./js/header.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&family=Raleway:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="phone">
+  <div id="header">
+    <div id="logo">energy.flow</div>
+    <div id="burger" onclick="toggleMenu()">
+      <svg id="burgerIcon" xmlns="http://www.w3.org/2000/svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
+        <path d="M28 10.3333H4" stroke="#7E847F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M28 5H4" stroke="#7E847F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div id="menu">
+    <div id="logoMenu">energy.flow</div>
+    <div id="home">Home</div>
+    <div id="favorites">Favorites</div>
+    <div id="closeButton" onclick="toggleMenu()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M15 5L5 15" stroke="#F6F6F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 5L15 15" stroke="#F6F6F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg></div>
+      <!-- Add the following HTML code at the bottom of your menu div -->
+    <div class="menu-icons">
+    <a href="https://www.facebook.com/goITclub/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+            <path d="M15.25 3.62512C15.4375 3.62512 15.625 3.62512 16 3.62512V6.43762C15.8125 6.43762 15.4375 6.43762 15.0625 6.43762C14.6875 6.43762 14.3125 6.43762 14.125 6.62512C13.9375 6.81262 13.9375 7.00012 13.9375 7.43762C13.9375 7.81262 13.9375 8.06262 13.9375 8.43762H16V10.8126H13.9375V21.1251H10.75V10.7501H9.0625V8.37512H10.75V7.56262C10.75 6.18762 10.9375 5.18762 11.3125 4.75012C11.875 3.93762 13 3.56262 14.6875 3.56262C14.875 3.62512 15.0625 3.62512 15.25 3.62512Z" fill="#F6F6F6"/>
+          </svg>
+    </a>
+    
+    <a href="https://www.instagram.com/goitclub/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+            <g opacity="0.8">
+              <path d="M22.4356 8.40309C22.4234 7.56376 22.2679 6.73107 21.9702 5.94606C21.4494 4.60556 20.3887 3.54557 19.046 3.02667C18.2697 2.73506 17.4489 2.57872 16.6182 2.56098C15.5498 2.51331 15.211 2.5 12.4989 2.5C9.78676 2.5 9.43914 2.5 8.3785 2.56098C7.54887 2.57872 6.72812 2.73506 5.9518 3.02667C4.60906 3.54557 3.54731 4.60556 3.02754 5.94606C2.73545 6.72109 2.57774 7.54047 2.56219 8.36872C2.51444 9.43647 2.5 9.77464 2.5 12.4823C2.5 15.1899 2.5 15.5358 2.56219 16.5958C2.57885 17.4252 2.73545 18.2434 3.02754 19.0207C3.54842 20.3601 4.60906 21.4201 5.95291 21.939C6.7259 22.2406 7.54665 22.4113 8.37961 22.4379C9.44913 22.4856 9.78787 22.5 12.5 22.5C15.2121 22.5 15.5598 22.5 16.6204 22.4379C17.45 22.4213 18.2708 22.2649 19.0482 21.9733C20.3909 21.4533 21.4516 20.3933 21.9725 19.0539C22.2646 18.2778 22.4211 17.4595 22.4378 16.6291C22.4856 15.5624 22.5 15.2242 22.5 12.5155C22.4978 9.80791 22.4978 9.46419 22.4356 8.40309ZM12.4922 17.6026C9.65571 17.6026 7.35784 15.3085 7.35784 12.4767C7.35784 9.64492 9.65571 7.35087 12.4922 7.35087C15.3265 7.35087 17.6266 9.64492 17.6266 12.4767C17.6266 15.3085 15.3265 17.6026 12.4922 17.6026ZM17.831 8.35653C17.1679 8.35653 16.6337 7.8221 16.6337 7.16127C16.6337 6.50044 17.1679 5.96602 17.831 5.96602C18.4918 5.96602 19.0271 6.50044 19.0271 7.16127C19.0271 7.8221 18.4918 8.35653 17.831 8.35653Z" fill="#F6F6F6"/>
+              <path d="M12.4934 15.6062C14.221 15.6062 15.6215 14.2057 15.6215 12.4781C15.6215 10.7505 14.221 9.34998 12.4934 9.34998C10.7657 9.34998 9.36523 10.7505 9.36523 12.4781C9.36523 14.2057 10.7657 15.6062 12.4934 15.6062Z" fill="#F6F6F6"/>
+            </g>
+          </svg>
+    </a>
+    
+    <a href="https://www.youtube.com/c/GoIT">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+            <g opacity="0.8">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M18.9375 4.68738C17.875 4.62488 15.6875 4.56238 12.375 4.56238H11.9375C8.74999 4.56238 6.62502 4.62488 5.56252 4.74988C4.12502 4.87488 3.12499 5.24988 2.56249 5.74988C2.06249 6.18738 1.68751 6.99988 1.56251 8.06238C1.50001 8.74988 1.4375 10.1874 1.4375 12.3749V12.6874C1.4375 14.7499 1.49999 16.1874 1.62499 16.8749C1.81249 17.8749 2.12502 18.6249 2.75002 19.0624C3.37502 19.5624 4.43751 19.8749 5.93751 19.9999C7.00001 20.0624 9.18751 20.1249 12.5 20.1249H12.9375C16.125 20.1249 18.25 20.0624 19.3125 19.9374C20.75 19.8124 21.75 19.4374 22.3125 18.9374C22.8125 18.4999 23.1875 17.6874 23.3125 16.6249C23.375 15.9374 23.4375 14.4999 23.4375 12.3124V11.9999C23.4375 9.93738 23.375 8.49988 23.25 7.81238C23.0625 6.81238 22.75 6.06238 22.125 5.62488C21.5 5.12488 20.4375 4.81238 18.9375 4.68738ZM16.5 12.3749L9.62502 16.4999V8.24988L16.5 12.3749Z" fill="#F6F6F6"/>
+            </g>
+          </svg>
+    </a>
+  </div>
+  
+  </div>
+</div>
+</body>
+</html>
