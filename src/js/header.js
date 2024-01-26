@@ -16,7 +16,7 @@ function toggleMenu() {
       home.style.display = 'block';
       favorites.style.display = 'block';
   
-      // Dynamically center "Home" when the menu is open
+
       home.style.marginTop = ((menu.clientHeight - home.clientHeight) / 2) + 'px';
     } else {
       menu.style.display = 'none';
@@ -30,7 +30,7 @@ function toggleMenu() {
   }
   
   document.addEventListener('DOMContentLoaded', function() {
-    // Код, який виконується після завантаження DOM
+
   
     var logo = document.getElementById('logo');
     var home = document.getElementById('home');
@@ -38,22 +38,22 @@ function toggleMenu() {
   
     if (logo) {
       logo.addEventListener('click', function() {
-        // Перенаправлення на головну сторінку при кліку на логотип
-        window.location.href = 'ваш_головний_URL'; // Замініть 'ваш_головний_URL' на реальний URL
+
+        window.location.href = 'ваш_головний_URL';
       });
     }
   
     if (home) {
       home.addEventListener('click', function() {
-        // Перенаправлення на головну сторінку при кліку на "Home"
-        window.location.href = 'ваш_головний_URL'; // Замініть 'ваш_головний_URL' на реальний URL
+       
+        window.location.href = 'ваш_головний_URL'; 
       });
     }
   
     if (energyFlow) {
       energyFlow.addEventListener('click', function() {
-        // Перенаправлення на головну сторінку при кліку на "energy.flow"
-        window.location.href = 'ваш_головний_URL'; // Замініть 'ваш_головний_URL' на реальний URL
+       
+        window.location.href = 'ваш_головний_URL'; 
       });
     }
   });
