@@ -1,10 +1,8 @@
-.hero-container {
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-}
 
 @media screen and (max-width: 767px) {
+  .hero-container {
+    padding: 20px;
+  }
   .hero-foto-tag {
     margin-bottom: 20px;
     height: 387px;
@@ -27,11 +25,11 @@
   }
   .hero-list {
     display: flex;
-    width: 141px;
+    width: 180px;
     gap: 4px;
     flex-wrap: wrap;
     padding-top: 95%;
-    padding-left: 2%;
+    padding-left: 8px;
   }
 
   .hero-list-tag {
@@ -117,13 +115,13 @@
   }
   .hero-list {
     display: flex;
-    width: 196px;
+    width: 250px;
     gap: 8px;
     align-items: center;
     align-content: center;
     flex-wrap: wrap;
     padding-top: 750px;
-    padding-left: 15px;
+    padding-left: 10px;
   }
 
   .hero-list-tag {
@@ -211,13 +209,14 @@
   }
   .hero-list {
     display: flex;
-    width: 196px;
+    width: auto;
+    max-width: 300px;
     gap: 8px;
     align-items: center;
     align-content: center;
     flex-wrap: wrap;
     padding-top: 750px;
-    padding-left: 18px;
+    padding-left: 30px;
   }
 
   .hero-list-tag {
