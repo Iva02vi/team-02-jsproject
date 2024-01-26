@@ -8,13 +8,14 @@
 }
 
 .quote-for-today {
-  width: 100%;
+  width: 335px;
   height: 272px;
   border-radius: 30px;
   background-color: var(--dark-gray);
 
   display: flex;
   gap: 14px;
+  position: relative;
 
   padding-left: 20px;
   padding-right: 20px;
@@ -55,17 +56,18 @@
   line-height: 24px; /* 150% */
 }
 
-.icon-quote {
-  position: relative;
-}
-
 .icon-quote-commas {
   position: absolute;
-  right: 0%;
+  right: 20px;
 }
 
 .quote-bg-image {
   width: 100%;
   height: 272px;
   border-radius: 30px;
+}
+
+.quote-img {
+  background-repeat: no-repeat;
+  background-size: contain;
 }
