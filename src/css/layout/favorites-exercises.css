@@ -1,17 +1,7 @@
-/* BASE */
-@import url('../base/reset.css');
-@import url('../base/common.css');
-@import url('../base/container.css');
-@import url('../base/colors.css');
-
-/* lAYOUT */
-@import url('../layout/header.css');
-@import url('../layout/quote.css');
-
 .favorites-page-items {
     width: 100%;
     padding: 40px 20px;
-    background-color: #E8E8E8;
+    background-color: var(--light-gray);
     border-radius: 30px;
 }
 
