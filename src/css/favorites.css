@@ -8,3 +8,7 @@
 @import url('./layout/header.css');
 @import url('./layout/favorites-quote.css');
 @import url('./layout/favorites-exercises.css');
+
+body {
+    background-color: var(--white-smoke);
+}
