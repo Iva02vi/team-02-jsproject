@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Функція відображення цитати
-  // function displayQuote(quote, author) {
-  //   quoteTextElement.textContent = quote || 'No quote available.';
-  //   quoteAuthorElement.textContent = author || 'Unknown author';
-  // }
+  function displayQuote(quote, author) {
+    quoteTextElement.textContent = quote || 'No quote available.';
+    quoteAuthorElement.textContent = author || 'Unknown author';
+  }
 
   // Виклик функції відображення збереженої цитати при завантаженні сторінки
   displayStoredQuote();
@@ -51,7 +51,4 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('Error fetching quote:', error);
     }
   }
-
-  // Періодичний виклик функції отримання цитати (раз на добу)
-  setInterval(fetchQuote, 24 * 60 * 60 * 1000);
 });
