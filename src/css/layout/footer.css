@@ -8,8 +8,7 @@
     color: var(--white-smoke);
     font-weight: 400;
     background-image: url('../../img/footer/footer-mobile-1x.jpg');
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
 }
 
 .footer-container {
@@ -109,13 +108,11 @@
 }
 
 .footer-modal-email::placeholder {
-    padding-left: 14px;
     color: rgba(246, 246, 246, 0.6);
 }
 
 .footer-modal-email:focus {
-    background-color: var(--white-smoke);
-    color: var(--black);
+    color: var(--white-smoke);
 }
 
 .footer-modal-button {
@@ -166,6 +163,7 @@ screen and (max-device-pixel-ratio: 2) and (max-width: 767px) {
     .footer {
         padding-top: 64px;
         border-radius: 50px;
+        margin: 16px auto;
     }
 
     .footer-container {
@@ -243,7 +241,6 @@ screen and (max-device-pixel-ratio: 2) and (max-width: 767px) {
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
     .footer {
-        padding-top: 64px;
         padding-bottom: 32px;
         padding-left: 28px;
         background-image: url('../../img/footer/footer-tablet-1x.jpg');
