@@ -1,7 +1,7 @@
 .footer {
     padding-top: 40px;
     padding-bottom: 20px;
-    border-radius: 50px;
+    border-radius: 30px;
     background-size: cover;
     background-repeat: no-repeat;
     max-width: 335px;
@@ -62,8 +62,8 @@
 
 .footer-social-card:hover,
 .footer-social-card:focus {
-    color: #5F6560;
-    border-color: #5F6560;
+    color: var(--dark-gray-hover);
+    border-color: var(--dark-gray-hover);
 }
 
 .footer-slogan {
@@ -135,8 +135,8 @@
 
 .footer-modal-button:hover,
 .footer-modal-button:focus {
-    background-color: #5F6560;
-    border: #5F6560;
+    background-color: var(--dark-gray-hover);
+    border: var(--dark-gray-hover);
 }
 
 .footer-terms-container {
@@ -165,6 +165,7 @@ screen and (max-device-pixel-ratio: 2) and (max-width: 767px) {
 @media screen and (min-width: 768px) {
     .footer {
         padding-top: 64px;
+        border-radius: 50px;
     }
 
     .footer-container {
