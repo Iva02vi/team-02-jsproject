@@ -39,6 +39,8 @@ img {
   right: 50px;
   cursor: pointer;
   transition: 0.3s all;
+  height: 48px;
+  width: 48px;
 }
 
 .back-to-top.active {

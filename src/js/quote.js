@@ -1,40 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Отримуємо елементи DOM для цитати та автора
+  const QUOTE_API_URL = 'https://energyflow.b.goit.study/api/quote';
+  const QUOTE_INTERVAL_MS = 4 * 60 * 60 * 1000; // Кожні 4 години
+
   const quoteTextElement = document.querySelector('.quote-text');
   const quoteAuthorElement = document.querySelector('.quote-author');
 
-  // Функція отримання збереженої цитати
   function getStoredQuote() {
     return JSON.parse(localStorage.getItem('quoteData')) || {};
   }
 
-  // Функція відображення збереженої цитати при завантаженні сторінки
-  function displayStoredQuote() {
-    const storedQuoteData = getStoredQuote();
-    displayQuote(storedQuoteData.quote, storedQuoteData.author);
+  function saveQuoteToLocalStorage(quote, author, date) {
+    localStorage.setItem(
+      'quoteData',
+      JSON.stringify({ quote, author, date: new Date().toDateString() })
+    );
   }
 
-  // Функція відображення цитати
   function displayQuote(quote, author) {
     quoteTextElement.textContent = quote || 'No quote available.';
     quoteAuthorElement.textContent = author || 'Unknown author';
   }
 
-  // Виклик функції відображення збереженої цитати при завантаженні сторінки
-  displayStoredQuote();
-
-  // Асинхронна функція отримання цитати з backend
   async function fetchQuote() {
     try {
-      const response = await fetch('https://energyflow.b.goit.study/api/quote');
+      const response = await fetch(QUOTE_API_URL);
       const data = await response.json();
 
       const storedQuoteData = getStoredQuote();
 
-      // Перевірка, чи цитата та автор змінилися
-      if (
+      if (!data.quote) {
+        // Якщо цитата не отримана від сервера, використовуємо ту, що вже є в localStorage
+        displayStoredQuote();
+      } else if (
         data.quote !== storedQuoteData.quote ||
-        data.author !== storedQuoteData.author
+        data.author !== storedQuoteData.author ||
+        !storedQuoteData.date ||
+        new Date().toDateString() !== storedQuoteData.date
       ) {
         // Зберігаємо нову цитату та автора, відображаємо на сторінці
         saveQuoteToLocalStorage(
@@ -51,4 +52,16 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('Error fetching quote:', error);
     }
   }
+
+  function displayStoredQuote() {
+    const storedQuoteData = getStoredQuote();
+    displayQuote(storedQuoteData.quote, storedQuoteData.author);
+  }
+
+  setInterval(async () => {
+    await fetchQuote();
+  }, QUOTE_INTERVAL_MS);
+
+  // Виклик функції відображення збереженої цитати при завантаженні сторінки
+  displayStoredQuote();
 });
