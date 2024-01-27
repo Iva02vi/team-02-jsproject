@@ -1,54 +1,69 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Отримуємо елементи DOM для цитати та автора
+  const QUOTE_API_URL = 'https://energyflow.b.goit.study/api/quote';
+  const QUOTE_INTERVAL_MS = 1 * 60 * 60 * 1000; // Кожну годину
+  const LOCAL_STORAGE_KEY = 'quoteData';
+
   const quoteTextElement = document.querySelector('.quote-text');
   const quoteAuthorElement = document.querySelector('.quote-author');
 
-  // Функція отримання збереженої цитати
   function getStoredQuote() {
-    return JSON.parse(localStorage.getItem('quoteData')) || {};
+    const storedData =
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
+    storedData.date = new Date(storedData.date);
+    return storedData;
   }
 
-  // Функція відображення збереженої цитати при завантаженні сторінки
-  function displayStoredQuote() {
-    const storedQuoteData = getStoredQuote();
-    displayQuote(storedQuoteData.quote, storedQuoteData.author);
+  function saveQuoteToLocalStorage(quote, author, date) {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({ quote, author, date: new Date().getTime() })
+    );
   }
 
-  // Функція відображення цитати
   function displayQuote(quote, author) {
     quoteTextElement.textContent = quote || 'No quote available.';
     quoteAuthorElement.textContent = author || 'Unknown author';
   }
 
-  // Виклик функції відображення збереженої цитати при завантаженні сторінки
-  displayStoredQuote();
+  function isQuoteChanged(data, storedData) {
+    return (
+      data.quote !== storedData.quote ||
+      data.author !== storedData.author ||
+      !storedData.date ||
+      new Date().toDateString() !== storedData.date
+    );
+  }
 
-  // Асинхронна функція отримання цитати з backend
   async function fetchQuote() {
     try {
-      const response = await fetch('https://energyflow.b.goit.study/api/quote');
+      const response = await fetch(QUOTE_API_URL);
       const data = await response.json();
+      const storedData = getStoredQuote();
 
-      const storedQuoteData = getStoredQuote();
-
-      // Перевірка, чи цитата та автор змінилися
-      if (
-        data.quote !== storedQuoteData.quote ||
-        data.author !== storedQuoteData.author
-      ) {
-        // Зберігаємо нову цитату та автора, відображаємо на сторінці
+      if (!data.quote || !isQuoteChanged(data, storedData)) {
+        displayStoredQuote();
+      } else {
         saveQuoteToLocalStorage(
           data.quote,
           data.author,
           new Date().toDateString()
         );
         displayQuote(data.quote, data.author);
-      } else {
-        // Якщо цитата не змінилась, відображаємо збережену цитату
-        displayStoredQuote();
       }
     } catch (error) {
       console.error('Error fetching quote:', error);
     }
   }
+
+  function displayStoredQuote() {
+    const storedData = getStoredQuote();
+    displayQuote(storedData.quote, storedData.author);
+  }
+
+  setInterval(async () => {
+    await fetchQuote();
+  }, QUOTE_INTERVAL_MS);
+
+  // Виклик функції відображення збереженої цитати при завантаженні сторінки
+  displayStoredQuote();
 });
