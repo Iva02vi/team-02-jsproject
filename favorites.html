@@ -13,7 +13,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <script type="module" crossorigin src="/team-02-jsproject/assets/favorites-eb5ed746.js"></script>
-  <link rel="stylesheet" href="/team-02-jsproject/assets/favorites-347bb66d.css">
+  <link rel="stylesheet" href="/team-02-jsproject/assets/favorites-4eead64c.css">
 </head>
 
 <body>
@@ -22,7 +22,29 @@
   </header>
   <main>
     
-    
+    <section class="container">
+    <div class="favorites-page-items">
+        <p class="favorites-page-items-header">Favorites</p>
+        <div class="favorites-page-items-not-found">
+            <img class="dumbbell-img" 
+            srcset="
+            ../img/favorites-page/dumbbell-tab-desk.png     115w,
+            ../img/favorites-page/dumbbell-tab-desk@2x.png  230w,
+            ../img/favorites-page/dumbbell-mob.png          85w,
+            ../img/favorites-page/dumbbell-mob@2x.png          170w
+            "
+            sizes="(min-width: 768px) 115px, (max-width: 767px) 85px"
+            src="../img/favorites-page/dumbbell-mob.png"
+            alt="dumbbell-img"
+            />
+            <p class="favorites-page-items-not-found-message">
+            It appears that you haven't added any exercises to your favorites yet. To get started, you can add exercises that you like to your favorites for easier access in the future.
+            </p>
+        </div>
+        <img src="../img/favorites-page/"/>
+        <ul class="favorites-page-items-gallery"></ul>
+    </div>
+</section>
   </main>
   
   
