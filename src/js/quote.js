@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Функція відображення цитати
-  function displayQuote(quote, author) {
-    quoteTextElement.textContent = quote || 'No quote available.';
-    quoteAuthorElement.textContent = author || 'Unknown author';
-  }
+  // function displayQuote(quote, author) {
+  //   quoteTextElement.textContent = quote || 'No quote available.';
+  //   quoteAuthorElement.textContent = author || 'Unknown author';
+  // }
 
   // Виклик функції відображення збереженої цитати при завантаженні сторінки
   displayStoredQuote();
