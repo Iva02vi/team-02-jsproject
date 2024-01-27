@@ -26,7 +26,24 @@ img {
 }
 
 .section {
-  border-radius: 20px;
+  border-radius: 30px;
+}
+
+.back-to-top {
+  background: var(--white);
+  border-radius: 30%;
+  position: fixed;
+  z-index: 999;
+  bottom: -50px;
+  padding: 10px 12px;
+  right: 50px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.back-to-top.active {
+  bottom: 50px;
+  transition: 0.3s all;
 }
 
 @media screen and (min-width: 768px) {
