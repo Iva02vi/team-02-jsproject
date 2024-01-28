@@ -1,9 +1,9 @@
 .information-section {
-  margin-right: 20px;
-  margin-left: 20px;
+  margin: auto;
+  margin-top: 20px;
 }
+
 .information-section-img {
-  border-radius: 30px;
   background: url(<path-to-image>),
     lightgray 6.659px 10.025px / 93.932% 155.972% no-repeat, #e8e8e8;
   height: 269px;
@@ -19,7 +19,6 @@
 }
 
 .information-section-text-container {
-  border-radius: 30px;
   background: #1b1b1b;
   width: 335px;
   height: 269px;
@@ -46,26 +45,21 @@
 }
 
 .info-second-text {
-  width: 135px;
   margin-bottom: 14px;
-  letter-spacing: 0.04em;
 }
 
 .info-third-text {
   height: 127px;
   width: 230px;
-  letter-spacing: 0.04em;
 }
 
 @media screen and (min-width: 768px) {
   .information-section-img {
-    border-radius: 50px;
     width: 736px;
     height: 302px;
   }
 
   .information-section-text-container {
-    border-radius: 50px;
     width: 736px;
     height: 302px;
     padding: 64px 96px 64px 64px;
@@ -83,11 +77,6 @@
     width: 520px;
     height: 97px;
   }
-
-  .information-section {
-    margin-right: 16px;
-    margin-left: 16px;
-  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -103,5 +92,6 @@
 
   .information-section {
     display: flex;
+    margin-top: 16px;
   }
 }
