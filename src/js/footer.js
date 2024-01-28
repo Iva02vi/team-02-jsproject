@@ -15,7 +15,7 @@ form.addEventListener('submit', event => {
     iziToast.success({
         position: 'topCenter',
         message: `We're excited to have you on board! 🎉 Thank you for subscribing to new exercises on Energy Flow. You've just taken a significant step towards improving your fitness and well-being.`,
-        backgroundColor: 'var( --dark-gray)',
+        backgroundColor: 'var( --dark-gray-hover)',
         messageColor: 'var( --white-smoke)',
     });
     console.log(userData);
