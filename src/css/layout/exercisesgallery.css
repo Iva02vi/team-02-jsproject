@@ -192,4 +192,18 @@
   .text-card {
     font-size: 24px;
   }
+  .exercises-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: -20px;
+  }
+
+  .exercises-item-background {
+    width: 313px;
+    height: 250px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
 }
