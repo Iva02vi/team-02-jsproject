@@ -1,5 +1,6 @@
 .exercises-gallery-background {
   background: var(--light-gray);
+  width: 335px;
   padding: 40px 20px 40px 20px;
   border-radius: 50px;
   margin-bottom: 16px;
@@ -43,8 +44,8 @@
 }
 
 .exercises-item {
-  width: 295px;
-  height: 232px;
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
   border: 1px solid rgba(246, 246, 246, 0.3);
   background: rgba(16, 16, 16, 0.7);
@@ -53,6 +54,8 @@
 
 .exercises-item-background {
   position: relative;
+  width: 295px;
+  height: 232px;
   border-radius: 12px;
   border: 1px solid rgba(246, 246, 246, 0.3);
   overflow: hidden;
@@ -131,6 +134,7 @@
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
     padding: 64px 48px 64px 48px;
+    width: 736px;
   }
   .exercises-gallery-label {
     font-size: 44px;
@@ -162,10 +166,11 @@
     gap: 14px;
   }
 
-  .exercises-item {
+  .exercises-item-background {
     width: 313px;
     height: 250px;
   }
+
   .text-card {
     font-size: 24px;
   }
@@ -178,6 +183,7 @@
 @media screen and (min-width: 1440px) {
   .exercises-gallery-background {
     padding: 64px 48px 64px 48px;
+    width: 1408px;
   }
   .exercises-gallery-label {
     font-size: 44px;

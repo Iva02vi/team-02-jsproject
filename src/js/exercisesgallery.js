@@ -179,7 +179,8 @@ If you have any more questions or if there's anything else I can help you with, 
 const exercisesGallery = document.querySelector('.exercises-gallery');
 exercisesGallery.addEventListener('click', event => {
   event.preventDefault();
-  const cardElement = event.target.closest('.exercises-item');
+  const cardElement = event.target.closest('.exercises-item-background');
+
   if (cardElement) {
     const name = cardElement.querySelector('.name-card').textContent;
     const filter = cardElement.querySelector('.type-card').textContent;
