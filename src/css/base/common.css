@@ -5,6 +5,7 @@
     url('../../fonts/DMSans-Medium.ttf') format('truetype'),
     url('../../fonts/DMSans-Bold.ttf') format('truetype'),
     url('../../fonts/DMSans-Italic.ttf') format('truetype');
+  font-display: swap;
 }
 
 body {
