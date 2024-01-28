@@ -18,8 +18,8 @@ const axiosInstance = axios.create({
 function renderExercises(images) {
   exercisesGallery.innerHTML = '';
   const newImages = images.results.map(image => {
-    return `<li class="exercises-item">
-      <a class="exercises-item-background "  href="${image.imgUrl}">
+    return `<li class="exercises-item-background">
+      <a href="${image.imgUrl}">
       <div>
         <img
           class="exercises-item"
