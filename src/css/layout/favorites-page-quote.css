@@ -1,0 +1,230 @@
+.quote-section {
+    margin-bottom: 20px;
+}
+
+/* -------QUOTE FOR TODAY STYLES -----------*/
+
+.quote-for-today {
+    width: 100%;
+    max-width: 335px;
+    height: 272px;
+    border-radius: 30px;
+    background-color: var(--dark-gray);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 42px 20px 40px 20px;
+}
+
+.quote-title-icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.quote-icon {
+    display: flex;
+    align-items: center;
+}
+
+.quote-title {
+    padding-left: 12px;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.quote-icon-commas {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+
+.quote-text {
+    color: rgba(246, 246, 246, 0.6);
+    font-size: 14px;
+    line-height: 1.28;
+    padding-left: 46px;
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.quote-author {
+    padding-left: 46px;
+    color: var(--white);
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* -------QUOTE IMAGE STYLES -----------*/
+
+.quote-bg-image {
+    width: 100%;
+    max-width: 335px;
+    height: 272px;
+}
+
+.quote-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 30px;
+    background-position: center;
+}
+
+/* -------QUOTE INFORMATION STYLES -----------*/
+
+.information-section-text-container {
+    border-radius: 30px;
+    background-color: var(--white);
+    width: 100%;
+    max-width: 335px;
+    height: 272px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.information-icon-item {
+    display: block;
+    margin-bottom: 15px;
+}
+  
+.info-first-text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+  
+.info-second-text {
+    color: rgba(27, 27, 27, 0.6);
+    font-size: 14px;
+    line-height: 1.29;
+}
+
+@media screen and (min-width: 768px) {
+    .quote-section {
+      margin-bottom: 16px;
+    }
+
+    .quote-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    /* -------QUOTE FOR TODAY STYLES -----------*/
+
+    .quote-for-today {
+      max-width: 736px;
+      height: 302px;
+      border-radius: 50px;
+      padding: 64px 80px;
+    }
+
+    .quote-title-icon {
+        margin-bottom: 16px;
+    }
+
+    .quote-title {
+      padding-left: 16px;
+      font-size: 24px;
+      line-height: 1.33;
+    }
+
+    .quote-icon-commas {
+      top: 32px;
+      right: 80px;
+    }
+
+    .quote-text {
+      padding-left: 50px;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .quote-author {
+      padding-left: 50px;
+    }
+
+    /* ------- QUOTE IMAGE STYLES -----------*/
+
+    .favorite-quote-pic-and-text{
+        display: flex;
+        width: 100%;
+        max-width: 736px;
+    }
+
+    .quote-bg-image {
+      width: 50%;
+      max-width: 368px;
+      height: 302px;
+    }
+
+    .quote-img {
+      border-radius: 50px;
+    }
+
+    /* -------QUOTE INFORMATION STYLES -----------*/
+
+    .information-section-text-container {
+        border-radius: 50px;
+        width: 50%;
+        max-width: 368px;
+        height: 302px;
+    }
+    
+    .info-first-text {
+        font-size: 24px;
+        line-height: 1.33;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+
+    .quote-container {
+      flex-wrap: nowrap;
+      gap: 0;
+    }
+
+   /* -------QUOTE FOR TODAY STYLES -----------*/
+
+    .quote-for-today {
+      width: 50%;
+      max-width: 704px;
+      padding: 64px;
+    }
+
+    .quote-title-icon {
+        margin-bottom: 16px;
+    }
+
+    .quote-icon-commas {
+      top: 32px;
+      right: 64px;
+    }
+
+    /* ------- QUOTE IMAGE STYLES -----------*/
+
+    .favorite-quote-pic-and-text{
+        width: 50%;
+        max-width: 704px;
+    }
+    
+    .quote-bg-image {
+        max-width: 352px;
+    }
+
+    /* -------QUOTE INFORMATION STYLES -----------*/
+
+    .information-section-text-container {
+        max-width: 352px;
+    }
+}
+  
+  
+
+  

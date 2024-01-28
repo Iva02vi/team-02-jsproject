@@ -5,6 +5,7 @@
     url('../../fonts/DMSans-Medium.ttf') format('truetype'),
     url('../../fonts/DMSans-Bold.ttf') format('truetype'),
     url('../../fonts/DMSans-Italic.ttf') format('truetype');
+  font-display: swap;
 }
 
 body {
@@ -39,6 +40,8 @@ img {
   right: 50px;
   cursor: pointer;
   transition: 0.3s all;
+  height: 48px;
+  width: 48px;
 }
 
 .back-to-top.active {

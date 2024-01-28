@@ -1,54 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Отримуємо елементи DOM для цитати та автора
-  const quoteTextElement = document.querySelector('.quote-text');
-  const quoteAuthorElement = document.querySelector('.quote-author');
+  const QUOTE_API_URL = 'https://energyflow.b.goit.study/api/quote';
+  const LOCAL_STORAGE_KEY = 'quoteData';
 
-  // Функція отримання збереженої цитати
-  function getStoredQuote() {
-    return JSON.parse(localStorage.getItem('quoteData')) || {};
-  }
+  const currentDate = new Date().toISOString().split('T')[0];
+  const quoteBlock = document.getElementById('quote');
 
-  // Функція відображення збереженої цитати при завантаженні сторінки
-  function displayStoredQuote() {
-    const storedQuoteData = getStoredQuote();
-    displayQuote(storedQuoteData.quote, storedQuoteData.author);
-  }
+  const storedData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
-  // Функція відображення цитати
-  function displayQuote(quote, author) {
-    quoteTextElement.textContent = quote || 'No quote available.';
-    quoteAuthorElement.textContent = author || 'Unknown author';
-  }
+  if (storedData && storedData.date === currentDate) {
+    // Використовувати збережену цитату, якщо дата не змінилась
+    displayQuote(storedData.quote, storedData.author);
+  } else {
+    fetch(QUOTE_API_URL)
+      .then(response => response.json())
+      .then(data => {
+        const quote = data.quote;
+        const author = data.author;
 
-  // Виклик функції відображення збереженої цитати при завантаженні сторінки
-  displayStoredQuote();
+        // Відображення нової цитати
+        displayQuote(quote, author);
 
-  // Асинхронна функція отримання цитати з backend
-  async function fetchQuote() {
-    try {
-      const response = await fetch('https://energyflow.b.goit.study/api/quote');
-      const data = await response.json();
-
-      const storedQuoteData = getStoredQuote();
-
-      // Перевірка, чи цитата та автор змінилися
-      if (
-        data.quote !== storedQuoteData.quote ||
-        data.author !== storedQuoteData.author
-      ) {
-        // Зберігаємо нову цитату та автора, відображаємо на сторінці
-        saveQuoteToLocalStorage(
-          data.quote,
-          data.author,
-          new Date().toDateString()
+        // Збереження нових даних в localStorage
+        localStorage.setItem(
+          LOCAL_STORAGE_KEY,
+          JSON.stringify({ quote, author, date: currentDate })
         );
-        displayQuote(data.quote, data.author);
-      } else {
-        // Якщо цитата не змінилась, відображаємо збережену цитату
-        displayStoredQuote();
-      }
-    } catch (error) {
-      console.error('Error fetching quote:', error);
-    }
+      })
+      .catch(error => {
+        // Обробка помилок: використовувати статичну цитату, якщо не вдалося отримати відповідь від сервера
+        console.error('Error fetching quote:', error);
+        if (storedData) {
+          displayQuote(storedData.quote, storedData.author);
+        }
+      });
+  }
+
+  // Функція для відображення цитати на сторінці
+  function displayQuote(quote, author) {
+    const quoteText = quoteBlock.querySelector('.quote-text');
+    const quoteAuthor = quoteBlock.querySelector('.quote-author');
+
+    quoteText.textContent = quote;
+    quoteAuthor.textContent = author;
   }
 });
