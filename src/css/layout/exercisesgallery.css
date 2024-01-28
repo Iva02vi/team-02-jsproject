@@ -51,9 +51,9 @@
   overflow: hidden;
 }
 
-/* .exercises-item-background {
+.exercises-item-background {
   position: relative;
-} */
+}
 
 .exercises-item-background::before {
   content: '';
