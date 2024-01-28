@@ -16,7 +16,7 @@
   <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/quote-1da8f9b3.js">
   <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/vendor-8cce9181.js">
   <link rel="stylesheet" href="/team-02-jsproject/assets/vendor-e5212ee8.css">
-  <link rel="stylesheet" href="/team-02-jsproject/assets/index-8948ca3a.css">
+  <link rel="stylesheet" href="/team-02-jsproject/assets/index-06655ad3.css">
 </head>
 
 <body>
@@ -24,11 +24,13 @@
   <div class="header-main container">
     <nav class="header-nav">
       <a class="header-logo" href="./index.html">energy.flow</a>
-       <ul class="header-nav-list">
-        <li class="header-list-item header-home">
-          <a class="header-list-link" href="./index.html">Home</a>
+      <ul class="header-nav-list">
+        <li class="header-list-item header-home header-navigation-home">
+          <a class="header-list-link is-active" href="./index.html">Home</a>
         </li>
-        <li class="header-list-item header-favorites">
+        <li
+          class="header-list-item header-favorites header-navigation-favorites"
+        >
           <a class="header-list-link" href="./favorites.html">Favorites</a>
         </li>
       </ul>
@@ -40,7 +42,12 @@
           class="header-social-list-link"
           target="_blank"
         >
-          <svg class="header-social-list-icon" width="28" height="28" fill="#7E847F">
+          <svg
+            class="header-social-list-icon"
+            width="28"
+            height="28"
+            fill="#7E847F"
+          >
             <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-facebook"></use>
           </svg>
         </a>
@@ -51,7 +58,12 @@
           class="header-social-list-link"
           target="_blank"
         >
-          <svg class="header-social-list-icon" width="28" height="28" fill="#7E847F">
+          <svg
+            class="header-social-list-icon"
+            width="28"
+            height="28"
+            fill="#7E847F"
+          >
             <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-instagram"></use>
           </svg>
         </a>
@@ -62,7 +74,12 @@
           class="header-social-list-link"
           target="_blank"
         >
-          <svg class="header-social-list-icon" width="28" height="28" fill="#7E847F">
+          <svg
+            class="header-social-list-icon"
+            width="28"
+            height="28"
+            fill="#7E847F"
+          >
             <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-youtube"></use>
           </svg>
         </a>
@@ -311,7 +328,61 @@
   </div>
 </footer>
 
-  
+  <!-- ========== Mobile menu ========== -->
+
+<div class="mobile-menu container section">
+  <div class="menu-header-wrapper">
+    <a class="menu-nav-item-link" href="./index.html">energy.flow</a>
+    <button class="menu-close-button" type="button">
+      <svg
+        class="menu-close-button-icon"
+        width="20"
+        height="20"
+        aria-label="close-button"
+      >
+        <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-x"></use>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="menu-nav">
+    <ul class="menu-nav-list">
+      <li class="menu-nav-list-item header-navigation-home">
+        <a class="menu-list-link" href="./index.html">Home</a>
+      </li>
+      <li class="menu-nav-list-item header-navigation-favorites">
+        <a class="menu-list-link" href="./favorites.html">Favorites</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="menu-social-links-container">
+    <ul class="list mobile-social-links-list">
+      <li class="menu-social-links-item">
+        <a class="social-links-link" href="https://www.facebook.com"
+          ><svg class="menu-social-link" width="25" height="25">
+            <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-facebook"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="menu-social-links-item">
+        <a class="social-links-link" href="https://www.instagram.com"
+          ><svg class="menu-social-link" width="25" height="25">
+            <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-instagram"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="menu-social-links-item">
+        <a class="social-links-link" href="https://www.youtube.com"
+          ><svg class="menu-social-link" width="25" height="25">
+            <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-youtube"></use>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
   <div id="back_to_top" class="back-to-top">
     <svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(270deg)" width="24" height="24"
       viewBox="0 0 24 24">
