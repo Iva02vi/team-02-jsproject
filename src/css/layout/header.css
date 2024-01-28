@@ -3,6 +3,7 @@
   top: 20px;
   left: 0;
   width: 100%;
+  padding-left: 20px;
 }
 
 .header-main {
@@ -68,10 +69,12 @@
   font-weight: 700;
   line-height: 1.12em;
   letter-spacing: -0.02em;
+  
 }
 .header-nav {
   display: flex;
   align-items: center;
+
   /* justify-content: space-between;  */
 }
 .header-nav-list {
@@ -114,16 +117,17 @@
   color: #1b1b1b;
   border-radius: 30px;
 }
-@media (min-width: 768px) {
+@media (min-width: 768px){
+  .header-main{
+    flex-wrap: nowrap;
+  }
   .header-burger {
     display: none;
   }
   .header-social-list {
-    /* display: flex; */
-    display: none;
+    display: flex;
     gap: 12px;
   }
-
   .header-social-list-link {
     display: flex;
     align-items: center;
@@ -139,23 +143,31 @@
   .header-social-list-icon:hover {
     fill: #5f6560;
   }
-  .header-logo {
-    color: #1b1b1b;
-    font-family: 'DM Sans';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1.12em;
-    letter-spacing: -0.02em;
-    margin-left: 20px;
+  .header-page {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 40px;
   }
   .header-nav {
     display: flex;
     align-items: center;
-    /* justify-content: space-between;  */
+  
+  }
+  .header-logo {
+    color: #1B1B1B;
+font-family: "DM Sans";
+font-size: 28px;
+font-style: normal;
+font-weight: 700;
+line-height: 1.12em; /* 100% */
+letter-spacing: -0.02em;
+margin-right: 90px;
   }
   .header-nav-list {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 211px;
@@ -165,6 +177,8 @@
     margin: 0;
     padding: 0;
     gap: 16px;
+    flex-shrink: 0;
+    
   }
   .header-list-item {
     display: flex;
@@ -195,33 +209,7 @@
     border-radius: 30px;
   }
 }
-@media (min-width: 768px) {
-  .header-page {
-    top: 24px;
-  }
-
-  .header-burger {
-    display: none;
-  }
-  .header-social-list {
-    display: flex;
-  }
-  .header-nav-list {
-    display: flex;
-  }
-  .header-logo {
-    font-size: 28px;
-    line-height: 1em;
-    letter-spacing: -0.02em;
-  }
-  .header-social-list {
-    margin-right: 32px;
-  }
-  .header-logo {
-    margin-left: 32px;
-  }
-}
-@media (min-width: 1440px) {
+@media screen and (min-width: 1440px) {
   .header-page {
     top: 32px;
   }
@@ -229,6 +217,15 @@
     margin-right: 48px;
   }
   .header-logo {
+    color: #1B1B1B;
+    font-family: "DM Sans";
+font-size: 28px;
+font-style: normal;
+font-weight: 700;
+line-height: 1.12em; /* 100% */
+letter-spacing: -0.02em;
     margin-left: 48px;
+    margin-right: 400px;
   }
+  
 }
