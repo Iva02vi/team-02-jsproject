@@ -1,14 +1,19 @@
 import axios from 'axios';
-const giveRatingButton = document.querySelector('.give-rating');
 const modalGiveRating = document.querySelector('.modal-give-rating');
 const giveRatingForm = document.querySelector('.give-rating-form');
 const giveRatingCloseBtn = document.querySelector('.give-rating-close');
+const giveRatingSendBtn = giveRatingForm.querySelector('button[type="submit"]');
+const giveRatingCurrentRating = document.querySelector('.give-rating-p1');
 const URL = 'https://energyflow.b.goit.study/api';
 const starsUl = document.querySelector('.give-rating-stars');
 const NUMBER_OF_STARS = 5;
 let selectedRating;
+let exerciseId;
 
-const renderStars = () => {
+export const prepareGiveRatingModal = (exercise_id, currentRating) => {
+  starsUl.innerHTML = '';
+  exerciseId = exercise_id;
+  giveRatingCurrentRating.innerHTML = currentRating;
   const svgHtml = `
   <svg
     class="icon-Star-2"
@@ -23,7 +28,6 @@ const renderStars = () => {
     const li = document.createElement('li');
     li.classList.add('li-star');
     const label = document.createElement('label');
-    label.setAttribute('for', `star${i + 1}`);
     label.innerHTML = svgHtml;
     label.style.pointerEvents = 'none';
     const checkboxInput = document.createElement('input');
@@ -42,33 +46,35 @@ const renderStars = () => {
       const selectedItems = Array.from(liStar).slice(0, selectedRating);
       const unselectedItems = Array.from(liStar).slice(selectedRating);
       selectedItems.forEach(li => li.classList.add('li-selected'));
-      unselectedItems.forEach(li => li.classList.replace('li-selected', 'li-unselected'));
+      unselectedItems.forEach(li =>
+        li.classList.replace('li-selected', 'li-unselected')
+      );
     });
+  });
+  giveRatingForm.addEventListener('submit', async event => {
+    giveRatingSendBtn.disabled = true;
+    event.preventDefault();
+    try {
+      if (!selectedRating) {
+        throw Error('Please select rating!');
+      }
+      console.log(`${URL}/exercises/${exerciseId}/rating`);
+      await axios.patch(`${URL}/exercises/${exerciseId}/rating`, {
+        rate: +selectedRating,
+        email: event.target.email.value,
+        review: event.target.comment.value,
+      });
+      giveRatingForm.reset();
+      modalGiveRating.classList.add('hidden');
+    } catch (e) {
+      console.error(e.message);
+    } finally {
+        giveRatingSendBtn.disabled = false;
+    }
+    return false;
   });
 };
 
-renderStars();
-
 giveRatingCloseBtn.addEventListener('click', () => {
-    modalGiveRating.classList.add('hidden');
-})
-
-giveRatingButton.addEventListener('click', () => {
-  modalGiveRating.classList.remove('hidden');
-});
-
-giveRatingForm.addEventListener('submit', async event => {
-  event.preventDefault();
-  console.log('rating', selectedRating);
-  console.log(event.target.email.value);
-  console.log(event.target.comment.value);
-  try {
-    await axios.patch(`${URL}/exercies/${exercise_id}/rating`, {
-      rate: selectedRating,
-      email: event.target.email.value,
-      review: event.target.comment.value,
-    });
-  } catch (e) {
-    console.error(e.message);
-  }
+  modalGiveRating.classList.add('hidden');
 });
