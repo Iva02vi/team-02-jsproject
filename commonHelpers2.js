@@ -1,18 +1,63 @@
-import"./assets/quote-1da8f9b3.js";import{a as v,i as h}from"./assets/vendor-8cce9181.js";const a=document.querySelector(".back-to-top"),m=()=>{const e=Math.max(document.documentElement.scrollTop,document.body.scrollTop);e>0&&(window.requestAnimationFrame(m),window.scrollTo(0,e-e/8))};a.addEventListener("click",m);window.addEventListener("scroll",()=>{(window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop)>350?a.classList.add("active"):a.classList.remove("active")});const d=document.querySelector(".exercises-gallery"),c=document.querySelector(".exercises-gallery-filter"),i=document.querySelector(".page-buttons-container"),w="https://energyflow.b.goit.study/api/filters";let r={filter:"Muscles",page:1,limit:8},S=0;const f="muscles",k=v.create({baseURL:w});function g(e){d.innerHTML="";const o=e.results.map(t=>`<li class="exercises-item-background">
-      <a href="${t.imgUrl}">
+import"./assets/quote-1da8f9b3.js";import{a as f,i as k}from"./assets/vendor-8cce9181.js";const p=document.querySelector(".back-to-top"),q=()=>{const e=Math.max(document.documentElement.scrollTop,document.body.scrollTop);e>0&&(window.requestAnimationFrame(q),window.scrollTo(0,e-e/8))};p.addEventListener("click",q);window.addEventListener("scroll",()=>{(window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop)>350?p.classList.add("active"):p.classList.remove("active")});const b=document.querySelector(".gallery-collection");document.querySelector(".gallery-item");document.querySelector(".filtred-submit");const x=document.querySelector(".gallery-list"),N=document.querySelector(".exercise-title"),h=document.querySelector(".page-button-list"),E=document.querySelector(".input-submit-key"),O=document.querySelector(".filtred-submit"),$="https://energyflow.b.goit.study/api/",j="muscles",D="bodypart",I="equipment";let l=1;const c={content:null,title:null},T=document.querySelector(".muscles");T.classList.add(".active");T.addEventListener("click",P);const Q=document.querySelector(".body-parts");Q.addEventListener("click",G);const W=document.querySelector(".equipment");W.addEventListener("click",V);h.addEventListener("click",e=>{if(e.preventDefault(),e.target.localName!=="button")return;i(),l=parseInt(e.target.value);const t={limit:u(),page:l};t[c.content]=c.title,w(t)});function P(){i();const e={limit:u(),page:l,filter:"Muscles"};c.content=j,v(e)}function G(){i();const e={limit:u(),page:l,filter:"Body parts"};c.content=D,v(e)}function V(){i();const e={limit:u(),page:l,filter:"Equipment"};c.content=I,v(e)}function i(){M(),z(),K()}async function v(e){try{const t=await f.get(`${$}filters`,{params:e});console.log(t);const{totalPages:r,results:n}=t.data;if(n.length==0)return alert("NO MORE EXEERCISES"),console.log(n.data);let s=n.reduce((m,o)=>m+`<li class="gallery-item">
+                        <a class="gallery-link" href="${o.imgUrl}">
+                            <img class="gallery-image" data-source="${o.imgUrl}" src="${o.imgUrl}" alt="${o.name}" width="360" height="200"/>
+                        </a>
+                        <div class='title'>
+                            <p>${o.name}</p>
+                        </div>
+                </li>`,"");b.insertAdjacentHTML("beforeend",s)}catch(t){console.log(t)}}b.addEventListener("click",e=>{e.preventDefault(),i();const t=e.target.alt;c.title=t,l=1;const r={limit:u(),page:l};r[c.content]=t,Y(t),w(r)});function Y(e){N.innerHTML=`Exercises / <span class="exercise-title-card"> ${e}</span>`}async function w(e){try{const t=await f.get(`${$}exercises`,{params:e}),{totalPages:r,results:n}=t.data;if(n.length==0){Z(),J();return}let s=n.reduce((m,o)=>{const H=_(o.rating);return m+`<li class="gallery-list-item">
+                <div class="workout-box">
+                    <div class="workout-rating">
+                        <p class="workout-title">WORKOUT</p>
+                        <p class="rating-title">${o.rating}
+                          ${H}
+                        </p>
+                            <button type="button" class="start-button">Start
+                            <span class="arrow-icon">
+                                <svg class="start-arrow-icon" width="14" height="14" aria-label="start-arrow">
+                                    <use href="./img/sprite.svg#icon-arrow"></use>
+                                </svg>
+                            </span>
+                            </button>
+                    </div>
+                    <div class="workout-type">
+                        <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
+                            <use href="../img/sprite.svg#icon-lighticon"></use>
+                        </svg>
+                        <p class="workout-name">${o.name}</p>
+                    </div>
+                    <div class="body-description">
+                        <p class="burned-callories">Burned calories:
+                            <span class="amount-callories">${o.burnedCalories}/${o.time} min</span>
+                        </p>
+                        <p class="filtred-class">Filtre:
+                            <span class="filter-type">${c.content}</span>
+                        </p>
+                        <p class="target">Target:
+                        <span class="key-word">${o.target}</span>
+                        </p>
+                    </div>
+                </div>
+            </li>`},"");x.insertAdjacentHTML("beforeend",s),h.innerHTML=X(r)}catch(t){console.log(t)}}function z(){b.replaceChildren()}function K(){x.replaceChildren()}function _(e){let t="";e=Math.floor(e);for(let r=0;r<e;r++)t+=`
+        <span class="rating-star-icon">
+            <svg class="rating-star" width="18" height="18" aria-label="rating-star">
+                   <use href="./img/sprite.svg#icon-Star-1"></use>
+            </svg>
+        </span>`;return t}function X(e){let t="";const r=Math.min(e,5);for(let n=1;n<=r;n++)t+=`<button class="button-next-page" value="${n}">${n}</button>`;return t}const B=document.querySelector(".card-error-message");function J(){B.style.visibility="visible"}function M(){B.style.visibility="hidden"}O.addEventListener("click",e=>{if(e.preventDefault(),e.target.localName!="svg")return;l=1;const t=E.value.trim();if(console.log(t),t.length===0){k.error({title:"Error",position:"topCenter",message:"Sorry, Please choose an exercise."});return}i();const r={limit:u(),page:l,keyword:t};r[c.content]=c.title,E.value="",w(r)});function Z(){h.replaceChildren()}function u(){return document.documentElement.clientWidth>768?12:8}M();P();const L=document.querySelector(".exercises-gallery"),d=document.querySelector(".exercises-gallery-filter"),y=document.querySelector(".page-buttons-container"),ee="https://energyflow.b.goit.study/api/filters";let a={filter:"Muscles",page:1,limit:8},te=0;const C="muscles",re=f.create({baseURL:ee});function A(e){L.innerHTML="";const t=e.results.map(r=>`<li class="exercises-item-background">
+      <a href="${r.imgUrl}">
       <div>
         <img
           class="exercises-item"
-          src="${t.imgUrl}"
-          alt="${t.name}">
+          src="${r.imgUrl}"
+          alt="${r.name}">
           <div class="text-card">
-          <p class = "name-card">${t.name}</p>
-          <p class = "type-card">${t.filter}</p>
+          <p class = "name-card">${r.name}</p>
+          <p class = "type-card">${r.filter}</p>
           </div>
           </div>
       </a>
-    </li>`);return d.insertAdjacentHTML("beforeend",o.join("")),e}function L(e){let o="";i.innerHTML="";for(let t=1;t<=e.totalPages;t++)t===1?o+=`<li>
-      <button class="page-button active" type="button" id="${t}">${t}</button>
-    </li>`:o+=`<li>
-      <button class="page-button" type="button" id="${t}">${t}</button>`;i.insertAdjacentHTML("afterbegin",o)}c.addEventListener("click",function(e){if(e.target.tagName==="BUTTON"){const o=e.target.getAttribute("name");u(o)}});function u(e){let o={};switch(b(),e){case"body":r.filter="Body parts",o=c.querySelectorAll(`button[name="${e}"]`);break;case"equipment":r.filter="Equipment",o=c.querySelectorAll(`button[name="${e}"]`);break;default:r.filter="Muscles",o=c.querySelectorAll(`button[name="${e}"]`)}T(o);const s=`?${new URLSearchParams(r).toString()}`;p(s).then(n=>g(n)).then(n=>L(n)).catch(n=>console.error(n))}function q(){const o=`?${new URLSearchParams(r).toString()}`;p(o).then(t=>g(t)).catch(t=>console.error(t))}async function p(e){try{const o=await k.get(e);return S=o.data.totalPages,o.data}catch(o){console.error(o)}}function T(e){const o=c.querySelectorAll("button"),t=Array.from(e);for(let s=0;s<o.length;s++){const n=o[s];t.includes(n)?(n.style.backgroundColor="var(--dark-gray)",n.style.color="var(--white)"):(n.style.backgroundColor="var(--white-smoke)",n.style.color="var(--black)")}}i.addEventListener("click",function(e){const o=e.target.closest(".page-button");if(o){const t=o.id;console.log("Clicked button value: "+t),y(t)}});function y(e){document.querySelectorAll(".page-button").forEach(t=>{t.id===e?(t.classList.add("active"),r.page=e,q()):t.classList.remove("active")})}window.addEventListener("resize",()=>{b(),u(f),y(1)});function b(){document.documentElement.clientWidth>1440?(r.page=1,r.limit=12):(r.page=1,r.limit=8)}u(f);const E="feedback-form",l=document.querySelector(".footer-modal-form");l.addEventListener("submit",e=>{e.preventDefault();const{email:o}=l.elements,t={email:o.value.trim()};h.success({position:"topRight",message:"We're excited to have you on board! 🎉 Thank you for subscribing to new exercises on Energy Flow. You've just taken a significant step towards improving your fitness and well-being."}),console.log(t),localStorage.removeItem(E),l.reset()});
+    </li>`);return L.insertAdjacentHTML("beforeend",t.join("")),e}function ne(e){let t="";y.innerHTML="";for(let r=1;r<=e.totalPages;r++)r===1?t+=`<li>
+      <button class="page-button active" type="button" id="${r}">${r}</button>
+    </li>`:t+=`<li>
+      <button class="page-button" type="button" id="${r}">${r}</button>`;y.insertAdjacentHTML("afterbegin",t)}d.addEventListener("click",function(e){if(e.target.tagName==="BUTTON"){const t=e.target.getAttribute("name");S(t)}});function S(e){let t={};switch(F(),e){case"body":a.filter="Body parts",t=d.querySelectorAll(`button[name="${e}"]`);break;case"equipment":a.filter="Equipment",t=d.querySelectorAll(`button[name="${e}"]`);break;default:a.filter="Muscles",t=d.querySelectorAll(`button[name="${e}"]`)}oe(t);const n=`?${new URLSearchParams(a).toString()}`;U(n).then(s=>A(s)).then(s=>ne(s)).catch(s=>console.error(s))}function se(){const t=`?${new URLSearchParams(a).toString()}`;U(t).then(r=>A(r)).catch(r=>console.error(r))}async function U(e){try{const t=await re.get(e);return te=t.data.totalPages,t.data}catch(t){console.error(t)}}function oe(e){const t=d.querySelectorAll("button"),r=Array.from(e);for(let n=0;n<t.length;n++){const s=t[n];r.includes(s)?(s.style.backgroundColor="var(--dark-gray)",s.style.color="var(--white)"):(s.style.backgroundColor="var(--white-smoke)",s.style.color="var(--black)")}}y.addEventListener("click",function(e){const t=e.target.closest(".page-button");if(t){const r=t.id;console.log("Clicked button value: "+r),R(r)}});function R(e){document.querySelectorAll(".page-button").forEach(r=>{r.id===e?(r.classList.add("active"),a.page=e,se()):r.classList.remove("active")})}window.addEventListener("resize",()=>{F(),S(C),R(1)});function F(){document.documentElement.clientWidth>1440?(a.page=1,a.limit=12):(a.page=1,a.limit=8)}S(C);const ae="feedback-form",g=document.querySelector(".footer-modal-form");g.addEventListener("submit",e=>{e.preventDefault();const{email:t}=g.elements,r={email:t.value.trim()};k.success({position:"topRight",message:"We're excited to have you on board! 🎉 Thank you for subscribing to new exercises on Energy Flow. You've just taken a significant step towards improving your fitness and well-being."}),console.log(r),localStorage.removeItem(ae),g.reset()});
 //# sourceMappingURL=commonHelpers2.js.map

@@ -16,7 +16,7 @@
   <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/quote-1da8f9b3.js">
   <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/vendor-8cce9181.js">
   <link rel="stylesheet" href="/team-02-jsproject/assets/vendor-e5212ee8.css">
-  <link rel="stylesheet" href="/team-02-jsproject/assets/index-abad5362.css">
+  <link rel="stylesheet" href="/team-02-jsproject/assets/index-e8c4ab8e.css">
 </head>
 
 <body>
@@ -137,7 +137,34 @@
   </div>
 </section>
 
-    
+    <!-- Section filtred request -->
+<section class="filtred-section">
+    <div class=" container container-filtred-exercise">
+        <h2 class="exercise-title">Exercises</h2>
+        <div class="search-form-wrpaper">
+            <button type="button" class="muscles">Muscles</button>
+            <button type="button" class="body-parts">Body parts</button>
+            <button type="button" class="equipment">Equipment</button>
+            <form class="filtred-submit">
+                <label for="submit-key-request" class="submit-key-form">
+                    <input type="text" class="input-submit-key" name="submit-key-request" id="filtred-key"
+                        placeholder="Search">
+                    <svg class="search-icon" width="18" height="18" aria-label="search">
+                        <use href="/team-02-jsproject/assets/sprite-efb3d2c1.svg#icon-search"></use>
+                    </svg>
+                </label>
+            </form>
+        </div>
+        <ul class="gallery-collection"></ul>
+        <ul class="gallery-list"></ul>
+        <p class="card-error-message">Unfortunately,
+            <span class="no-results-word">no results</span>
+            no results were found. You may want to consider other search options to find the exercise you are looking
+            for. Our range is wide and you have the opportunity to find more options that suit your needs.
+        </p>
+        <div class="page-button-list"></div>
+    </div>
+</section>
     <div class="container exercises-gallery-background">
   <h2 class="exercises-gallery-label">Exercises</h2>
   <ul class="exercises-gallery-filter">
@@ -297,7 +324,7 @@
   
   <!-- <script type="module" src="./js/header.js"></script> -->
   
-  <!-- <script type="module" src="./js/exerciselist.js"></script> -->
+  
   
   
 </body>
