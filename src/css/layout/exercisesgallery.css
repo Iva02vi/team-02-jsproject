@@ -1,5 +1,6 @@
 .exercises-gallery-background {
   background: var(--light-gray);
+  width: 335px;
   padding: 40px 20px 40px 20px;
   border-radius: 50px;
   margin-bottom: 16px;
@@ -133,6 +134,7 @@
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
     padding: 64px 48px 64px 48px;
+    width: 736px;
   }
   .exercises-gallery-label {
     font-size: 44px;
