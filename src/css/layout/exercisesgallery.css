@@ -51,9 +51,12 @@
   overflow: hidden;
 }
 
-/* .exercises-item-background {
+.exercises-item-background {
   position: relative;
-} */
+  border-radius: 12px;
+  border: 1px solid rgba(246, 246, 246, 0.3);
+  overflow: hidden;
+}
 
 .exercises-item-background::before {
   content: '';
