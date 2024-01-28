@@ -45,7 +45,9 @@
     border: 1px solid rgba(246, 246, 246, 0.2);
     border-radius: 10px;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    color: var(--dark-gray);
+    border-color: var(--white-smoke);
+    fill: var(--white-smoke);
+    opacity: 0.8;
 }
 
 .footer-social-item {
@@ -61,8 +63,8 @@
 
 .footer-social-card:hover,
 .footer-social-card:focus {
-    color: var(--dark-gray-hover);
     border-color: var(--dark-gray-hover);
+    fill: var(--dark-gray-hover);
 }
 
 .footer-slogan {
@@ -102,17 +104,22 @@
     padding-left: 14px;
     font-size: 14px;
     line-height: 1.29;
-    color: rgba(246, 246, 246, 0.6);
     margin-bottom: 12px;
     padding: 12px 14px;
 }
 
 .footer-modal-email::placeholder {
-    color: rgba(246, 246, 246, 0.6);
+    color: var(--white-smoke);
 }
 
-.footer-modal-email:focus {
-    color: var(--white-smoke);
+.footer-modal-email:focus::placeholder,
+.footer-modal-email:hover::placeholder {
+    color: var(--dark-gray-hover);
+}
+
+.footer-modal-email:focus,
+.footer-modal-email:hover {
+    border: 1px solid var(--dark-gray-hover);
 }
 
 .footer-modal-button {
@@ -149,6 +156,15 @@
     display: flex;
     column-gap: 8px;
     margin-top: 10px;
+}
+
+.privacy-item {
+    color: var(--white-smoke);
+}
+
+.privacy-item:hover,
+.privacy-item:focus {
+    color: var(--dark-gray-hover);
 }
 
 @media screen and (min-resolution: 192dpi) and (max-width: 767px),
