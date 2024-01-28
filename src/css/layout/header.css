@@ -69,7 +69,6 @@
   font-weight: 700;
   line-height: 1.12em;
   letter-spacing: -0.02em;
-  
 }
 .header-nav {
   display: flex;
@@ -108,17 +107,8 @@
   border-radius: 30px;
 } */
 
-.header-favorites {
-  /* при переходе на фейворитс у хоум будет меняться цвет на белый */
-  width: 96px;
-  height: 36px;
-  padding: 6px 26px;
-  background-color: white;
-  color: #1b1b1b;
-  border-radius: 30px;
-}
-@media (min-width: 768px){
-  .header-main{
+@media (min-width: 768px) {
+  .header-main {
     flex-wrap: nowrap;
   }
   .header-burger {
@@ -154,17 +144,16 @@
   .header-nav {
     display: flex;
     align-items: center;
-  
   }
   .header-logo {
-    color: #1B1B1B;
-font-family: "DM Sans";
-font-size: 28px;
-font-style: normal;
-font-weight: 700;
-line-height: 1.12em; /* 100% */
-letter-spacing: -0.02em;
-margin-right: 90px;
+    color: #1b1b1b;
+    font-family: 'DM Sans';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.12em; /* 100% */
+    letter-spacing: -0.02em;
+    margin-right: 90px;
   }
   .header-nav-list {
     display: flex;
@@ -178,7 +167,6 @@ margin-right: 90px;
     padding: 0;
     gap: 16px;
     flex-shrink: 0;
-    
   }
   .header-list-item {
     display: flex;
@@ -190,23 +178,23 @@ margin-right: 90px;
     line-height: 1.5em;
   }
   /* будет добавляться класс и меняться цвет шрифта у фейворитс */
-  /* .header-home{
+  /* .header-home .not-active {
     width: 96px;
     height: 36px;
     padding: 6px 26px;
-    background-color: white;
-    color: #1B1B1B;
     border-radius: 30px;
   } */
 
-  .header-favorites {
-    /* при переходе на фейворитс у хоум будет меняться цвет на белый */
+  .is-active {
+    background-color: white;
+    border-radius: 30px;
     width: 96px;
     height: 36px;
     padding: 6px 26px;
-    background-color: white;
     color: #1b1b1b;
-    border-radius: 30px;
+  }
+  .not-active {
+    background-color: #7e847f;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -217,15 +205,14 @@ margin-right: 90px;
     margin-right: 48px;
   }
   .header-logo {
-    color: #1B1B1B;
-    font-family: "DM Sans";
-font-size: 28px;
-font-style: normal;
-font-weight: 700;
-line-height: 1.12em; /* 100% */
-letter-spacing: -0.02em;
+    color: #1b1b1b;
+    font-family: 'DM Sans';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.12em; /* 100% */
+    letter-spacing: -0.02em;
     margin-left: 48px;
     margin-right: 400px;
   }
-  
 }
