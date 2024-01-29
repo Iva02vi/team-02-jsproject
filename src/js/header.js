@@ -1,9 +1,9 @@
 // ============ navigation =============
-
-const firstChild = document.querySelector('.header-navigation-home');
-const secondChild = document.querySelector('.header-navigation-favorites');
-const mobFirstChild = document.querySelector('.menu-list-link-home');
-const mobSecondChild = document.querySelector('.menu-list-link-favorites');
+try {
+  const firstChild = document.querySelector('.header-navigation-home');
+  const secondChild = document.querySelector('.header-navigation-favorites');
+  const mobFirstChild = document.querySelector('.menu-list-link-home');
+  const mobSecondChild = document.querySelector('.menu-list-link-favorites');
 
 function goToPage(path) {
   location.pathname = path;
@@ -20,4 +20,7 @@ if (path === '/index.html' || path === '/') {
   mobFirstChild.classList.remove('is-active');
   secondChild.classList.add('is-active');
   mobSecondChild.classList.add('is-active');
+}
+} catch (error) {
+  console.error(error.message);
 }
