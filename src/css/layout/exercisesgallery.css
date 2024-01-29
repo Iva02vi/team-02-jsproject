@@ -1,7 +1,7 @@
 .exercises-gallery-background {
   background: var(--light-gray);
-  width: 335px;
-  padding: 40px 20px 40px 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   border-radius: 50px;
   margin-bottom: 16px;
 }
@@ -146,13 +146,13 @@
   position: absolute;
   top: 0;
   right: 0;
-  transform: translateY(90%) translateX(-100%);
+  transform: translateY(85%) translateX(-100%);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
     padding: 64px 48px 64px 48px;
-    width: 736px;
   }
   .exercises-gallery-label {
     font-size: 44px;
@@ -207,7 +207,8 @@
 
 @media screen and (min-width: 1440px) {
   .exercises-gallery-background {
-    padding: 64px 48px 64px 48px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     width: 1408px;
   }
   .exercises-gallery-label {
