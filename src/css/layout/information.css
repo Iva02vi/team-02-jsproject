@@ -4,9 +4,6 @@
 }
 
 .information-section-img {
-  background: url(<path-to-image>),
-    var(--light-gray) 6.659px 10.025px / 93.932% 155.972% no-repeat,
-    var(--light-gray);
   height: 269px;
   width: 335px;
 }
