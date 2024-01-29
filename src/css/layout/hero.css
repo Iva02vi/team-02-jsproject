@@ -1,6 +1,7 @@
 @media screen and (max-width: 767px) {
   .hero-container {
-    padding: 20px;
+   margin-top: 20px;
+   margin-bottom: 20px;
   }
 
   .hero-foto-tag {
