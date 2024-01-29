@@ -21,11 +21,12 @@ export async function renderExercise(id) {
     // ----
 
     // --- Start Anna --- //
-    giveRatingButton.addEventListener('click', async () => {
+    giveRatingButton.addEventListener('click', (event) => {
       backDrop.classList.add('visually-hidden');
       markupModal.classList.add('hidden');
       prepareGiveRatingModal(exerciseId, rating);
       modalGiveRating.classList.remove('hidden');
+      event.stopImmediatePropagation();
     });
     // --- End Anna --- //
 
@@ -50,18 +51,6 @@ export async function renderExercise(id) {
           description,
         }) => {
           const parsedRating = Math.round(parseFloat(rating));
-          console.log(
-            gifUrl,
-            name,
-            rating,
-            target,
-            bodyPart,
-            equipment,
-            popularity,
-            burnedCalories,
-            time,
-            description
-          );
           const stars = Array.from(
             { length: 5 },
             (_, starIndex) => `
