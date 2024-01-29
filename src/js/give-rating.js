@@ -27,6 +27,16 @@ const starClickHandler = (event, liStar) => {
   );
 };
 
+const starHoverHandler = (event, liStar) => {
+    const tempRating = event.currentTarget.querySelector('input').value;
+    const selectedItems = Array.from(liStar).slice(0, tempRating);
+    const unselectedItems = Array.from(liStar).slice(tempRating);
+    selectedItems.forEach(li => li.classList.add('li-selected'));
+    unselectedItems.forEach(li =>
+      li.classList.replace('li-selected', 'li-unselected')
+    );
+  };
+
 const submitFormHandler = async event => {
   giveRatingSendBtn.disabled = true;
   event.preventDefault();
@@ -90,6 +100,7 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
   const liStar = starsUl.querySelectorAll('li');
   liStar.forEach(li => {
     li.addEventListener('click', event => starClickHandler(event, liStar));
+    li.addEventListener('mouseover', event => starHoverHandler(event, liStar));
   });
   giveRatingForm.addEventListener('submit', submitFormHandler);
 };
