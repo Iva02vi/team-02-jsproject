@@ -1,35 +1,86 @@
-
-import axios from "axios";
+import axios from 'axios';
 
 const markupModal = document.querySelector('.modal-window');
 console.log(markupModal);
 
+// --- Start Anna --- //
+import { prepareGiveRatingModal } from './give-rating';
+const giveRatingButton = document.querySelector('.modal-btn-rating');
+const modalGiveRating = document.querySelector('.modal-give-rating');
+const URL = 'https://energyflow.b.goit.study/api';
+// --- End Anna --- //
+
 export async function renderExercise(id) {
   try {
-    const test = await axios.get(`https://energyflow.b.goit.study/api/exercises/${id}`);
+    const backDrop = document.querySelector('.backdrop');
+    // For testing
+    const exercises = (await axios.get(`${URL}/exercises`)).data.results;
+    const { _id: exerciseId, rating } =
+      exercises[(exercises.length * Math.random()) | 0];
+
+    // ----
+
+    // --- Start Anna --- //
+    giveRatingButton.addEventListener('click', async () => {
+      backDrop.classList.add('visually-hidden');
+      markupModal.classList.add('hidden');
+      prepareGiveRatingModal(exerciseId, rating);
+      modalGiveRating.classList.remove('hidden');
+    });
+    // --- End Anna --- //
+
+    const test = await axios.get(
+      `https://energyflow.b.goit.study/api/exercises/${_id}`
+    );
+    console.log('test', exerciseModalData);
     const exerciseModalData = test.data;
-
-    markupModal.innerHTML = exerciseModalData.map(
-      ({
-        gifUrl, name, rating, target, bodyPart, equipment,
-        popularity, burnedCalories, time, description
-      }) => {
-        const parsedRating = Math.round(parseFloat(rating));
-
-        const stars = Array.from({ length: 5 }, (_, starIndex) => `
+    console.log(exerciseModalData);
+    markupModal.innerHTML = exerciseModalData
+      .map(
+        ({
+          gifUrl,
+          name,
+          rating,
+          target,
+          bodyPart,
+          equipment,
+          popularity,
+          burnedCalories,
+          time,
+          description,
+        }) => {
+          const parsedRating = Math.round(parseFloat(rating));
+          console.log(
+            gifUrl,
+            name,
+            rating,
+            target,
+            bodyPart,
+            equipment,
+            popularity,
+            burnedCalories,
+            time,
+            description
+          );
+          const stars = Array.from(
+            { length: 5 },
+            (_, starIndex) => `
           <li>
             <svg class="modal-rating-stars-svg" width="18" height="18">
               <use href="./img/sprite.svg#icon-Star-1"></use>
             </svg>
           </li>
-        `).map((star, starIndex) => {
-          if (starIndex < parsedRating) {
-            return star.replace('<svg', '<svg class="is-active"');
-          }
-          return star;
-        }).join('');
+        `
+          )
+            .map((star, starIndex) => {
+              if (starIndex < parsedRating) {
+                return star.replace('<svg', '<svg class="is-active"');
+              }
+              return star;
+            })
+            .join('');
 
-        return `
+          return `
           <div class="modal-tablet-pc-ver">
             <div class="modal-video"><img src="${gifUrl}" alt="Animated GIF"></div>
             <div>
@@ -68,18 +119,20 @@ export async function renderExercise(id) {
             </div>
           </div>
         `;
-      }
-    ).join('');
+        }
+      )
+      .join('');
 
     const addToFavoritesBtn = document.querySelector('.add-to-favorites-btn');
-    const backDrop = document.querySelector('.backdrop');
 
     addToFavoritesBtn.addEventListener('click', addToFavoritesClickHandler);
 
     function addToFavoritesClickHandler(e) {
       e.preventDefault();
-      
-      const index = favorites.findIndex((exercise) => exercise.name === exerciseModalData.name);
+
+      const index = favorites.findIndex(
+        exercise => exercise.name === exerciseModalData.name
+      );
 
       if (index !== -1) {
         favorites.splice(index, 1);
@@ -87,7 +140,7 @@ export async function renderExercise(id) {
           message: 'Упражнение удалено из избранного',
           messageColor: '#f7f7fc',
           backgroundColor: '#3939db',
-          position: 'topRight'
+          position: 'topRight',
         });
       } else {
         favorites.push(exerciseModalData[0]);
@@ -96,7 +149,7 @@ export async function renderExercise(id) {
           message: 'Упражнение добавлено в избранное',
           messageColor: '#f7f7fc',
           backgroundColor: '#219c2b',
-          position: 'topRight'
+          position: 'topRight',
         });
       }
 
@@ -109,7 +162,10 @@ export async function renderExercise(id) {
     function closeModal() {
       markupModal.innerHTML = '';
       backDrop.classList.add('visually-hidden');
-      addToFavoritesBtn.removeEventListener('click', addToFavoritesClickHandler);
+      addToFavoritesBtn.removeEventListener(
+        'click',
+        addToFavoritesClickHandler
+      );
       closeBtn.removeEventListener('click', closeModal);
       document.removeEventListener('keydown', escapeKeyHandler);
       backDrop.removeEventListener('click', backdropClickHandler);
@@ -130,11 +186,7 @@ export async function renderExercise(id) {
     }
 
     backDrop.addEventListener('click', backdropClickHandler);
-
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 }
-
 
 renderExercise(1);
