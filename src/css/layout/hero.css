@@ -6,21 +6,17 @@
   .hero-foto-tag {
     margin-bottom: 20px;
     height: 387px;
-    width: 335px;
     border-radius: 30px;
     background: url('/img/hero/mob-hero-min.jpg') center no-repeat;
+    position: relative;
   }
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     .hero-foto-tag {
-      margin-bottom: 20px;
-      height: 387px;
-      width: 335px;
-      border-radius: 30px;
       background: url('/img/hero/mob-hero@2-min.jpg') center no-repeat;
-      background-size: 335px;
+      background-size: cover;
     }
   }
   .hero-list {
@@ -28,8 +24,9 @@
     width: 180px;
     gap: 4px;
     flex-wrap: wrap;
-    padding-top: 95%;
-    padding-left: 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
   }
 
   .hero-list-tag {
@@ -42,7 +39,6 @@
     border: 1px solid rgba(246, 246, 246, 0.3);
     color: var(--white-smoke);
     font-size: 12px;
-    font-style: normal;
     font-weight: 400;
     line-height: 1.16;
   }
@@ -50,20 +46,16 @@
   .hero-title {
     border-radius: 30px;
     background: var(--white);
-    width: 335px;
-    height: 365px;
+    padding: 60px 20px 80px 20px;
   }
 
   .hero-text {
     color: var(--black);
     font-size: 56px;
-    font-style: normal;
     font-weight: 400;
     line-height: 0.89;
     letter-spacing: -0.02em;
     margin-bottom: 20px;
-    padding-top: 60px;
-    padding-left: 20px;
   }
 
   .hero-text-part {
@@ -74,10 +66,8 @@
   .hero-text-paragraph {
     color: var(--black);
     font-size: 14px;
-    font-style: normal;
     line-height: 1.28;
     letter-spacing: 0.01em;
-    padding-left: 20px;
   }
 }
 
@@ -89,17 +79,12 @@
   }
 
   .hero-foto-tag {
-    background-image: url('/img/hero/tabl-hero-min.jpg');
-  }
-
-  .hero-foto-tag {
     margin-bottom: 20px;
     height: 900px;
     width: 248px;
-    border-radius: 30px;
     flex-shrink: 0;
     border-radius: 50px 0px 50px 50px;
-    background: url('/img/hero/tabl-hero-min.jpg') no-repeat #e8e8e8;
+    background: url('/img/hero/tabl-hero-min.jpg') no-repeat var(--white-smoke);
     background-size: cover;
   }
 
@@ -112,7 +97,8 @@
       width: 248px;
       flex-shrink: 0;
       border-radius: 50px 0px 50px 50px;
-      background: url('/img/hero/tabl-hero@2-min.jpg') no-repeat #e8e8e8;
+      background: url('/img/hero/tabl-hero@2-min.jpg') no-repeat
+        var(--white-smoke);
       background-size: cover;
     }
   }
