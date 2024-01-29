@@ -10,12 +10,12 @@ function goToPage(path) {
 
 const path = location.pathname;
 console.log(path);
-if (path === 'index.html' || path === '') {
+if (path === '/team-02-jsproject/index.html' || path === '/team-02-jsproject/') {
   secondChild.classList.remove('is-active');
   mobSecondChild.classList.remove('is-active');
   firstChild.classList.add('is-active');
   mobFirstChild.classList.add('is-active');
-} else if (path === 'favorites.html') {
+} else if (path === '/team-02-jsproject/favorites.html') {
   firstChild.classList.remove('is-active');
   mobFirstChild.classList.remove('is-active');
   secondChild.classList.add('is-active');
