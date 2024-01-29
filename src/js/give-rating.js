@@ -1,4 +1,8 @@
 import axios from 'axios';
+import iziToast from "izitoast";
+
+import { renderExercise } from './modal-window-exercise';
+
 const modalGiveRating = document.querySelector('.modal-give-rating');
 const giveRatingForm = document.querySelector('.give-rating-form');
 const giveRatingCloseBtn = document.querySelector('.give-rating-close');
@@ -12,8 +16,46 @@ const NUMBER_OF_STARS = 5;
 let selectedRating;
 let exerciseId;
 
+const starClickHandler = (event, liStar) => {
+    selectedRating = event.currentTarget.querySelector('input').value;
+    const selectedItems = Array.from(liStar).slice(0, selectedRating);
+    const unselectedItems = Array.from(liStar).slice(selectedRating);
+    selectedItems.forEach(li => li.classList.add('li-selected'));
+    unselectedItems.forEach(li =>
+      li.classList.replace('li-selected', 'li-unselected')
+    );
+  }
+
+const submitFormHandler = async event => {
+    giveRatingSendBtn.disabled = true;
+    event.preventDefault();
+    try {
+      if (!selectedRating) {
+        throw Error('Please select rating!');
+      }
+      await axios.patch(`${URL}/exercises/${exerciseId}/rating`, {
+        rate: +selectedRating,
+        email: event.target.email.value,
+        review: event.target.comment.value,
+      });
+      giveRatingForm.reset();
+      showModalExercise();
+      renderExercise(exerciseId);
+    } catch (e) {
+        iziToast.error({
+            message: e.response?.data?.message || e.message,
+            position: 'topRight',
+            icon: ''
+        });
+    } finally {
+      giveRatingSendBtn.disabled = false;
+    }
+    return false;
+  }
+
 export const prepareGiveRatingModal = (exercise_id, currentRating) => {
   starsUl.innerHTML = '';
+  selectedRating = undefined;
   exerciseId = exercise_id;
   giveRatingCurrentRating.innerHTML = currentRating;
   const svgHtml = `
@@ -43,42 +85,17 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
 
   const liStar = starsUl.querySelectorAll('li');
   liStar.forEach(li => {
-    li.addEventListener('click', event => {
-      selectedRating = event.currentTarget.querySelector('input').value;
-      const selectedItems = Array.from(liStar).slice(0, selectedRating);
-      const unselectedItems = Array.from(liStar).slice(selectedRating);
-      selectedItems.forEach(li => li.classList.add('li-selected'));
-      unselectedItems.forEach(li =>
-        li.classList.replace('li-selected', 'li-unselected')
-      );
-    });
+    li.addEventListener('click', (event) => starClickHandler(event, liStar));
   });
-  giveRatingForm.addEventListener('submit', async event => {
-    giveRatingSendBtn.disabled = true;
-    event.preventDefault();
-    try {
-      if (!selectedRating) {
-        throw Error('Please select rating!');
-      }
-      console.log(`${URL}/exercises/${exerciseId}/rating`);
-      await axios.patch(`${URL}/exercises/${exerciseId}/rating`, {
-        rate: +selectedRating,
-        email: event.target.email.value,
-        review: event.target.comment.value,
-      });
-      giveRatingForm.reset();
-      modalGiveRating.classList.add('hidden');
-    } catch (e) {
-      console.error(e.message);
-    } finally {
-        giveRatingSendBtn.disabled = false;
-    }
-    return false;
-  });
+  giveRatingForm.addEventListener('submit', submitFormHandler);
 };
 
 giveRatingCloseBtn.addEventListener('click', () => {
+  showModalExercise();
+});
+
+const showModalExercise = () => {
   modalGiveRating.classList.add('hidden');
   backDrop.classList.remove('visually-hidden');
   markupModal.style.display = 'block';
-});
+};
