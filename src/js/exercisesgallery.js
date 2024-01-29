@@ -1,7 +1,23 @@
 import axios from 'axios';
-const exercisesGallery = document.querySelector('.exercises-gallery');
+const exercisesTitle = document.querySelector('.exercises-gallery-label');
+const exercisesGallery = document.querySelector('.exercises-gallery-group');
 const filterButton = document.querySelector('.exercises-gallery-filter');
 const pageButtonsContainer = document.querySelector('.page-buttons-container');
+let titleExerciseSpan = null;
+const titleExerciseSlash = document.createElement('span');
+const inputSearchValue = document.querySelector('#filtre-key');
+const searchExerciseForm = document.querySelector('.search-tool');
+
+import iziToast from 'izitoast';
+const cardErrorMessage = document.querySelector('.error-card-message');
+
+const BASE_URL = 'https://energyflow.b.goit.study/api/';
+let page = 1;
+
+const pageContent = {
+  content: null,
+  title: null,
+};
 
 const baseURL = 'https://energyflow.b.goit.study/api/filters';
 let urlOptions = {
@@ -9,7 +25,8 @@ let urlOptions = {
   page: 1,
   limit: 8,
 };
-let totalPages = 0;
+const filterBodypart = 'bodypart';
+let toggle = 'filter';
 const defaultFilter = 'muscles';
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -38,30 +55,20 @@ function renderExercises(images) {
   return images;
 }
 
-function renderPagesIcon(images) {
-  let pagesMarkup = '';
-  pageButtonsContainer.innerHTML = '';
-  for (let i = 1; i <= images.totalPages; i++) {
-    if (i === 1) {
-      pagesMarkup += `<li>
-      <button class="page-button active" type="button" id="${i}">${i}</button>
-    </li>`;
-    } else {
-      pagesMarkup += `<li>
-      <button class="page-button" type="button" id="${i}">${i}</button>`;
-    }
-  }
-  pageButtonsContainer.insertAdjacentHTML('afterbegin', pagesMarkup);
-}
-
 filterButton.addEventListener('click', function (event) {
+  clearExerciseTitle();
+  closeErrorMessage();
+  searchExerciseForm.style.display = 'none';
   if (event.target.tagName === 'BUTTON') {
+    toggle = 'filter';
     const buttonName = event.target.getAttribute('name');
     handleFilter(buttonName);
   }
 });
 
 function handleFilter(buttonName) {
+  searchExerciseForm.style.display = 'none';
+
   let selectedFilter = {};
   galleryForDesktop();
   switch (buttonName) {
@@ -89,7 +96,7 @@ function handleFilter(buttonName) {
   const apiUrl = `?${queryStr}`;
   fetchExercises(apiUrl)
     .then(images => renderExercises(images))
-    .then(imgages => renderPagesIcon(imgages))
+    .then(imgages => renderPagesIcon(imgages.totalPages))
     .catch(error => console.error(error));
 }
 
@@ -104,7 +111,7 @@ function fetchUrl() {
 async function fetchExercises(apiUrl) {
   try {
     const response = await axiosInstance.get(apiUrl);
-    totalPages = response.data.totalPages;
+    // totalPages = response.data.totalPages;
     return response.data;
   } catch (error) {
     console.error(error);
@@ -124,6 +131,23 @@ function changeButtonColor(selectedFilter) {
       currentButton.style.color = 'var(--black)';
     }
   }
+  console.log('changeButtonColor function toggle is: ' + toggle);
+}
+
+function renderPagesIcon(totalPages) {
+  let pagesMarkup = '';
+  pageButtonsContainer.innerHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1) {
+      pagesMarkup += `<li>
+      <button class="page-button active" type="button" id="${i}">${i}</button>
+    </li>`;
+    } else {
+      pagesMarkup += `<li>
+      <button class="page-button" type="button" id="${i}">${i}</button>`;
+    }
+  }
+  pageButtonsContainer.insertAdjacentHTML('afterbegin', pagesMarkup);
 }
 
 pageButtonsContainer.addEventListener('click', function (event) {
@@ -131,7 +155,7 @@ pageButtonsContainer.addEventListener('click', function (event) {
 
   if (clickedButton) {
     const buttonValue = clickedButton.id;
-    console.log('Clicked button value: ' + buttonValue);
+
     changeActiveButton(buttonValue);
   }
 });
@@ -142,15 +166,26 @@ function changeActiveButton(index) {
   buttons.forEach(button => {
     if (button.id === index) {
       button.classList.add('active');
-      urlOptions.page = index;
-      fetchUrl();
+      switch (toggle) {
+        case 'filter':
+          urlOptions.page = index;
+          fetchUrl();
+          break;
+        case 'workout':
+          page = index;
+          const cardQueryParams = { limit: adjustLimit(), page: page };
+          cardQueryParams[pageContent.content] = pageContent.title;
+          getListExercisesByName(cardQueryParams);
+          break;
+      }
     } else {
       button.classList.remove('active');
     }
   });
 }
 
-window.addEventListener('resize', () => {
+window.addEventListener('resize', event => {
+  event.preventDefault();
   galleryForDesktop();
   handleFilter(defaultFilter);
   changeActiveButton(1);
@@ -170,21 +205,189 @@ function galleryForDesktop() {
 
 handleFilter(defaultFilter);
 
-/* 
-Instructions for Olga-ampilogova: Add the code to your JavaScript project, 
-and you can use it to correctly handle clicks on the card and retrieve information about the card.
-Feel free to use this corrected version in your communication. 
-If you have any more questions or if there's anything else I can help you with, let me know!
-
-const exercisesGallery = document.querySelector('.exercises-gallery');
 exercisesGallery.addEventListener('click', event => {
   event.preventDefault();
   const cardElement = event.target.closest('.exercises-item-background');
 
   if (cardElement) {
+    toggle = 'workout';
+    searchExerciseForm.style.display = 'flex';
     const name = cardElement.querySelector('.name-card').textContent;
-    const filter = cardElement.querySelector('.type-card').textContent;
-    console.log('Clicked on card with name:', name, 'and filter:', filter);
+    let filter = cardElement
+      .querySelector('.type-card')
+      .textContent.toLowerCase()
+      .replace(/\s/g, '');
+    if (filter === 'bodyparts') {
+      filter = filter.slice(0, -1);
+    }
+
+    buildWorkoutGallery(name, filter);
   }
 });
-*/
+
+function cleanAll() {
+  closeErrorMessage();
+  clearExerciseTitle();
+  exercisesGallery.innerHTML = '';
+  pageButtonsContainer.innerHTML = '';
+}
+
+function ratingStarRow(rating) {
+  let row = '';
+  rating = Math.floor(rating);
+  for (let index = 0; index < rating; index++) {
+    row += `
+        <span class="rating-star-icon">
+            <svg class="rating-star" width="18" height="18" aria-label="rating-star">
+                   <use href="./img/sprite.svg#icon-Star-1"></use>
+            </svg>
+        </span>`;
+  }
+  return row;
+}
+
+/* Search function */
+searchExerciseForm.addEventListener('click', event => {
+  event.preventDefault();
+  if (event.target.localName != 'svg') {
+    return;
+  }
+  page = 1;
+
+  const searchValue = inputSearchValue.value.trim();
+  console.log(searchValue);
+
+  if (searchValue.length === 0) {
+    iziToast.error({
+      title: 'Error',
+      position: 'topCenter',
+      message: 'Sorry, Please choose an exercise.',
+    });
+    return;
+  }
+  cleanAll();
+
+  const cardQueryParams = {
+    limit: adjustLimit(),
+    page: page,
+    keyword: searchValue,
+  };
+
+  cardQueryParams[pageContent.content] = pageContent.title;
+  inputSearchValue.value = '';
+  getListExercisesByName(cardQueryParams);
+});
+
+function adjustLimit() {
+  const widthScreen = document.documentElement.clientWidth;
+  if (widthScreen > 768) {
+    return 12;
+  }
+  return 8;
+}
+
+function openErrorMessage() {
+  cardErrorMessage.style.display = 'block';
+}
+
+function closeErrorMessage() {
+  cardErrorMessage.style.display = 'none';
+}
+closeErrorMessage();
+
+function buildWorkoutGallery(title, filter) {
+  pageContent.title = title;
+  pageContent.content = filter;
+  page = 1;
+  const cardQueryParams = { limit: adjustLimit(), page: page };
+  cardQueryParams[pageContent.content] = title;
+  updateTitle(title);
+  getListExercisesByName(cardQueryParams);
+}
+
+async function getListExercisesByName(queryParams) {
+  try {
+    const res = await axios.get(`${BASE_URL}exercises`, {
+      params: queryParams,
+    });
+    const { totalPages, results } = res.data;
+    if (results.length == 0) {
+      //   clearPaginationButton();
+      openErrorMessage();
+      return;
+    }
+    let renderExersisesByName = results.reduce((html, image) => {
+      exercisesGallery.innerHTML = '';
+      pageButtonsContainer.innerHTML = '';
+      const ratingRow = ratingStarRow(image.rating);
+      return (
+        html +
+        `<li class="gallery-list-item">
+                <div class="workout-box">
+                    <div class="workout-rating">
+                        <p class="workout-title">WORKOUT</p>
+                        <p class="rating-title">${image.rating}
+                          ${ratingRow}
+                        </p>
+                            <button type="button" class="start-button">Start
+                            <span class="arrow-icon">
+                                <svg class="start-arrow-icon" width="14" height="14" aria-label="start-arrow">
+                                    <use href="./img/sprite.svg#icon-arrow"></use>
+                                </svg>
+                            </span>
+                            </button>
+                    </div>
+                    <div class="workout-type">
+                        <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
+                            <use href="../img/sprite.svg#icon-lighticon"></use>
+                        </svg>
+                        <p class="workout-name">${image.name}</p>
+                    </div>
+                    <div class="body-description">
+                        <p class="burned-callories">Burned calories:
+                            <span class="amount-callories">${image.burnedCalories}/${image.time} min</span>
+                        </p>
+                        <p class="filtred-class">Filtre:
+                            <span class="filter-type">${pageContent.content}</span>
+                        </p>
+                        <p class="target">Target:
+                        <span class="key-word">${image.target}</span>
+                        </p>
+                    </div>
+                </div>
+            </li>`
+      );
+    }, '');
+
+    exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
+    toggle = 'workout';
+    if (totalPages < 3) {
+      renderPagesIcon(totalPages);
+    } else {
+      renderPagesIcon(3);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function updateTitle(title) {
+  titleExerciseSpan = document.createElement('span');
+  titleExerciseSpan.classList.add('exercise-title-card');
+  titleExerciseSpan.innerHTML = title;
+
+  titleExerciseSlash.classList.add('exercises-gallery-label');
+  titleExerciseSlash.innerHTML = ' / ';
+
+  exercisesTitle.appendChild(titleExerciseSlash);
+  exercisesTitle.appendChild(titleExerciseSpan);
+}
+
+function clearExerciseTitle() {
+  if (titleExerciseSpan) {
+    exercisesTitle.removeChild(titleExerciseSpan);
+    exercisesTitle.removeChild(titleExerciseSlash);
+    titleExerciseSpan = null;
+    closeErrorMessage();
+  }
+}

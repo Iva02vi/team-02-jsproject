@@ -1,5 +1,5 @@
-import axios from "axios";
-import iziToast from "izitoast";
+import axios from 'axios';
+import iziToast from 'izitoast';
 
 const galleryTitle = document.querySelector('.gallery-collection');
 const galleryImage = document.querySelector('.gallery-item');
@@ -17,8 +17,8 @@ const equipementName = 'equipment';
 let page = 1;
 
 const pageContent = {
-    content: null,
-    title: null
+  content: null,
+  title: null,
 };
 
 const muscleButton = document.querySelector('.muscles');
@@ -31,58 +31,72 @@ bodyPartsButton.addEventListener('click', updateBodyPartsContent);
 const eqipementButton = document.querySelector('.equipment');
 eqipementButton.addEventListener('click', updateEquipmentContent);
 
-cardPaginationButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (!(event.target.localName === "button")) {
-        return;
-    }
-    cleanAll();
-    page = parseInt(event.target.value);
-    const cardQueryParams = { limit: adjustLimit(), page: page };
-    cardQueryParams[pageContent.content] = pageContent.title;
-    getExercisesByName(cardQueryParams);
+cardPaginationButton.addEventListener('click', event => {
+  event.preventDefault();
+  if (!(event.target.localName === 'button')) {
+    return;
+  }
+  cleanAll();
+  page = parseInt(event.target.value);
+  const cardQueryParams = { limit: adjustLimit(), page: page };
+  cardQueryParams[pageContent.content] = pageContent.title;
+  getExercisesByName(cardQueryParams);
 });
 
 function updateMusclesContent() {
-    cleanAll();
-    const exerciseQueryParams = { limit: adjustLimit(), page: page, filter: "Muscles" };
-    pageContent.content = muscleName;
-    getExercisesSet(exerciseQueryParams);
+  cleanAll();
+  const exerciseQueryParams = {
+    limit: adjustLimit(),
+    page: page,
+    filter: 'Muscles',
+  };
+  pageContent.content = muscleName;
+  getExercisesSet(exerciseQueryParams);
 }
 
 function updateBodyPartsContent() {
-    cleanAll();
-    const exerciseQueryParams = { limit: adjustLimit(), page: page, filter: "Body parts" };
-    pageContent.content = bodyPartName;
-    getExercisesSet(exerciseQueryParams);
+  cleanAll();
+  const exerciseQueryParams = {
+    limit: adjustLimit(),
+    page: page,
+    filter: 'Body parts',
+  };
+  pageContent.content = bodyPartName;
+  getExercisesSet(exerciseQueryParams);
 }
 
 function updateEquipmentContent() {
-    cleanAll();
-    const exerciseQueryParams = { limit: adjustLimit(), page: page, filter: "Equipment" };
-    pageContent.content = equipementName;
-    getExercisesSet(exerciseQueryParams);
+  cleanAll();
+  const exerciseQueryParams = {
+    limit: adjustLimit(),
+    page: page,
+    filter: 'Equipment',
+  };
+  pageContent.content = equipementName;
+  getExercisesSet(exerciseQueryParams);
 }
 
 function cleanAll() {
-    closeErrorMessage();
-    cleanGalleryList();
-    cleanGalleryCardList();
+  closeErrorMessage();
+  cleanGalleryList();
+  cleanGalleryCardList();
 }
 
 async function getExercisesSet(queryParams) {
-    try {
-        const result = await axios.get(`${BASE_URL}filters`, { params: queryParams });
-        console.log(result);
-        const { totalPages, results } = result.data;
-        if (results.length == 0) {
-            alert('NO MORE EXEERCISES')
-            return console.log(results.data);
-        }
-        let renderExersises = results.reduce(
-            (html, image) =>
-                html +
-                `<li class="gallery-item">
+  try {
+    const result = await axios.get(`${BASE_URL}filters`, {
+      params: queryParams,
+    });
+    console.log(result);
+    const { totalPages, results } = result.data;
+    if (results.length == 0) {
+      alert('NO MORE EXEERCISES');
+      return console.log(results.data);
+    }
+    let renderExersises = results.reduce(
+      (html, image) =>
+        html +
+        `<li class="gallery-item">
                         <a class="gallery-link" href="${image.imgUrl}">
                             <img class="gallery-image" data-source="${image.imgUrl}" src="${image.imgUrl}" alt="${image.name}" width="360" height="200"/>
                         </a>
@@ -90,43 +104,46 @@ async function getExercisesSet(queryParams) {
                             <p>${image.name}</p>
                         </div>
                 </li>`,
-            '');
-        galleryTitle.insertAdjacentHTML("beforeend", renderExersises);
-    }
-    catch (error) {
-       console.log(error);
-    }
+      ''
+    );
+    galleryTitle.insertAdjacentHTML('beforeend', renderExersises);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-galleryTitle.addEventListener('click', (event) => {
-    event.preventDefault();
-    cleanAll();
-    const title = event.target.alt;
-    pageContent.title = title;
-    page = 1;
-    const cardQueryParams = { limit: adjustLimit(), page: page };
-    cardQueryParams[pageContent.content] = title;
-    updateTitle(title);
-    getExercisesByName(cardQueryParams);
+galleryTitle.addEventListener('click', event => {
+  event.preventDefault();
+  cleanAll();
+  const title = event.target.alt;
+  pageContent.title = title;
+  page = 1;
+  const cardQueryParams = { limit: adjustLimit(), page: page };
+  cardQueryParams[pageContent.content] = title;
+  updateTitle(title);
+  getExercisesByName(cardQueryParams);
 });
 
 function updateTitle(title) {
-    exerciseTitle.innerHTML = `Exercises / <span class="exercise-title-card"> ${title}</span>`;
+  exerciseTitle.innerHTML = `Exercises / <span class="exercise-title-card"> ${title}</span>`;
 }
 
 async function getExercisesByName(queryParams) {
-    try {
-        const res = await axios.get(`${BASE_URL}exercises`, { params: queryParams });
-        const { totalPages, results } = res.data;
-        if (results.length == 0) {
-            clearPaginationButton();
-            openErrorMessage();
-            return;
-        }
-        let renderExersisesByName = results.reduce((html, image) => {
-            const ratingRow = ratingStarRow(image.rating);
-            return html +
-                `<li class="gallery-list-item">
+  try {
+    const res = await axios.get(`${BASE_URL}exercises`, {
+      params: queryParams,
+    });
+    const { totalPages, results } = res.data;
+    if (results.length == 0) {
+      clearPaginationButton();
+      openErrorMessage();
+      return;
+    }
+    let renderExersisesByName = results.reduce((html, image) => {
+      const ratingRow = ratingStarRow(image.rating);
+      return (
+        html +
+        `<li class="gallery-list-item">
                 <div class="workout-box">
                     <div class="workout-rating">
                         <p class="workout-title">WORKOUT</p>
@@ -160,94 +177,98 @@ async function getExercisesByName(queryParams) {
                     </div>
                 </div>
             </li>`
-            }, '');
+      );
+    }, '');
 
-        galleryCardsList.insertAdjacentHTML("beforeend", renderExersisesByName);
-        cardPaginationButton.innerHTML = createCardPaginationButton(totalPages);
-    } catch (error) {
-        console.log(error);
-    }
+    galleryCardsList.insertAdjacentHTML('beforeend', renderExersisesByName);
+    cardPaginationButton.innerHTML = createCardPaginationButton(totalPages);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function cleanGalleryList() {
-   galleryTitle.replaceChildren();
+  galleryTitle.replaceChildren();
 }
 
 function cleanGalleryCardList() {
-   galleryCardsList.replaceChildren();
+  galleryCardsList.replaceChildren();
 }
 
 function ratingStarRow(rating) {
-    let row = '';
-    rating = Math.floor(rating);
-    for (let index = 0; index < rating; index++) {
-        row += `
+  let row = '';
+  rating = Math.floor(rating);
+  for (let index = 0; index < rating; index++) {
+    row += `
         <span class="rating-star-icon">
             <svg class="rating-star" width="18" height="18" aria-label="rating-star">
                    <use href="./img/sprite.svg#icon-Star-1"></use>
             </svg>
         </span>`;
-    }
-    return row;
+  }
+  return row;
 }
 
 function createCardPaginationButton(totalPages) {
-    let row = '';
-    const maxPages = Math.min(totalPages, 5);
-    for (let index = 1; index <= maxPages; index++) {
-        row += `<button class="button-next-page" value="${index}">${index}</button>`;
-    }
-    return row;
+  let row = '';
+  const maxPages = Math.min(totalPages, 5);
+  for (let index = 1; index <= maxPages; index++) {
+    row += `<button class="button-next-page" value="${index}">${index}</button>`;
+  }
+  return row;
 }
 
 const cardErrorMessage = document.querySelector('.card-error-message');
 
 function openErrorMessage() {
-    cardErrorMessage.style.visibility = 'visible';
+  cardErrorMessage.style.visibility = 'visible';
 }
 
-function closeErrorMessage(){
-    cardErrorMessage.style.visibility = 'hidden';
+function closeErrorMessage() {
+  cardErrorMessage.style.visibility = 'hidden';
 }
 
-searchExerciseForm.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (event.target.localName != "svg") {
-        return;
-    }
-    page = 1;
+searchExerciseForm.addEventListener('click', event => {
+  event.preventDefault();
+  if (event.target.localName != 'svg') {
+    return;
+  }
+  page = 1;
 
-    const searchValue = inputSearchValue.value.trim();
-    console.log(searchValue);
+  const searchValue = inputSearchValue.value.trim();
+  console.log(searchValue);
 
-    if (searchValue.length === 0) {
-        iziToast.error({
-            title: 'Error',
-            position: 'topCenter',
-            message: "Sorry, Please choose an exercise."
-        });
-        return;
-    }
-    cleanAll();
+  if (searchValue.length === 0) {
+    iziToast.error({
+      title: 'Error',
+      position: 'topCenter',
+      message: 'Sorry, Please choose an exercise.',
+    });
+    return;
+  }
+  cleanAll();
 
-    const cardQueryParams = {limit: adjustLimit(), page: page, keyword: searchValue };
-    cardQueryParams[pageContent.content] = pageContent.title;
-    inputSearchValue.value = '';
-    getExercisesByName(cardQueryParams);
+  const cardQueryParams = {
+    limit: adjustLimit(),
+    page: page,
+    keyword: searchValue,
+  };
+  cardQueryParams[pageContent.content] = pageContent.title;
+  inputSearchValue.value = '';
+  getExercisesByName(cardQueryParams);
 });
 
 function clearPaginationButton() {
-    cardPaginationButton.replaceChildren();
+  cardPaginationButton.replaceChildren();
 }
 
 function adjustLimit() {
-    const widthScreen = document.documentElement.clientWidth;
-    if (widthScreen > 768) {
-        return 12;
-    }
-    return 8;
+  const widthScreen = document.documentElement.clientWidth;
+  if (widthScreen > 768) {
+    return 12;
+  }
+  return 8;
 }
 
 closeErrorMessage();
 updateMusclesContent();
-
