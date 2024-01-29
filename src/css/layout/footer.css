@@ -8,7 +8,8 @@
     color: var(--white-smoke);
     font-weight: 400;
     background-image: url('../../img/footer/footer-mobile-1x.jpg');
-    margin: 20px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .footer-logo-social {
@@ -173,7 +174,8 @@ screen and (max-device-pixel-ratio: 2) and (max-width: 767px) {
     .footer {
         padding-top: 64px;
         border-radius: 50px;
-        margin: 16px auto;
+        margin-top: 16px;
+        margin-bottom: 16px;
     }
 
     .footer-container {
