@@ -4,6 +4,8 @@ const giveRatingForm = document.querySelector('.give-rating-form');
 const giveRatingCloseBtn = document.querySelector('.give-rating-close');
 const giveRatingSendBtn = giveRatingForm.querySelector('button[type="submit"]');
 const giveRatingCurrentRating = document.querySelector('.give-rating-p1');
+const backDrop = document.querySelector('.backdrop');
+const markupModal = document.querySelector('.modal-window');
 const URL = 'https://energyflow.b.goit.study/api';
 const starsUl = document.querySelector('.give-rating-stars');
 const NUMBER_OF_STARS = 5;
@@ -77,4 +79,6 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
 
 giveRatingCloseBtn.addEventListener('click', () => {
   modalGiveRating.classList.add('hidden');
+  backDrop.classList.remove('visually-hidden');
+  markupModal.style.display = 'block';
 });
