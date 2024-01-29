@@ -172,7 +172,6 @@
 
 @media screen and (min-width: 768px) {
   .footer {
-    padding-top: 64px;
     border-radius: 50px;
     margin-top: 16px;
     margin-bottom: 16px;
@@ -252,11 +251,10 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
-  .footer {
+  .footer-container {
     padding-bottom: 32px;
     padding-left: 28px;
     background-image: url('../../img/footer/footer-tablet-1x.jpg');
-    max-width: 736px;
     background-size: 736px;
   }
 
@@ -292,18 +290,18 @@
 @media screen and (min-resolution: 192dpi) and (min-width: 768px) and (max-width: 1439px),
   screen and (min-resolution: 2dppx) and (min-width: 768px) and (max-width: 1439px),
   screen and (max-device-pixel-ratio: 2) and (min-width: 768px) and (max-width: 1439px) {
-  .footer {
+  .footer-container {
     background-image: url('../../img/footer/footer-tablet-2x.jpg');
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .footer {
+  .footer-container {
+    background-image: url('../../img/footer/footer-desktop-1x.jpg');
     max-width: 1408px;
     height: 454px;
     padding-bottom: 26px;
     background-size: 1408px;
-    background-image: url('../../img/footer/footer-desktop-1x.jpg');
   }
 
   .footer-main-info-container {
@@ -342,7 +340,7 @@
 @media screen and (min-resolution: 192dpi) and (min-width: 1440px),
   screen and (min-resolution: 2dppx) and (min-width: 1440px),
   screen and (max-device-pixel-ratio: 2) and (min-width: 1440px) {
-  .footer {
+  .footer-container {
     background-image: url('../../img/footer/footer-desktop-2x.jpg');
   }
 }
