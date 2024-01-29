@@ -12,86 +12,55 @@
     integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
   
-  <script type="module" crossorigin src="/team-02-jsproject/commonHelpers.js"></script>
-  <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/quote-1da8f9b3.js">
-  <link rel="stylesheet" href="/team-02-jsproject/assets/favorites-b5a9b3ff.css">
+  <script type="module" crossorigin src="/team-02-jsproject/assets/mob-menu-fd6c460a.js"></script>
+  <link rel="stylesheet" href="/team-02-jsproject/assets/favorites-05d467c9.css">
 </head>
 
 <body>
   <header>
-    <header class="header-page">
-  <div class="header-main container">
+    <header class="header-page container">
+  <div class="header-main">
     <nav class="header-nav">
       <a class="header-logo" href="./index.html">energy.flow</a>
       <ul class="header-nav-list">
-        <li class="header-list-item header-home header-navigation-home">
-          <a class="header-list-link is-active" href="./index.html">Home</a>
+        <li class="header-list-item header-home header-navigation-home is-active">
+          <a class="header-list-link" href="./index.html">Home</a>
         </li>
-        <li
-          class="header-list-item header-favorites header-navigation-favorites"
-        >
+        <li class="header-list-item header-favorites header-navigation-favorites">
           <a class="header-list-link" href="./favorites.html">Favorites</a>
         </li>
       </ul>
     </nav>
     <ul class="header-social-list">
       <li class="header-social-list-item">
-        <a
-          href="https://www.facebook.com/"
-          class="header-social-list-link"
-          target="_blank"
-        >
-          <svg
-            class="header-social-list-icon"
-            width="28"
-            height="28"
-            fill="#7E847F"
-          >
-            <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-facebook"></use>
+        <a href="https://www.facebook.com/" class="header-social-list-link" target="_blank">
+          <svg class="header-social-list-icon" width="28" height="28">
+            <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-facebook"></use>
           </svg>
         </a>
       </li>
       <li class="header-social-list-item">
-        <a
-          href="https://www.instagram.com/"
-          class="header-social-list-link"
-          target="_blank"
-        >
-          <svg
-            class="header-social-list-icon"
-            width="28"
-            height="28"
-            fill="#7E847F"
-          >
-            <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-instagram"></use>
+        <a href="https://www.instagram.com/" class="header-social-list-link" target="_blank">
+          <svg class="header-social-list-icon" width="28" height="28">
+            <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-instagram"></use>
           </svg>
         </a>
       </li>
       <li class="header-social-list-item">
-        <a
-          href="https://www.youtube.com/"
-          class="header-social-list-link"
-          target="_blank"
-        >
-          <svg
-            class="header-social-list-icon"
-            width="28"
-            height="28"
-            fill="#7E847F"
-          >
-            <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-youtube"></use>
+        <a href="https://www.youtube.com/" class="header-social-list-link" target="_blank">
+          <svg class="header-social-list-icon" width="28" height="28">
+            <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-youtube"></use>
           </svg>
         </a>
       </li>
     </ul>
     <button class="header-burger" type="button">
-      <svg width="32" height="16">
-        <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-align-justify"></use>
+      <svg class="header-burger-icon" width="32" height="16">
+        <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-burger-menu"></use>
       </svg>
     </button>
   </div>
 </header>
-
   </header>
   <main>
     <section class="container quote-section" id="quote">
@@ -99,12 +68,12 @@
         <div class="quote-for-today">
             <div class="quote-title-icon">
                 <svg class="quote-icon" width="32" height="32">
-                    <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-darkicon"></use>
+                    <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-darkicon"></use>
                 </svg>
                 <h2 class="quote-title">Quote of the day</h2>
             </div>
             <svg class="quote-icon-commas" width="32" height="32">
-                <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-inverted-commas"></use>
+                <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-inverted-commas"></use>
             </svg>
             <p class="quote-text">
                 A lot of times I find that people who are blessed with the most talent
@@ -136,7 +105,7 @@
             <div class="information-section-text-container">
                 <div class="information-section-items">
                     <svg class="information-icon-item" width="20" height="20">
-                        <use href="/team-02-jsproject/assets/sprite-866d8bd6.svg#icon-dumbbell-svg"></use>
+                        <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-dumbbell-svg"></use>
                     </svg>
                     <h2 class="information-text info-first-text">110 min</h2>
                     <h3 class="information-text info-second-text">Daily norm of sports</h3>
@@ -163,7 +132,59 @@
         <ul class="favorites-page-items-gallery"></ul>
     </div>
 </section>
+    <!-- ========== Mobile menu ========== -->
+
+<div class="mobile-menu">
+  <div class="menu-wrapper section">
+    <div class="menu-header-wrapper">
+      <a class="menu-nav-item-link" href="./index.html">energy.flow</a>
+      <button class="menu-close-button" type="button">
+        <svg class="menu-close-button-icon" width="20" height="20" aria-label="close-button">
+          <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-x"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="menu-nav">
+      <ul class="menu-nav-list">
+        <li class="menu-nav-list-item header-navigation-home">
+          <a class="menu-list-link menu-list-link-home is-active" href="./index.html">Home</a>
+        </li>
+        <li class="menu-nav-list-item header-navigation-favorites">
+          <a class="menu-list-link menu-list-link-favorites" href="./favorites.html">Favorites</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="menu-social-links-container">
+      <ul class="list mobile-social-links-list">
+        <li class="menu-social-links-item">
+          <a class="social-links-link" href="https://www.facebook.com" target="_blank">
+            <svg class="menu-social-link" width="25" height="25">
+              <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-facebook"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="menu-social-links-item">
+          <a class="social-links-link" href="https://www.instagram.com" target="_blank">
+            <svg class="menu-social-link" width="25" height="25">
+              <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="menu-social-links-item">
+          <a class="social-links-link" href="https://www.youtube.com" target="_blank">
+            <svg class="menu-social-link" width="25" height="25">
+              <use href="/team-02-jsproject/assets/sprite-04fa977b.svg#icon-youtube"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
   </main>
+  
   
   
   
