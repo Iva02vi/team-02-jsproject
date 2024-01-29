@@ -26,10 +26,6 @@ img {
   height: auto;
 }
 
-.section {
-  border-radius: 30px;
-}
-
 .back-to-top {
   background: var(--white);
   border-radius: 30%;
@@ -47,6 +43,10 @@ img {
 .back-to-top.active {
   bottom: 50px;
   transition: 0.3s all;
+}
+
+.section {
+  border-radius: 30px;
 }
 
 @media screen and (min-width: 768px) {
