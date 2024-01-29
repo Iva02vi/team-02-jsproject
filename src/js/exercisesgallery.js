@@ -27,6 +27,7 @@ let urlOptions = {
 };
 const filterBodypart = 'bodypart';
 let toggle = 'filter';
+let workoutCountPages = 0;
 const defaultFilter = 'muscles';
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -131,12 +132,11 @@ function changeButtonColor(selectedFilter) {
       currentButton.style.color = 'var(--black)';
     }
   }
-  console.log('changeButtonColor function toggle is: ' + toggle);
 }
 
 function renderPagesIcon(totalPages) {
+  console.log('RNDER PAGES ICON: ' + totalPages);
   let pagesMarkup = '';
-  pageButtonsContainer.innerHTML = '';
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1) {
       pagesMarkup += `<li>
@@ -147,6 +147,8 @@ function renderPagesIcon(totalPages) {
       <button class="page-button" type="button" id="${i}">${i}</button>`;
     }
   }
+
+  pageButtonsContainer.innerHTML = '';
   pageButtonsContainer.insertAdjacentHTML('afterbegin', pagesMarkup);
 }
 
@@ -165,6 +167,9 @@ function changeActiveButton(index) {
 
   buttons.forEach(button => {
     if (button.id === index) {
+      console.log('!!!!!!Button active: ');
+      console.log('!!!!!!button.id: ' + button.id);
+      console.log('!!!!!!index.id: ' + index);
       button.classList.add('active');
       switch (toggle) {
         case 'filter':
@@ -179,17 +184,19 @@ function changeActiveButton(index) {
           break;
       }
     } else {
+      console.log('Button INACTIVE!!!!!!: ' + button.id);
       button.classList.remove('active');
     }
   });
 }
 
-window.addEventListener('resize', event => {
-  event.preventDefault();
-  galleryForDesktop();
-  handleFilter(defaultFilter);
-  changeActiveButton(1);
-});
+// window.addEventListener('resize', event => {
+//   event.preventDefault();
+//   galleryForDesktop();
+//   handleFilter(defaultFilter);
+//   changeActiveButton(1);
+//   clearExerciseTitle();
+// });
 
 function galleryForDesktop() {
   const widthScreen = document.documentElement.clientWidth;
@@ -222,6 +229,13 @@ exercisesGallery.addEventListener('click', event => {
     }
 
     buildWorkoutGallery(name, filter);
+    console.log('RENDER TOTAL PAGE: ' + workoutCountPages);
+    if (workoutCountPages === 0) return;
+    if (workoutCountPages > 3) {
+      renderPagesIcon(3);
+    } else {
+      renderPagesIcon(workoutCountPages);
+    }
   }
 });
 
@@ -246,7 +260,6 @@ function ratingStarRow(rating) {
   return row;
 }
 
-/* Search function */
 searchExerciseForm.addEventListener('click', event => {
   event.preventDefault();
   if (event.target.localName != 'svg') {
@@ -312,13 +325,12 @@ async function getListExercisesByName(queryParams) {
     });
     const { totalPages, results } = res.data;
     if (results.length == 0) {
-      //   clearPaginationButton();
+      exercisesGallery.innerHTML = '';
       openErrorMessage();
       return;
     }
+
     let renderExersisesByName = results.reduce((html, image) => {
-      exercisesGallery.innerHTML = '';
-      pageButtonsContainer.innerHTML = '';
       const ratingRow = ratingStarRow(image.rating);
       return (
         html +
@@ -358,14 +370,10 @@ async function getListExercisesByName(queryParams) {
             </li>`
       );
     }, '');
-
+    workoutCountPages = Math.ceil(res.data.totalPages / res.data.perPage);
+    exercisesGallery.innerHTML = '';
     exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
     toggle = 'workout';
-    if (totalPages < 3) {
-      renderPagesIcon(totalPages);
-    } else {
-      renderPagesIcon(3);
-    }
   } catch (error) {
     console.log(error);
   }
