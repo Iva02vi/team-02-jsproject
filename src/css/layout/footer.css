@@ -11,11 +11,6 @@
     margin: 20px auto;
 }
 
-.footer-container {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
 .footer-logo-social {
     margin-bottom: 42px;
 }
@@ -106,6 +101,7 @@
     line-height: 1.29;
     margin-bottom: 12px;
     padding: 12px 14px;
+    color: var(--white-smoke);
 }
 
 .footer-modal-email::placeholder {
@@ -144,8 +140,6 @@
 }
 
 .footer-terms-container {
-    padding-left: 20px;
-    padding-right: 20px;
     opacity: 0.9;
     font-size: 12px;
     line-height: 0.83;

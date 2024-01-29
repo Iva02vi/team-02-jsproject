@@ -11,5 +11,7 @@
 @import url('./layout/exerciselist.css');
 @import url('./layout/exercisesgallery.css');
 @import url('./layout/information.css');
+@import url('./layout/give-rating.css');
 @import url('./layout/footer.css');
+@import url('./layout/modal-window-exercise.css');
 @import url('./layout/mob-menu.css');

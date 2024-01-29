@@ -13,8 +13,10 @@ form.addEventListener('submit', event => {
       email: email.value.trim(),
     };
     iziToast.success({
-        position: 'topRight',
+        position: 'topCenter',
         message: `We're excited to have you on board! 🎉 Thank you for subscribing to new exercises on Energy Flow. You've just taken a significant step towards improving your fitness and well-being.`,
+        backgroundColor: 'var( --dark-gray-hover)',
+        messageColor: 'var( --white-smoke)',
     });
     console.log(userData);
   localStorage.removeItem(LOCAL_KEY);
