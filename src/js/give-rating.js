@@ -65,7 +65,7 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
     height="24"
     aria-label="modal rating star icon"
   >
-    <use href="/img/sprite.svg#icon-Star-2"></use>
+    <use href="./img/sprite.svg#icon-Star-2"></use>
   </svg>`;
   const lies = [];
   for (let i = 0; i < NUMBER_OF_STARS; i++) {
