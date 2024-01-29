@@ -203,8 +203,8 @@
 }
 
 .modal-btn-favorites {
-  display: block;
   width: 100%;
+  display: block;
   border-radius: 30px;
   background: #7e847f;
   border: none;
