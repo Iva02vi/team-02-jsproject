@@ -1,4 +1,3 @@
-try {
   const mobileMenu = document.querySelector('.mobile-menu');
   const openMenuBtn = document.querySelector('.header-burger');
   const closeMenuBtn = document.querySelector('.menu-close-button');
@@ -23,6 +22,3 @@ try {
     openMenuBtn.setAttribute('aria-expanded', false);
     bodyScrollLock.enableBodyScroll(document.body);
   });
-} catch (error) {
-  console.error(error.message);
-}
