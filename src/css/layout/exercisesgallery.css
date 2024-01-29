@@ -13,9 +13,16 @@
   line-height: 1;
 }
 
+.filter-kit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .exercises-gallery-filter {
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
   gap: 6px;
@@ -36,7 +43,7 @@
   resize: none;
 }
 
-.exercises-gallery {
+.exercises-gallery-group {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -131,6 +138,17 @@
   border: 1px solid #1b1b1b;
 }
 
+.search-tool {
+  position: relative;
+}
+
+.icon-search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(90%) translateX(-100%);
+}
+
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
     padding: 64px 48px 64px 48px;
@@ -138,6 +156,13 @@
   }
   .exercises-gallery-label {
     font-size: 44px;
+  }
+
+  .filter-kit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .exercises-gallery-filter {
@@ -159,7 +184,7 @@
     resize: none;
   }
 
-  .exercises-gallery {
+  .exercises-gallery-group {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -192,7 +217,7 @@
   .text-card {
     font-size: 24px;
   }
-  .exercises-gallery {
+  .exercises-gallery-group {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
