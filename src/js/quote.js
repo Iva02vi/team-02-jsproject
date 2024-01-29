@@ -40,6 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const quoteText = quoteBlock.querySelector('.quote-text');
     const quoteAuthor = quoteBlock.querySelector('.quote-author');
 
+    // Додаємо відступи, якщо довжина цитати менша за 100 символів
+    if (quote.length < 100) {
+      quoteText.style.marginTop = '30px';
+      quoteAuthor.style.marginTop = '15px';
+    } else {
+      // Якщо відступи вже вказані в стилях, не робимо нічого
+    }
+
     quoteText.textContent = quote;
     quoteAuthor.textContent = author;
   }

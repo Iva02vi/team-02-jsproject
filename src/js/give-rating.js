@@ -10,9 +10,10 @@ const giveRatingSendBtn = giveRatingForm.querySelector('button[type="submit"]');
 const giveRatingCurrentRating = document.querySelector('.give-rating-p1');
 const backDrop = document.querySelector('.backdrop');
 const markupModal = document.querySelector('.modal-window');
-const URL = 'https://energyflow.b.goit.study/api';
+const API_URL = 'https://energyflow.b.goit.study/api';
 const starsUl = document.querySelector('.give-rating-stars');
 const NUMBER_OF_STARS = 5;
+const svgStarUrl = new URL('/img/sprite.svg#icon-Star-2', import.meta.url);
 let selectedRating;
 let exerciseId;
 
@@ -33,7 +34,7 @@ const submitFormHandler = async event => {
     if (!selectedRating) {
       throw Error('Please select rating!');
     }
-    await axios.patch(`${URL}/exercises/${exerciseId}/rating`, {
+    await axios.patch(`${API_URL}/exercises/${exerciseId}/rating`, {
       rate: +selectedRating,
       email: event.target.email.value,
       review: event.target.comment.value,
@@ -62,14 +63,14 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
   exerciseId = exercise_id;
   giveRatingCurrentRating.innerHTML = currentRating;
   const svgHtml = `
-  <svg
-    class="icon-Star-2"
-    width="24"
-    height="24"
-    aria-label="modal rating star icon"
-  >
-    <use href="./img/sprite.svg#icon-Star-2"></use>
-  </svg>`;
+    <svg
+      class="icon-Star-2"
+      width="24"
+      height="24"
+      aria-label="modal rating star icon"
+    >
+      <use href="${svgStarUrl}"></use>
+    </svg>`;
   const lies = [];
   for (let i = 0; i < NUMBER_OF_STARS; i++) {
     const li = document.createElement('li');
