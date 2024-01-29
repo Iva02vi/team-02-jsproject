@@ -1,3 +1,8 @@
+.give-rating-btn-send:hover {
+  background-color: var(--dark-gray-hover);
+  transform: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @media screen and (max-width: 767px) {
   .modal-give-rating {
     margin-top: 40px;
@@ -48,7 +53,6 @@
   .give-rating-p1 {
     color: #1b1b1b;
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: 'DM Sans';
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -81,7 +85,6 @@
     border-radius: 30px;
     border: 1px solid rgba(27, 27, 27, 0.4);
     color: rgba(27, 27, 27, 0.6);
-    font-family: 'DM Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -100,7 +103,6 @@
     border: 1px solid rgba(27, 27, 27, 0.4);
     resize: none;
     color: rgba(27, 27, 27, 0.6);
-    font-family: 'DM Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -108,7 +110,6 @@
   }
   .give-rating-btn-send {
     color: #f6f6f6;
-    font-family: 'DM Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

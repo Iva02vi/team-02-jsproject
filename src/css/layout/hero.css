@@ -67,7 +67,7 @@
   }
 
   .hero-text-part {
-    color: var(--dark-grey);
+    color: var(--dark-gray);
     font-style: italic;
   }
 
@@ -85,6 +85,7 @@
   .hero-container {
     display: flex;
     flex-direction: row;
+    padding-top: 16px;
   }
 
   .hero-foto-tag {
@@ -162,7 +163,7 @@
   }
 
   .hero-text-part {
-    color: var(--dark-grey);
+    color: var(--dark-gray);
     font-style: italic;
   }
 
@@ -180,7 +181,9 @@
   .hero-container {
     display: flex;
     flex-direction: row;
+    padding-top: 16px;
   }
+
   .hero-foto-tag {
     width: 704px;
     background-image: url('/img/hero/desktop-hero-min.jpg');
@@ -251,7 +254,7 @@
   }
 
   .hero-text-part {
-    color: var(--dark-grey);
+    color: var(--dark-gray);
     font-style: italic;
   }
 
