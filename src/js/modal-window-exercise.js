@@ -1,10 +1,38 @@
-
+import axios from 'axios';
 
 const markupModal = document.querySelector('.modal-window');
 
+// --- Start Anna --- //
+import { prepareGiveRatingModal } from './give-rating';
+const giveRatingButton = document.querySelector('.modal-btn-rating');
+const modalGiveRating = document.querySelector('.modal-give-rating');
+const URL = 'https://energyflow.b.goit.study/api';
+// --- End Anna --- //
+
 export async function renderExercise(id) {
   try {
-    const test = await axios.get(`https://energyflow.b.goit.study/api/exercises/${id}`);
+    const backDrop = document.querySelector('.backdrop');
+    // For testing
+    const exercises = (await axios.get(`${URL}/exercises`)).data.results;
+    const { _id: exerciseId, rating } =
+      exercises[(exercises.length * Math.random()) | 0];
+
+    // ----
+
+    // --- Start Anna --- //
+    giveRatingButton.addEventListener('click', (event) => {
+      backDrop.classList.add('visually-hidden');
+      markupModal.classList.add('hidden');
+      prepareGiveRatingModal(exerciseId, rating);
+      modalGiveRating.classList.remove('hidden');
+      event.stopImmediatePropagation();
+    });
+    // --- End Anna --- //
+
+    const test = await axios.get(
+      `https://energyflow.b.goit.study/api/exercises/${_id}`
+    );
+    console.log('test', exerciseModalData);
     const exerciseModalData = test.data;
     console.log(exerciseModalData);
 
@@ -61,7 +89,7 @@ export async function renderExercise(id) {
           message: 'Упражнение удалено из избранного',
           messageColor: '#f7f7fc',
           backgroundColor: '#3939db',
-          position: 'topRight'
+          position: 'topRight',
         });
       } else {
         favorites.push(exerciseModalData);
@@ -70,7 +98,7 @@ export async function renderExercise(id) {
           message: 'Упражнение добавлено в избранное',
           messageColor: '#f7f7fc',
           backgroundColor: '#219c2b',
-          position: 'topRight'
+          position: 'topRight',
         });
       }
 

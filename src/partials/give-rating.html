@@ -1,0 +1,33 @@
+<section class="modal-give-rating hidden">
+  <button class="give-rating-close" type="button">
+    <svg class="icon-x" width="24" height="24" aria-label="modal close icon">
+      <use href="/img/sprite.svg#icon-close"></use>
+    </svg>
+  </button>
+
+  <form class="give-rating-form">
+    <h2 class="give-rating-form-review">Rating</h2>
+    <div class="give-rating-p1-stars">
+      <p class="give-rating-p1">0.0></p>
+      <ul class="give-rating-stars"></ul>
+    </div>
+
+    <input
+      class="give-rating-email"
+      type="email"
+      name="email"
+      placeholder="Email"
+      pattern="[\w]+(\.[\w]+)*@([\w]+\.)+[a-zA-Z]{2,7}"
+      required
+    />
+
+    <textarea
+      class="give-rating-comment"
+      name="comment"
+      placeholder="Your comment"
+      required
+    ></textarea>
+
+    <button class="give-rating-btn-send" type="submit">Send</button>
+  </form>
+</section>
