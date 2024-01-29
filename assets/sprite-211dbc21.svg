@@ -28,8 +28,7 @@
             </path>
         </symbol>
         <symbol id="icon-arrow" viewBox="0 0 32 32">
-            <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6"
-                stroke="#1B1B1B" d="M15 28l13-13M28 15l-13-13M28 15h-26"></path>
+        <path fill="#f6f6f6" style="fill: var(--color1, #f6f6f6); stroke: var(--color1, #f6f6f6)" stroke="#f6f6f6" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.48" d="M17.036 7.986v16.338h-1.738v-16.338l-8.169 8.169-1.229-1.229 10.267-10.267 10.267 10.267-1.229 1.229-8.169-8.169z"></path>
         </symbol>
         <symbol id="icon-inverted-commas" viewBox="0 0 32 32">
             <path fill="#f6f6f6" style="fill: var(--color1, #f6f6f6)"
