@@ -1,6 +1,6 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
-    <symbol id="icon-align-justify" viewBox="0 0 64 32">
+    <symbol id="icon-burger-menu" viewBox="0 0 64 32">
 <path fill="none" stroke="#7e847f" style="stroke: var(--color1, #7e847f)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M56 20.667h-48"></path>
 <path fill="none" stroke="#7e847f" style="stroke: var(--color1, #7e847f)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M56 10h-48"></path>
 </symbol>
@@ -20,7 +20,7 @@
 <path fill="#eea10c" style="fill: var(--color2, #eea10c)" d="M13.826 3.262c0.684-2.106 3.663-2.106 4.348 0l1.932 5.945c0.306 0.942 1.184 1.579 2.174 1.579h6.251c2.214 0 3.135 2.833 1.344 4.135l-5.057 3.674c-0.801 0.582-1.136 1.614-0.83 2.556l1.931 5.945c0.684 2.106-1.726 3.857-3.517 2.555l-5.057-3.674c-0.801-0.582-1.886-0.582-2.687 0l-5.057 3.674c-1.791 1.302-4.202-0.45-3.517-2.555l1.932-5.945c0.306-0.942-0.029-1.973-0.83-2.556l-5.057-3.674c-1.791-1.302-0.871-4.135 1.344-4.135h6.251c0.99 0 1.868-0.638 2.174-1.579l1.932-5.945z"></path>
 </symbol>
 <symbol id="icon-arrow" viewBox="0 0 32 32">
-<path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6" stroke="#1B1B1B" d="M15 28l13-13M28 15l-13-13M28 15h-26"></path>
+<path fill="#f6f6f6" style="fill: var(--color1, #f6f6f6); stroke: var(--color1, #f6f6f6)" stroke="#f6f6f6" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.48" d="M17.036 7.986v16.338h-1.738v-16.338l-8.169 8.169-1.229-1.229 10.267-10.267 10.267 10.267-1.229 1.229-8.169-8.169z"></path>
 </symbol>
 <symbol id="icon-inverted-commas" viewBox="0 0 32 32">
 <path fill="#f6f6f6" style="fill: var(--color1, #f6f6f6)" d="M8.201 17.468c1.546-0.612 2.785-0.452 3.719 0.481s1.21 2.421 0.831 4.462c-0.292 1.517-0.933 2.683-1.925 3.5-0.962 0.788-2.085 1.181-3.369 1.181-1.75 0-2.96-0.671-3.631-2.013-0.671-1.371-0.802-3.208-0.394-5.512 0.233-1.254 0.613-2.523 1.137-3.806s1.225-2.596 2.1-3.937c0.875-1.342 2.013-2.508 3.413-3.5s2.946-1.633 4.638-1.925l-0.438 4.637c-1.429 0.292-2.698 1.035-3.806 2.231-1.108 1.167-1.867 2.567-2.275 4.2zM21.37 17.468c1.546-0.612 2.785-0.452 3.719 0.481s1.21 2.421 0.831 4.462c-0.292 1.517-0.933 2.683-1.925 3.5-0.963 0.788-2.085 1.181-3.369 1.181-1.75 0-2.96-0.671-3.631-2.013-0.671-1.371-0.802-3.208-0.394-5.512 0.233-1.254 0.613-2.523 1.138-3.806s1.225-2.596 2.1-3.937 2.012-2.508 3.412-3.5c1.4-0.992 2.946-1.633 4.638-1.925l-0.438 4.637c-1.429 0.292-2.698 1.035-3.806 2.231-1.108 1.167-1.867 2.567-2.275 4.2z"></path>
