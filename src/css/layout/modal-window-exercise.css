@@ -203,11 +203,12 @@
 }
 
 .modal-btn-favorites {
+  width: 100%;
   display: block;
   border-radius: 30px;
   background: #7e847f;
   border: none;
-  padding: 12px 83px;
+  padding: 12px 24px;
   margin-bottom: 9px;
   cursor: pointer;
   color: #f6f6f6;
@@ -228,9 +229,10 @@
 }
 
 .modal-btn-rating {
+  width: 100%;
   border-radius: 30px;
   border: 1px solid #1b1b1b;
-  padding: 12px 107px;
+  padding: 12px 24px;
   color: #1b1b1b;
   font-size: 14px;
   font-style: normal;
@@ -241,4 +243,14 @@
 .imgGif {
   min-width: 270px;
   min-height: 259px;
+}
+
+.modal-rating-stars,
+.modal-info-list {
+  list-style-type: none;
+}
+
+.modal-info-list-title-value,
+.modal-info-list-title {
+  font-weight: 800;
 }
