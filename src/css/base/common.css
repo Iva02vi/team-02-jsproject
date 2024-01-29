@@ -206,3 +206,26 @@ img {
     background-color: rgba(126, 132, 127, 0.2);
   }
 }
+.loader {
+  width: 48px;
+  height: 48px;
+  margin-left: 50%;
+  margin-top: 150px;
+  position: fixed;
+  border: 5px solid var(--dark-gray);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: none;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  z-index: 999;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
