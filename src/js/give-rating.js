@@ -1,5 +1,5 @@
 import axios from 'axios';
-import iziToast from "izitoast";
+import iziToast from 'izitoast';
 
 import { renderExercise } from './modal-window-exercise';
 
@@ -17,43 +17,46 @@ let selectedRating;
 let exerciseId;
 
 const starClickHandler = (event, liStar) => {
-    selectedRating = event.currentTarget.querySelector('input').value;
-    const selectedItems = Array.from(liStar).slice(0, selectedRating);
-    const unselectedItems = Array.from(liStar).slice(selectedRating);
-    selectedItems.forEach(li => li.classList.add('li-selected'));
-    unselectedItems.forEach(li =>
-      li.classList.replace('li-selected', 'li-unselected')
-    );
-  }
+  selectedRating = event.currentTarget.querySelector('input').value;
+  const selectedItems = Array.from(liStar).slice(0, selectedRating);
+  const unselectedItems = Array.from(liStar).slice(selectedRating);
+  selectedItems.forEach(li => li.classList.add('li-selected'));
+  unselectedItems.forEach(li =>
+    li.classList.replace('li-selected', 'li-unselected')
+  );
+};
 
 const submitFormHandler = async event => {
-    giveRatingSendBtn.disabled = true;
-    event.preventDefault();
-    try {
-      if (!selectedRating) {
-        throw Error('Please select rating!');
-      }
-      await axios.patch(`${URL}/exercises/${exerciseId}/rating`, {
-        rate: +selectedRating,
-        email: event.target.email.value,
-        review: event.target.comment.value,
-      });
-      giveRatingForm.reset();
-      showModalExercise();
-      renderExercise(exerciseId);
-    } catch (e) {
-        iziToast.error({
-            message: e.response?.data?.message || e.message,
-            position: 'topRight',
-            icon: ''
-        });
-    } finally {
-      giveRatingSendBtn.disabled = false;
+  giveRatingSendBtn.disabled = true;
+  event.preventDefault();
+  try {
+    if (!selectedRating) {
+      throw Error('Please select rating!');
     }
-    return false;
+    await axios.patch(`${URL}/exercises/${exerciseId}/rating`, {
+      rate: +selectedRating,
+      email: event.target.email.value,
+      review: event.target.comment.value,
+    });
+    giveRatingForm.reset();
+    showModalExercise();
+    renderExercise(exerciseId);
+  } catch (e) {
+    iziToast.error({
+      message: e.response?.data?.message || e.message,
+      position: 'topRight',
+      icon: '',
+    });
+  } finally {
+    giveRatingSendBtn.disabled = false;
   }
+  return false;
+};
 
 export const prepareGiveRatingModal = (exercise_id, currentRating) => {
+  backDrop.appendChild(modalGiveRating);
+  backDrop.classList.remove('visually-hidden');
+  markupModal.style.display = 'none';
   starsUl.innerHTML = '';
   selectedRating = undefined;
   exerciseId = exercise_id;
@@ -85,14 +88,12 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
 
   const liStar = starsUl.querySelectorAll('li');
   liStar.forEach(li => {
-    li.addEventListener('click', (event) => starClickHandler(event, liStar));
+    li.addEventListener('click', event => starClickHandler(event, liStar));
   });
   giveRatingForm.addEventListener('submit', submitFormHandler);
 };
 
-giveRatingCloseBtn.addEventListener('click', () => {
-  showModalExercise();
-});
+giveRatingCloseBtn.addEventListener('click', () => showModalExercise());
 
 const showModalExercise = () => {
   modalGiveRating.classList.add('hidden');
