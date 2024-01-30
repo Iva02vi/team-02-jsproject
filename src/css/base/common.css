@@ -63,6 +63,33 @@ img {
   padding-bottom: 20px;
 }
 
+.footer-privacy-terms {
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-top: 1px solid var(--black);
+}
+
+.logo-privacy-terms {
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-right: 40px;
+}
+
+.privacy-terms-text-off{
+  display: none;
+}
+
+.privacy-terms-social-list {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   .section {
     border-radius: 50px;
@@ -77,4 +104,42 @@ img {
     padding-top: 130px;
     padding-bottom: 40px;
   }
+
+  .footer-privacy-terms {
+    justify-content: space-between;
+  }
+
+  .logo-privacy-terms {
+    margin-right: 0;
+  }
+
+  .privacy-terms-text-off{
+    display: contents;
+  }
+  
+  .privacy-terms-social-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .privacy-terms-social-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 10px;
+    fill: var(--dark-gray);
+    border: 1px solid rgba(126, 132, 127, 0.2);
+    opacity: 0.8;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .privacy-terms-social-card:hover,
+  .privacy-terms-social-card:active {
+    fill: var(--dark-gray-hover);
+    background-color: rgba(126, 132, 127, 0.2);
+  }
 }
+
