@@ -110,8 +110,8 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
   giveRatingForm.addEventListener('submit', submitFormHandler);
 };
 
-giveRatingCloseBtn.addEventListener('click', event => {
-  renderExercise(exerciseId);
+giveRatingCloseBtn.addEventListener('click', async event => {
+  await renderExercise(exerciseId);
   showModalExercise();
   event.stopImmediatePropagation();
 });
