@@ -1,20 +1,28 @@
-const exercisesNotFound = document.querySelector(".favorites-page-items-not-found");
-const exercisesGallery = document.querySelector(".favorites-page-items-gallery");
+import { openModalWindEx } from './modal-window-exercise';
 
-const KEY = "savedExercises";
+const exercisesNotFound = document.querySelector(
+  '.favorites-page-items-not-found'
+);
+const exercisesGallery = document.querySelector(
+  '.favorites-page-items-gallery'
+);
+
+const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
+const KEY = 'favorites';
 const storageFetch = localStorage.getItem(KEY);
 const savedInStorageExercises = JSON.parse(storageFetch);
 
 function hideElem(elem) {
-    elem.style.display = "none";
+  elem.style.display = 'none';
 }
 function showElem(elem) {
-  elem.style.display = "flex";
+  elem.style.display = 'flex';
 }
 function renderExerciseCards(arr) {
-    const galleryItems = arr.reduce(
-        (html, card) => html +
-            `<li class="gallery-list-item">
+  const galleryItems = arr.reduce(
+    (html, card) =>
+      html +
+      `<li class="gallery-list-item">
                 <div class="workout-box">
                     <div class="workout-header">
                         <div class="workout-header-wrap">
@@ -26,9 +34,9 @@ function renderExerciseCards(arr) {
                             </button>
                         </div>
                         <div class="start-button-wrap">
-                            <button type="button" class="start-button" id="${card._id}>Start
-                                <svg class="start-arrow-icon" id="${card._id} width="14" height="14" aria-label="start-arrow">
-                                  <use href="./img/sprite.svg#icon-arrow"></use>
+                            <button type="button" class="start-button" id=${card._id}>Start
+                                <svg class="start-arrow-icon" id=${card._id} width="14" height="14" aria-label="start-arrow">
+                                  <use href=${svgArrowUrl}></use>
                                 </svg>
                             </button>
                         </div>
@@ -51,23 +59,42 @@ function renderExerciseCards(arr) {
                         </p>
                     </div>
                 </div>
-            </li>`, "");
-    exercisesGallery.innerHTML = galleryItems;
+            </li>`,
+    ''
+  );
+  exercisesGallery.innerHTML = galleryItems;
 }
 
+console.log(savedInStorageExercises);
 if (storageFetch === null || savedInStorageExercises.length === 0) {
-    hideElem(exercisesGallery);
+  hideElem(exercisesGallery);
 } else {
-    hideElem(exercisesNotFound);
-    renderExerciseCards(savedInStorageExercises);
+  hideElem(exercisesNotFound);
+  renderExerciseCards(savedInStorageExercises);
 }
 
-exercisesGallery.addEventListener("click", event => {
-  if(event.target.className === "delete-workout-btn" || event.target.ariaLabel === "trash-icon") {
-    const filteredArr = savedInStorageExercises.filter((card) => card._id !== event.target.id);
+///
+exercisesGallery.addEventListener('click', async event => {
+  let id;
+  const clickedButton = event.target;
+  console.log(clickedButton);
+  if (clickedButton && clickedButton.closest('.start-button')) {
+    id = clickedButton.closest('.start-button').getAttribute('id');
+    await openModalWindEx(id);
+  }
+});
+
+exercisesGallery.addEventListener('click', event => {
+  if (
+    event.target.className === 'delete-workout-btn' ||
+    event.target.ariaLabel === 'trash-icon'
+  ) {
+    const filteredArr = savedInStorageExercises.filter(
+      card => card._id !== event.target.id
+    );
     localStorage.setItem(KEY, JSON.stringify(filteredArr));
 
-    if(filteredArr.length === 0) {
+    if (filteredArr.length === 0) {
       hideElem(exercisesGallery);
       showElem(exercisesNotFound);
     } else {
@@ -76,4 +103,4 @@ exercisesGallery.addEventListener("click", event => {
       renderExerciseCards(newExercisesList);
     }
   }
-})
+});
