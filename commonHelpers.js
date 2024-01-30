@@ -1,4 +1,4 @@
-import{o as u}from"./assets/mob-menu-1d0d75a8.js";import"./assets/vendor-8cce9181.js";const l=document.querySelector(".favorites-page-items-not-found"),o=document.querySelector(".favorites-page-items-gallery"),g=new URL("/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-arrow",self.location),r="favorites",c=localStorage.getItem(r),a=JSON.parse(c);function n(e){e.style.display="none"}function p(e){e.style.display="flex"}function d(e){const i=e.reduce((s,t)=>s+`<li class="gallery-list-item">
+import{o as g}from"./assets/mob-menu-1d0d75a8.js";import"./assets/vendor-8cce9181.js";const l=document.querySelector(".favorites-page-items-not-found"),o=document.querySelector(".favorites-page-items-gallery"),p=new URL("/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-arrow",self.location),r="favorites",c=localStorage.getItem(r),a=JSON.parse(c);let m=Math.ceil(a.length/3);console.log(m);console.log(a);function n(e){e.style.display="none"}function v(e){e.style.display="flex"}function d(e){const i=e.reduce((s,t)=>s+`<li class="gallery-list-item">
                 <div class="workout-box">
                     <div class="workout-header">
                         <div class="workout-header-wrap">
@@ -12,7 +12,7 @@ import{o as u}from"./assets/mob-menu-1d0d75a8.js";import"./assets/vendor-8cce918
                         <div class="start-button-wrap">
                             <button type="button" class="start-button" id=${t._id}>Start
                                 <svg class="start-arrow-icon" id=${t._id} width="14" height="14" aria-label="start-arrow">
-                                  <use href=${g}></use>
+                                  <use href=${p}></use>
                                 </svg>
                             </button>
                         </div>
@@ -35,5 +35,5 @@ import{o as u}from"./assets/mob-menu-1d0d75a8.js";import"./assets/vendor-8cce918
                         </p>
                     </div>
                 </div>
-            </li>`,"");o.innerHTML=i}console.log(a);c===null||a.length===0?n(o):(n(l),d(a));o.addEventListener("click",async e=>{let i;const s=e.target;console.log(s),s&&s.closest(".start-button")&&(i=s.closest(".start-button").getAttribute("id"),await u(i))});o.addEventListener("click",e=>{if(e.target.className==="delete-workout-btn"||e.target.ariaLabel==="trash-icon"){const i=a.filter(s=>s._id!==e.target.id);if(localStorage.setItem(r,JSON.stringify(i)),i.length===0)n(o),p(l);else{const s=localStorage.getItem(r),t=JSON.parse(s);d(t)}}});
+            </li>`,"");o.innerHTML=i}c===null||a.length===0?n(o):(n(l),d(a));o.addEventListener("click",async e=>{let i;const s=e.target;console.log(s),s&&s.closest(".start-button")&&(i=s.closest(".start-button").getAttribute("id"),await g(i))});o.addEventListener("click",e=>{if(e.target.className==="delete-workout-btn"){const i=localStorage.getItem(r),t=JSON.parse(i).filter(u=>u._id!==e.target.id);localStorage.setItem(r,JSON.stringify(t)),t.length===0?(n(o),v(l)):d(t)}});
 //# sourceMappingURL=commonHelpers.js.map
