@@ -3,9 +3,14 @@
   margin-top: 20px;
 }
 
-.information-section-img {
+.information-section-img-container {
+  width: 100%;
   height: 269px;
-  width: 335px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 30px;
+  background-position: center;
+  background-image: url('../../img/information/information-phone-img.jpg');
 }
 
 .information-icon-item {
@@ -19,7 +24,6 @@
 .information-section-text-container {
   background: var(--black);
   max-width: 335px;
-  height: 269px;
   padding: 40px 20px;
   display: flex;
   column-gap: 18px;
@@ -27,7 +31,6 @@
 
 .information-text {
   color: rgba(246, 246, 246, 0.6);
-  font-family: 'DM Sans';
   font-size: 14px;
   line-height: 1.29;
 }
@@ -46,15 +49,19 @@
   margin-bottom: 14px;
 }
 
-.info-third-text {
-  height: 127px;
-  width: 230px;
+@media screen and (min-resolution: 192dpi) and (max-width: 767px),
+  screen and (min-resolution: 2dppx) and (max-width: 767px),
+  screen and (max-device-pixel-ratio: 2) and (max-width: 767px) {
+  .information-section-img-container {
+    background-image: url('../../img/information/information-phone-img@2x.jpg');
+  }
 }
 
 @media screen and (min-width: 768px) {
-  .information-section-img {
-    width: 736px;
+  .information-section-img-container {
     height: 302px;
+    border-radius: 50px;
+    background-image: url('../../information/information-tablet-img.jpg');
   }
 
   .information-section-text-container {
@@ -77,9 +84,18 @@
   }
 }
 
+@media screen and (min-resolution: 192dpi) and (min-width: 768px) and (max-width: 1439px),
+  screen and (min-resolution: 2dppx) and (min-width: 768px) and (max-width: 1439px),
+  screen and (max-device-pixel-ratio: 2) and (min-width: 768px) and (max-width: 1439px) {
+  .information-section-img-container {
+    background-image: url('../../img/information/information-tablet-img@2x.jpg');
+  }
+}
+
 @media screen and (min-width: 1440px) {
-  .information-section-img {
+  .information-section-img-container {
     width: 704px;
+    background-image: url('../../img/information/information-desktop-img.jpg');
   }
 
   .information-section-text-container {
@@ -91,5 +107,13 @@
   .information-section {
     display: flex;
     margin-top: 16px;
+  }
+}
+
+@media screen and (min-resolution: 192dpi) and (min-width: 1440px),
+  screen and (min-resolution: 2dppx) and (min-width: 1440px),
+  screen and (max-device-pixel-ratio: 2) and (min-width: 1440px) {
+  .information-section-img-container {
+    background-image: url('../../img/information/information-desktop-img@2x.jpg');
   }
 }
