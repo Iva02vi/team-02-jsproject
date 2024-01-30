@@ -1,36 +1,27 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 var audio = document.getElementById('myAudio');
-var isCyclic = false;
 
-function toggleAudio() {
-  if (audio.paused) {
-    audio.play();
-  } else {
-    audio.pause();
-  }
+function playAudio() {
+  audio.play();
 }
 
-// Вимикаємо циклічне відтворення
-audio.addEventListener('ended', function () {
-  if (!isCyclic) {
-    audio.currentTime = 0; // Перемотуємо аудіо до початку
-    audio.pause(); // Пауза, щоб не відтворювалося циклічно
-  }
-});
-
-// Функція для управління циклічним відтворенням
-function toggleCyclic() {
-  isCyclic = !isCyclic;
-  if (isCyclic) {
-    // Включення циклічного відтворення
-    audio.removeEventListener('ended', stopNonCyclicPlayback);
-  } else {
-    // Вимикаємо циклічне відтворення
-    audio.addEventListener('ended', stopNonCyclicPlayback);
-  }
-}
-
-// Функція для зупинки аудіо в нециклічному режимі
-function stopNonCyclicPlayback() {
-  audio.currentTime = 0;
+function pauseAudio() {
   audio.pause();
 }
+
+function stopAudio() {
+  audio.pause();
+  audio.currentTime = 0;
+}
+
+audio.addEventListener('ended', function () {
+  // Викликається після завершення відтворення
+  iziToast.show({
+    title: 'Lets do it!',
+    message: 'Subscribe in the bottom, and learn about new exercises!',
+    position: 'bottomRight',
+    timeout: 15000, // Час виведення повідомлення в мілісекундах (5 секунд у цьому випадку)
+  });
+});
