@@ -6,7 +6,7 @@ import { renderExercise } from './modal-window-exercise';
 const modalGiveRating = document.querySelector('.modal-give-rating');
 const giveRatingForm = document.querySelector('.give-rating-form');
 const giveRatingCloseBtn = document.querySelector('.give-rating-close');
-const giveRatingSendBtn = giveRatingForm.querySelector('.give-rating-btn-send');
+const giveRatingSendBtn = giveRatingForm.querySelector('button[type="submit"]');
 const giveRatingCurrentRating = document.querySelector('.give-rating-p1');
 const backDrop = document.querySelector('.backdrop');
 const markupModal = document.querySelector('.modal-window');
