@@ -28,7 +28,11 @@ import axios from 'axios';
     //   event.stopImmediatePropagation();
     // });
     // --- End Anna --- //
-
+export function openModalWindEx(id) {
+  
+  backDrop.classList.add("is-open");
+  renderExercise(id);
+}
     
 import { prepareGiveRatingModal } from './give-rating';
 const modalGiveRating = document.querySelector('.modal-give-rating');
@@ -168,4 +172,3 @@ export async function renderExercise(id) {
   }
 }
 
-renderExercise("64f389465ae26083f39b17a4");
