@@ -1,6 +1,8 @@
 import axios from 'axios';
 import iziToast from 'izitoast';
 
+const backDrop = document.querySelector('.backdrop');
+
 export async function openModalWindEx(id) {
   backDrop.classList.add("is-open");
   return renderExercise(id);
@@ -11,14 +13,12 @@ const modalGiveRating = document.querySelector('.modal-give-rating');
 const giveRatingButton = document.querySelector('.modal-btn-rating');
 
 const markupModal = document.querySelector('.modal-window');
-const backDrop = document.querySelector('.backdrop');
 
 export async function renderExercise(id) {
   try {
     const test = await axios.get(`https://energyflow.b.goit.study/api/exercises/${id}`);
     const exerciseModalData = test.data;
     localStorage.setItem('exerciseModalData', JSON.stringify(exerciseModalData));
-
     const stars = document.getElementsByClassName("modal-rating-stars")[0];
     stars.innerHTML = exerciseModalData.rating;
     for (let i = 1; i <= 5; i++) {
@@ -117,6 +117,8 @@ export async function renderExercise(id) {
     document.addEventListener('keydown', escapeKeyHandler);
 
   } catch (error) {
-
+      iziToast.error({
+        message: error.message
+      })
   }
 }
