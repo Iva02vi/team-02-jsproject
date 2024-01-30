@@ -169,6 +169,12 @@
     letter-spacing: -0.01em;
     margin-bottom: 80px;
   }
+
+  .audio-container {
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -260,5 +266,10 @@
     line-height: 1.3;
     letter-spacing: -0.01em;
     margin-bottom: 130px;
+  }
+
+  .audio-container {
+    justify-content: end;
+    margin-right: 30px;
   }
 }
