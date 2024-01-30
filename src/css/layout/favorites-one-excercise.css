@@ -91,6 +91,11 @@
     text-overflow: ellipsis;
 }
 
+.workout-name::first-letter,
+.description-item-value::first-letter {
+    text-transform: capitalize;
+}
+
 /* ----WORKOUT DESCRIPTION STYLES -----*/
 
 .workout-description {
