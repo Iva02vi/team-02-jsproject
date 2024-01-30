@@ -14,7 +14,7 @@
   
   <script type="module" crossorigin src="/team-02-jsproject/commonHelpers.js"></script>
   <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/vendor-8cce9181.js">
-  <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/modal-window-exercise-3efef76b.js">
+  <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/modal-window-exercise-6828e0d1.js">
   <link rel="stylesheet" href="/team-02-jsproject/assets/vendor-e5212ee8.css">
   <link rel="stylesheet" href="/team-02-jsproject/assets/favorites-d96e4331.css">
 </head>
@@ -268,6 +268,41 @@
     </div>
   </div>
 </div>
+  <section class="modal-give-rating hidden">
+  <button class="give-rating-close" type="button">
+    <svg class="icon-x" width="24" height="24" aria-label="modal close icon">
+      <use href="/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-close"></use>
+    </svg>
+  </button>
+
+  <form class="give-rating-form">
+    <h2 class="give-rating-form-review">Rating</h2>
+    <div class="give-rating-p1-stars">
+      <p class="give-rating-p1">0.0></p>
+      <ul class="give-rating-stars"></ul>
+    </div>
+
+    <input
+      class="give-rating-email"
+      type="email"
+      name="email"
+      placeholder="Email"
+      pattern="[\w]+(\.[\w]+)*@([\w]+\.)+[a-zA-Z]{2,7}"
+      required
+    />
+
+    <textarea
+      class="give-rating-comment"
+      name="comment"
+      placeholder="Your comment"
+      required
+    ></textarea>
+
+    <button class="give-rating-btn-send" type="submit">Send</button>
+  </form>
+</section>
+
+  
   
   
   
