@@ -31,6 +31,7 @@ bodyPartsButton.addEventListener('click', updateBodyPartsContent);
 const eqipementButton = document.querySelector('.equipment');
 eqipementButton.addEventListener('click', updateEquipmentContent);
 
+
 cardPaginationButton.addEventListener('click', event => {
   event.preventDefault();
   if (!(event.target.localName === 'button')) {
@@ -122,6 +123,7 @@ galleryTitle.addEventListener('click', event => {
   cardQueryParams[pageContent.content] = title;
   updateTitle(title);
   getExercisesByName(cardQueryParams);
+  
 });
 
 function updateTitle(title) {

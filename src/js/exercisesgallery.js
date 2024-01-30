@@ -303,6 +303,7 @@ function buildWorkoutGallery(title, filter) {
   cardQueryParams[pageContent.content] = title;
   updateTitle(title);
   getListExercisesByName(cardQueryParams);
+
 }
 
 async function getListExercisesByName(queryParams) {
