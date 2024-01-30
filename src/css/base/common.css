@@ -63,6 +63,60 @@ img {
   padding-bottom: 20px;
 }
 
+.footer-privacy {
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-top: 1px solid var(--black);
+}
+
+.logo-privacy {
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-right: 40px;
+}
+
+.privacy-text-off{
+  display: none;
+}
+
+.privacy-social-list {
+  display: none;
+}
+
+.footer-terms {
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-top: 1px solid var(--black);
+}
+
+.logo-terms {
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-right: 40px;
+}
+
+.terms-text-off {
+  display: none;
+}
+
+.terms-social-list {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   .section {
     border-radius: 50px;
@@ -76,5 +130,79 @@ img {
   .terms-page {
     padding-top: 130px;
     padding-bottom: 40px;
+  }
+
+  .footer-privacy {
+    justify-content: space-between;
+  }
+
+  .logo-privacy {
+    margin-right: 0;
+  }
+
+  .privacy-text-off {
+    display: contents;
+  }
+
+  .privacy-social-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .privacy-social-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 10px;
+    fill: var(--dark-gray);
+    border: 1px solid rgba(126, 132, 127, 0.2);
+    opacity: 0.8;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .privacy-social-card:hover,
+  .privacy-social-card:active {
+    fill: var(--dark-gray-hover);
+    background-color: rgba(126, 132, 127, 0.2);
+  }
+
+  .footer-terms {
+    justify-content: space-between;
+  }
+
+  .logo-terms {
+    margin-right: 0;
+  }
+
+  .terms-text-off{
+    display: contents;
+  }
+  
+  .terms-social-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .terms-social-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 10px;
+    fill: var(--dark-gray);
+    border: 1px solid rgba(126, 132, 127, 0.2);
+    opacity: 0.8;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .terms-social-card:hover,
+  .terms-social-card:active {
+    fill: var(--dark-gray-hover);
+    background-color: rgba(126, 132, 127, 0.2);
   }
 }
