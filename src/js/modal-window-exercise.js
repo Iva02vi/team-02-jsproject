@@ -49,6 +49,7 @@ export async function renderExercise(id) {
     document.getElementsByClassName("descr")[0].innerHTML = exerciseModalData.description;
 
     const addToFavoritesBtn = document.querySelector('.modal-btn-favorites');
+    const addToFavoritesText = document.querySelector('.modal-btn-favorites-text');
 
     addToFavoritesBtn.addEventListener('click', addToFavoritesClickHandler);
 
@@ -64,18 +65,18 @@ export async function renderExercise(id) {
 
       if (index !== -1) {
         favorites.splice(index, 1);
-        addToFavoritesBtn.innerText = 'Add to favorites';
+        addToFavoritesText.innerText = 'Add to favorites';
         iziToast.show({
-          message: 'Упражнение удалено из избранного',
+          message: 'Exercise removed from favorites',
           messageColor: '#f7f7fc',
           backgroundColor: '#3939db',
           position: 'topRight'
         });
       } else {
         favorites.push(exerciseModalData);
-        addToFavoritesBtn.innerText = 'Remove from favorites';
+        addToFavoritesText.innerText = 'Remove from favorites';
         iziToast.show({
-          message: 'Упражнение добавлено в избранное',
+          message: 'Exercise added to favorites',
           messageColor: '#f7f7fc',
           backgroundColor: '#219c2b',
           position: 'topRight'
