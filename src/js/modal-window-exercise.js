@@ -1,4 +1,5 @@
 import axios from 'axios';
+import iziToast from 'izitoast';
 
 export async function openModalWindEx(id) {
   backDrop.classList.add("is-open");
@@ -88,7 +89,6 @@ export async function renderExercise(id) {
     closeBtn.addEventListener('click', closeModal);
 
     function closeModal() {
-      markupModal.innerHTML = '';
       backDrop.classList.remove('is-open');
       addToFavoritesBtn.removeEventListener('click', addToFavoritesClickHandler);
       closeBtn.removeEventListener('click', closeModal);
