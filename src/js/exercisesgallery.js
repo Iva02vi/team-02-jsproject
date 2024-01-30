@@ -10,6 +10,7 @@ let titleExerciseSpan = null;
 const titleExerciseSlash = document.createElement('span');
 const inputSearchValue = document.querySelector('#filtre-key');
 const searchExerciseForm = document.querySelector('.search-tool');
+const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 
 const cardErrorMessage = document.querySelector('.error-card-message');
 
@@ -331,10 +332,10 @@ async function getListExercisesByName(queryParams) {
                         <p class="rating-title">${image.rating}
                           ${ratingRow}
                         </p>
-                            <button type="button" class="start-button" data-exercise-id=${image._id} >Start
+            <button type="button" class="start-button" data-exercise-id=${image._id} >Start
                             <span class="arrow-icon">
-                                <svg class="start-arrow-icon" width="14" height="14" aria-label="start-arrow">
-                                    <use href="./img/sprite.svg#icon-arrow"></use>
+                                <svg class="start-arrow-icon" width="16" height="16" aria-label="start-arrow">
+                                    <use href=${svgArrowUrl}></use>
                                 </svg>
                             </span>
                             </button>
