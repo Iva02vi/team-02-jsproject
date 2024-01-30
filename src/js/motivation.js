@@ -21,7 +21,9 @@ audio.addEventListener('ended', function () {
   iziToast.show({
     title: 'Lets do it!',
     message: 'Subscribe in the bottom, and learn about new exercises!',
-    position: 'bottomRight',
-    timeout: 15000, // Час виведення повідомлення в мілісекундах (5 секунд у цьому випадку)
+    position: 'bottomCenter',
+    timeout: 10000, // Час виведення повідомлення в мілісекундах (5 секунд у цьому випадку)
+    backgroundColor: 'var( --dark-gray-hover)',
+    messageColor: 'var( --white-smoke)',
   });
 });
