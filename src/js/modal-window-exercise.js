@@ -12,10 +12,10 @@ import axios from 'axios';
 // export async function renderExercise(id) {
 //   try {
 //     const backDrop = document.querySelector('.backdrop');
-    // For testing
-    // const exercises = (await axios.get(`${URL}/exercises`)).data.results;
-    // const { _id: exerciseId, rating } =
-    //   exercises[(exercises.length * Math.random()) | 0];
+//     For testing
+//     const exercises = (await axios.get(`${URL}/exercises`)).data.results;
+//     const { _id: exerciseId, rating } =
+//       exercises[(exercises.length * Math.random()) | 0];
 
     // ----
 
