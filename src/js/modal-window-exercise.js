@@ -1,42 +1,13 @@
 import axios from 'axios';
 
-
-
-// --- Start Anna --- //
-// import { prepareGiveRatingModal } from './give-rating';
-// const giveRatingButton = document.querySelector('.modal-btn-rating');
-// const modalGiveRating = document.querySelector('.modal-give-rating');
-// const URL = 'https://energyflow.b.goit.study/api';
-// --- End Anna --- //
-
-// export async function renderExercise(id) {
-//   try {
-//     const backDrop = document.querySelector('.backdrop');
-//     For testing
-//     const exercises = (await axios.get(`${URL}/exercises`)).data.results;
-//     const { _id: exerciseId, rating } =
-//       exercises[(exercises.length * Math.random()) | 0];
-
-    // ----
-
-    // --- Start Anna --- //
-    // giveRatingButton.addEventListener('click', (event) => {
-    //   backDrop.classList.add('visually-hidden');
-    //   markupModal.classList.add('hidden');
-    //   prepareGiveRatingModal(exerciseId, rating);
-    //   modalGiveRating.classList.remove('hidden');
-    //   event.stopImmediatePropagation();
-    // });
-    // --- End Anna --- //
-export function openModalWindEx(id) {
-  
+export async function openModalWindEx(id) {
   backDrop.classList.add("is-open");
-  renderExercise(id);
+  return renderExercise(id);
 }
-    
+
 import { prepareGiveRatingModal } from './give-rating';
 const modalGiveRating = document.querySelector('.modal-give-rating');
-const modalBtns = document.querySelector('.modal-btns');
+const giveRatingButton = document.querySelector('.modal-btn-rating');
 
 const markupModal = document.querySelector('.modal-window');
 const backDrop = document.querySelector('.backdrop');
@@ -45,35 +16,21 @@ export async function renderExercise(id) {
   try {
     const test = await axios.get(`https://energyflow.b.goit.study/api/exercises/${id}`);
     const exerciseModalData = test.data;
-    console.log(exerciseModalData);
-
-    // Create give rating button dynamically
-    
-    // можна видалити коли відкрівання картку буде дороблено
-    if (document.querySelectorAll('.modal-btn-rating').length > 0) {
-      document.querySelectorAll('.modal-btn-rating').forEach(el => el.remove());
-    }
-    // видалити до сюди
-
-    const giveRatingButton = document.createElement('button');
-    giveRatingButton.setAttribute('class', 'modal-btn-rating');
-    giveRatingButton.setAttribute('id', crypto.randomUUID());
-    giveRatingButton.textContent = 'Give a rating';
-    modalBtns.appendChild(giveRatingButton);
+    localStorage.setItem('exerciseModalData', JSON.stringify(exerciseModalData));
 
     const stars = document.getElementsByClassName("modal-rating-stars")[0];
     stars.innerHTML = exerciseModalData.rating;
     for (let i = 1; i <= 5; i++) {
       if (i < exerciseModalData.rating) {
         stars.innerHTML += `<li>
-      
+
       <svg class="modal-rating-stars-svg" width="18" height="18">
         <use href="../img/sprite.svg#icon-Star-1"></use>
       </svg>
     </li>`;
       } else {
         stars.innerHTML += `<li>
-        
+
         <svg class="modal-rating-stars-svg" width="18" height="18">
           <use href="../img/sprite.svg#icon-Star-1"></use>
         </svg>
@@ -136,7 +93,6 @@ export async function renderExercise(id) {
       addToFavoritesBtn.removeEventListener('click', addToFavoritesClickHandler);
       closeBtn.removeEventListener('click', closeModal);
       document.removeEventListener('keydown', escapeKeyHandler);
-      backDrop.removeEventListener('click', backdropClickHandler);
       giveRatingButton.removeEventListener('click', giveRatingHandler);
     }
 
@@ -145,30 +101,21 @@ export async function renderExercise(id) {
         closeModal();
       }
     }
-    function backdropClickHandler() {
-      closeModal();
-    }
 
     const giveRatingHandler = (event) => {
       backDrop.classList.remove('visually-hidden');
       markupModal.classList.add('hidden');
-      prepareGiveRatingModal(id, exerciseModalData.rating);
+      prepareGiveRatingModal(id, JSON.parse(localStorage.getItem('exerciseModalData'))['rating']);
       modalGiveRating.classList.remove('hidden');
       event.stopImmediatePropagation();
-      giveRatingButton.removeEventListener('click', giveRatingHandler);
-      giveRatingButton.remove();
+      localStorage.removeItem('exerciseModalData');
     }
 
     giveRatingButton.addEventListener('click', giveRatingHandler);
 
     document.addEventListener('keydown', escapeKeyHandler);
 
-    // *** Це закриває усі модальні вікна по кліку в будь-якому місці.
-    // Навіщо це? Це зробить обробку кліків в модальніх вікнах складнішими. Краще закрівати по крестику.
-    // backDrop.addEventListener('click', backdropClickHandler);
-
   } catch (error) {
 
   }
 }
-
