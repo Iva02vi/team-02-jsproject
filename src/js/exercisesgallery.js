@@ -393,6 +393,16 @@ async function getListExercisesByName(queryParams) {
       );
     }, '');
     // workoutCountPages = Math.ceil(res.data.totalPages / res.data.perPage);
+
+    exercisesGallery.addEventListener('click', async (event) => {
+      let id;
+      const clickedButton = event.target;
+      if (event.target && event.target.closest('.start-button')) {
+        id = clickedButton.closest('.start-button').getAttribute('data-exercise-id');
+        await openModalWindEx(id);
+      }
+      })
+
     workoutCountPages = res.data.totalPages;
     exercisesGallery.innerHTML = '';
     exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
