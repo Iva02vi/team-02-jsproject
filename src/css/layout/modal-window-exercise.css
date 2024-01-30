@@ -87,15 +87,9 @@
 .modal-video {
   border-radius: 12px;
   border-radius: 12px;
-  background: linear-gradient(
-    0deg,
-    rgba(27, 27, 27, 0.2) 0%,
-    rgba(27, 27, 27, 0.2) 100%
-  );
   margin-bottom: 20px;
   margin-top: 2px;
   width: 100%;
-  min-height: 258px;
 }
 
 @media (min-width: 768px) {
