@@ -28,30 +28,35 @@ const starClickHandler = (event, liStar) => {
 };
 
 const starHoverHandler = (event, liStar) => {
-    const tempRating = event.currentTarget.querySelector('input').value;
-    const selectedItems = Array.from(liStar).slice(0, tempRating);
-    const unselectedItems = Array.from(liStar).slice(tempRating);
-    selectedItems.forEach(li => li.classList.add('li-selected'));
-    unselectedItems.forEach(li =>
-      li.classList.replace('li-selected', 'li-unselected')
-    );
-  };
+  const tempRating = event.currentTarget.querySelector('input').value;
+  const selectedItems = Array.from(liStar).slice(0, tempRating);
+  const unselectedItems = Array.from(liStar).slice(tempRating);
+  selectedItems.forEach(li => li.classList.add('li-selected'));
+  unselectedItems.forEach(li =>
+    li.classList.replace('li-selected', 'li-unselected')
+  );
+};
 
 const submitFormHandler = async event => {
   giveRatingSendBtn.disabled = true;
   event.preventDefault();
   try {
     if (!selectedRating) {
-      throw Error('Please select rating!');
+      throw Error('Please select rating! Make sure to click!');
     }
     await axios.patch(`${API_URL}/exercises/${exerciseId}/rating`, {
       rate: +selectedRating,
       email: event.target.email.value,
       review: event.target.comment.value,
     });
+    iziToast.success({
+      message: 'Thank you for your review!',
+      position: 'topRight',
+      icon: '',
+    });
     giveRatingForm.reset();
     showModalExercise();
-    renderExercise(exerciseId);
+    await renderExercise(exerciseId);
   } catch (e) {
     iziToast.error({
       message: e.response?.data?.message || e.message,
@@ -105,10 +110,13 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
   giveRatingForm.addEventListener('submit', submitFormHandler);
 };
 
-giveRatingCloseBtn.addEventListener('click', () => showModalExercise());
+giveRatingCloseBtn.addEventListener('click', event => {
+  renderExercise(exerciseId);
+  showModalExercise();
+  event.stopImmediatePropagation();
+});
 
 const showModalExercise = () => {
   modalGiveRating.classList.add('hidden');
-  backDrop.classList.remove('visually-hidden');
   markupModal.style.display = 'block';
 };
