@@ -1,4 +1,4 @@
-import"./assets/modal-window-exercise-6828e0d1.js";import"./assets/vendor-8cce9181.js";const l=document.querySelector(".favorites-page-items-not-found"),a=document.querySelector(".favorites-page-items-gallery"),o="savedExercises",c=localStorage.getItem(o),r=JSON.parse(c);function n(t){t.style.display="none"}function u(t){t.style.display="flex"}function d(t){const i=t.reduce((s,e)=>s+`<li class="gallery-list-item">
+import"./assets/modal-window-exercise-3efef76b.js";import"./assets/vendor-8cce9181.js";const l=document.querySelector(".favorites-page-items-not-found"),a=document.querySelector(".favorites-page-items-gallery"),o="savedExercises",c=localStorage.getItem(o),r=JSON.parse(c);function n(t){t.style.display="none"}function u(t){t.style.display="flex"}function d(t){const i=t.reduce((s,e)=>s+`<li class="gallery-list-item">
                 <div class="workout-box">
                     <div class="workout-header">
                         <div class="workout-header-wrap">
