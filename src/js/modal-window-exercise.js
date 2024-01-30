@@ -83,7 +83,7 @@ export async function renderExercise(id) {
         });
       }
 
-        localStorage.setItem("favorites", JSON.stringify(favorites))
+      localStorage.setItem("savedExercises", JSON.stringify(favorites));
     }
 
     const closeBtn = document.querySelector('.modal-btn-close');
