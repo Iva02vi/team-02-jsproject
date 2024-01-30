@@ -309,7 +309,6 @@ workout-name::first-letter,
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
     padding: 64px 48px 64px 48px;
-    width: 736px;
   }
   .exercises-gallery-label {
     font-size: 44px;
