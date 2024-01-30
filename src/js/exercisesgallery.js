@@ -59,6 +59,7 @@ function renderExercises(images) {
 filterButton.addEventListener('click', function (event) {
   clearExerciseTitle();
   closeErrorMessage();
+  workoutCountPages = 0;
   searchExerciseForm.style.display = 'none';
   if (event.target.tagName === 'BUTTON') {
     toggle = 'filter';
@@ -112,7 +113,6 @@ function fetchUrl() {
 async function fetchExercises(apiUrl) {
   try {
     const response = await axiosInstance.get(apiUrl);
-    // totalPages = response.data.totalPages;
     return response.data;
   } catch (error) {
     console.error(error);
@@ -135,7 +135,6 @@ function changeButtonColor(selectedFilter) {
 }
 
 function renderPagesIcon(totalPages) {
-  console.log('RNDER PAGES ICON: ' + totalPages);
   let pagesMarkup = '';
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1) {
@@ -167,9 +166,6 @@ function changeActiveButton(index) {
 
   buttons.forEach(button => {
     if (button.id === index) {
-      console.log('!!!!!!Button active: ');
-      console.log('!!!!!!button.id: ' + button.id);
-      console.log('!!!!!!index.id: ' + index);
       button.classList.add('active');
       switch (toggle) {
         case 'filter':
@@ -184,7 +180,6 @@ function changeActiveButton(index) {
           break;
       }
     } else {
-      console.log('Button INACTIVE!!!!!!: ' + button.id);
       button.classList.remove('active');
     }
   });
@@ -229,9 +224,9 @@ exercisesGallery.addEventListener('click', event => {
     }
 
     buildWorkoutGallery(name, filter);
-    console.log('RENDER TOTAL PAGE: ' + workoutCountPages);
+
     if (workoutCountPages === 0) return;
-    if (workoutCountPages > 3) {
+    if (workoutCountPages >= 3) {
       renderPagesIcon(3);
     } else {
       renderPagesIcon(workoutCountPages);
@@ -249,14 +244,12 @@ function cleanAll() {
 function ratingStarRow(rating) {
   let row = '';
   rating = Math.floor(rating);
-  for (let index = 0; index < rating; index++) {
-    row += `
+  row += `
         <span class="rating-star-icon">
             <svg class="rating-star" width="18" height="18" aria-label="rating-star">
                    <use href="./img/sprite.svg#icon-Star-1"></use>
             </svg>
         </span>`;
-  }
   return row;
 }
 
@@ -268,7 +261,6 @@ searchExerciseForm.addEventListener('click', event => {
   page = 1;
 
   const searchValue = inputSearchValue.value.trim();
-  console.log(searchValue);
 
   if (searchValue.length === 0) {
     iziToast.error({
@@ -318,67 +310,6 @@ function buildWorkoutGallery(title, filter) {
   getListExercisesByName(cardQueryParams);
 }
 
-async function getListExercisesByName(queryParams) {
-  try {
-    const res = await axios.get(`${BASE_URL}exercises`, {
-      params: queryParams,
-    });
-    const { totalPages, results } = res.data;
-    if (results.length == 0) {
-      exercisesGallery.innerHTML = '';
-      openErrorMessage();
-      return;
-    }
-
-    let renderExersisesByName = results.reduce((html, image) => {
-      const ratingRow = ratingStarRow(image.rating);
-      return (
-        html +
-        `<li class="gallery-list-item">
-                <div class="workout-box">
-                    <div class="workout-rating">
-                        <p class="workout-title">WORKOUT</p>
-                        <p class="rating-title">${image.rating}
-                          ${ratingRow}
-                        </p>
-                            <button type="button" class="start-button">Start
-                            <span class="arrow-icon">
-                                <svg class="start-arrow-icon" width="14" height="14" aria-label="start-arrow">
-                                    <use href="./img/sprite.svg#icon-arrow"></use>
-                                </svg>
-                            </span>
-                            </button>
-                    </div>
-                    <div class="workout-type">
-                        <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
-                            <use href="../img/sprite.svg#icon-lighticon"></use>
-                        </svg>
-                        <p class="workout-name">${image.name}</p>
-                    </div>
-                    <div class="body-description">
-                        <p class="burned-callories">Burned calories:
-                            <span class="amount-callories">${image.burnedCalories}/${image.time} min</span>
-                        </p>
-                        <p class="filtred-class">Filtre:
-                            <span class="filter-type">${pageContent.content}</span>
-                        </p>
-                        <p class="target">Target:
-                        <span class="key-word">${image.target}</span>
-                        </p>
-                    </div>
-                </div>
-            </li>`
-      );
-    }, '');
-    workoutCountPages = Math.ceil(res.data.totalPages / res.data.perPage);
-    exercisesGallery.innerHTML = '';
-    exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
-    toggle = 'workout';
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function updateTitle(title) {
   titleExerciseSpan = document.createElement('span');
   titleExerciseSpan.classList.add('exercise-title-card');
@@ -398,4 +329,93 @@ function clearExerciseTitle() {
     titleExerciseSpan = null;
     closeErrorMessage();
   }
+}
+
+async function getListExercisesByName(queryParams) {
+  try {
+    const res = await axios.get(`${BASE_URL}exercises`, {
+      params: queryParams,
+    });
+    const { totalPages, results } = res.data;
+    if (results.length == 0) {
+      exercisesGallery.innerHTML = '';
+      openErrorMessage();
+      return;
+    }
+
+    let renderExersisesByName = results.reduce((html, image) => {
+      const ratingRow = ratingStarRow(image.rating);
+      const ratingNumber = Number(image.rating).toFixed(1);
+      const name = adjustLengthName(image.name);
+      return (
+        html +
+        `<li class="gallery-item-list">
+                <div class="workout-header-wrap">
+                        <div class= "workout-and-rating">
+                            <p class="workout-item-title">WORKOUT</p>
+                            <p class="rating-title-item">${ratingNumber}
+                                ${ratingRow}
+                            </p>
+                            </div>
+                        <div class="start-button-wrap">
+                            <button type="button" class="start-button-item">Start
+                                <svg class="start-workout-icon" width="14" height="14" aria-label="start-arrow">
+                                    <use href="./img/sprite.svg#icon-arrow"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                       <div class="workout-type-item">
+                        <svg  width="24" height="24" aria-label="run-man">
+                            <use href="./img/sprite.svg#icon-lighticon"></use>
+                        </svg>
+                        <p class="workout-name-item">${name}</p>
+                    </div>
+                <div class="workout-items-box">
+                
+                 
+                    <div class="workout-description">
+                        <p class="description-item-name">Burned calories:
+                            <span class="description-item-value">${image.burnedCalories} / ${image.time} min</span>
+                        </p>
+                        <p class="description-item-name">Body part:
+                            <span class="description-item-value">${image.bodyPart}</span>
+                        </p>
+                        <p class="description-item-name">Target:
+                            <span class="description-item-value">${image.target}</span>
+                        </p>
+                    </div> 
+            </li>`
+      );
+    }, '');
+    // workoutCountPages = Math.ceil(res.data.totalPages / res.data.perPage);
+    workoutCountPages = res.data.totalPages;
+    exercisesGallery.innerHTML = '';
+    exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
+    toggle = 'workout';
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function adjustLengthName(name) {
+  const widthScreen = document.documentElement.clientWidth;
+  let fontSize = 20;
+  let boxWidth = 295;
+  let factor = 0.75;
+  if (widthScreen > 1440) {
+    fontSize = 24;
+    boxWidth = 424;
+    factor = 0.85;
+  } else if (widthScreen > 768) {
+    fontSize = 24;
+    boxWidth = 313;
+    factor = 0.8;
+  }
+
+  const maxCharacters = (boxWidth / (fontSize / 2)) * factor;
+  if (name.length > maxCharacters) {
+    return name.slice(0, maxCharacters) + '...';
+  }
+  return name;
 }
