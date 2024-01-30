@@ -1,174 +1,100 @@
 import axios from 'axios';
+import iziToast from 'izitoast';
+
+export async function openModalWindEx(id) {
+  backDrop.classList.add("is-open");
+  return renderExercise(id);
+}
+
+import { prepareGiveRatingModal } from './give-rating';
+const modalGiveRating = document.querySelector('.modal-give-rating');
+const giveRatingButton = document.querySelector('.modal-btn-rating');
 
 const markupModal = document.querySelector('.modal-window');
-console.log(markupModal);
-
-// --- Start Anna --- //
-import { prepareGiveRatingModal } from './give-rating';
-const giveRatingButton = document.querySelector('.modal-btn-rating');
-const modalGiveRating = document.querySelector('.modal-give-rating');
-const URL = 'https://energyflow.b.goit.study/api';
-// --- End Anna --- //
+const backDrop = document.querySelector('.backdrop');
 
 export async function renderExercise(id) {
   try {
-    const backDrop = document.querySelector('.backdrop');
-    // For testing
-    const exercises = (await axios.get(`${URL}/exercises`)).data.results;
-    const { _id: exerciseId, rating } =
-      exercises[(exercises.length * Math.random()) | 0];
-
-    // ----
-
-    // --- Start Anna --- //
-    giveRatingButton.addEventListener('click', async () => {
-      backDrop.classList.add('visually-hidden');
-      markupModal.classList.add('hidden');
-      prepareGiveRatingModal(exerciseId, rating);
-      modalGiveRating.classList.remove('hidden');
-    });
-    // --- End Anna --- //
-
-    const test = await axios.get(
-      `https://energyflow.b.goit.study/api/exercises/${_id}`
-    );
-    console.log('test', exerciseModalData);
+    const test = await axios.get(`https://energyflow.b.goit.study/api/exercises/${id}`);
     const exerciseModalData = test.data;
-    console.log(exerciseModalData);
-    markupModal.innerHTML = exerciseModalData
-      .map(
-        ({
-          gifUrl,
-          name,
-          rating,
-          target,
-          bodyPart,
-          equipment,
-          popularity,
-          burnedCalories,
-          time,
-          description,
-        }) => {
-          const parsedRating = Math.round(parseFloat(rating));
-          console.log(
-            gifUrl,
-            name,
-            rating,
-            target,
-            bodyPart,
-            equipment,
-            popularity,
-            burnedCalories,
-            time,
-            description
-          );
-          const stars = Array.from(
-            { length: 5 },
-            (_, starIndex) => `
-          <li>
-            <svg class="modal-rating-stars-svg" width="18" height="18">
-              <use href="./img/sprite.svg#icon-Star-1"></use>
-            </svg>
-          </li>
-        `
-          )
-            .map((star, starIndex) => {
-              if (starIndex < parsedRating) {
-                return star.replace('<svg', '<svg class="is-active"');
-              }
-              return star;
-            })
-            .join('');
+    localStorage.setItem('exerciseModalData', JSON.stringify(exerciseModalData));
 
-          return `
-          <div class="modal-tablet-pc-ver">
-            <div class="modal-video"><img src="${gifUrl}" alt="Animated GIF"></div>
-            <div>
-              <h1 class="modal-title">${name}</h1>
-              <div class="modal-rating">
-                <p class="modal-rating-numbers">${parsedRating}</p>
-                <ul class="modal-rating-stars">
-                  ${stars}
-                </ul>
-              </div>
-              <div class="modal-info">
-                <ul class="modal-info-list">
-                  <li>
-                    <h3 class="modal-info-list-title">Target</h3>
-                    <p class="modal-info-list-title-value">${target}</p>
-                  </li>
-                  <li>
-                    <h3 class="modal-info-list-title">Body Part</h3>
-                    <p class="modal-info-list-title-value">${bodyPart}</p>
-                  </li>
-                  <li>
-                    <h3 class="modal-info-list-title">Equipment</h3>
-                    <p class="modal-info-list-title-value">${equipment}</p>
-                  </li>
-                  <li>
-                    <h3 class="modal-info-list-title">Popular</h3>
-                    <p class="modal-info-list-title-value">${popularity}</p>
-                  </li>
-                  <li>
-                    <h3 class="modal-info-list-title">Burned Calories</h3>
-                    <p class="modal-info-list-title-value">${burnedCalories}/${time} min</p>
-                  </li>
-                </ul>
-              </div>
-              <p class="descr">${description}</p>
-            </div>
-          </div>
-        `;
-        }
-      )
-      .join('');
+    const stars = document.getElementsByClassName("modal-rating-stars")[0];
+    stars.innerHTML = exerciseModalData.rating;
+    for (let i = 1; i <= 5; i++) {
+      if (i < exerciseModalData.rating) {
+        stars.innerHTML += `<li>
 
-    const addToFavoritesBtn = document.querySelector('.add-to-favorites-btn');
+      <svg class="modal-rating-stars-svg" width="18" height="18">
+        <use href="../img/sprite.svg#icon-Star-1"></use>
+      </svg>
+    </li>`;
+      } else {
+        stars.innerHTML += `<li>
+
+        <svg class="modal-rating-stars-svg" width="18" height="18">
+          <use href="../img/sprite.svg#icon-Star-1"></use>
+        </svg>
+      </li>`;
+      }
+    }
+
+    document.getElementsByClassName("imgGif")[0].src = exerciseModalData.gifUrl;
+    document.getElementsByClassName("modal-title")[0].innerHTML = exerciseModalData.name;
+    document.getElementsByClassName("modal-info-list-title-value")[0].innerHTML = exerciseModalData.target;
+    document.getElementsByClassName("modal-info-list-title-value")[1].innerHTML = exerciseModalData.bodyPart;
+    document.getElementsByClassName("modal-info-list-title-value")[2].innerHTML = exerciseModalData.equipment;
+    document.getElementsByClassName("modal-info-list-title-value")[3].innerHTML = exerciseModalData.popularity;
+    document.getElementsByClassName("modal-info-list-title-value")[4].innerHTML = exerciseModalData.burnedCalories;
+    document.getElementsByClassName("descr")[0].innerHTML = exerciseModalData.description;
+
+    const addToFavoritesBtn = document.querySelector('.modal-btn-favorites');
+    const addToFavoritesText = document.querySelector('.modal-btn-favorites-text');
 
     addToFavoritesBtn.addEventListener('click', addToFavoritesClickHandler);
 
     function addToFavoritesClickHandler(e) {
+      e.stopPropagation();
       e.preventDefault();
+      let favorites = JSON.parse(localStorage.getItem("favorites"))
+      if (favorites == undefined) {
+        favorites = [];
+      }
 
-      const index = favorites.findIndex(
-        exercise => exercise.name === exerciseModalData.name
-      );
+      const index = favorites.findIndex((exercise) => exercise.name === exerciseModalData.name);
 
       if (index !== -1) {
         favorites.splice(index, 1);
+        addToFavoritesText.innerText = 'Add to favorites';
         iziToast.show({
-          message: 'Упражнение удалено из избранного',
+          message: 'Exercise removed from favorites',
           messageColor: '#f7f7fc',
           backgroundColor: '#3939db',
-          position: 'topRight',
+          position: 'topRight'
         });
       } else {
-        favorites.push(exerciseModalData[0]);
-        addToFavoritesBtn.innerText = 'Убрать из избранного';
+        favorites.push(exerciseModalData);
+        addToFavoritesText.innerText = 'Remove from favorites';
         iziToast.show({
-          message: 'Упражнение добавлено в избранное',
+          message: 'Exercise added to favorites',
           messageColor: '#f7f7fc',
           backgroundColor: '#219c2b',
-          position: 'topRight',
+          position: 'topRight'
         });
       }
 
-      updateFavorites();
+        localStorage.setItem("favorites", JSON.stringify(favorites))
     }
 
     const closeBtn = document.querySelector('.modal-btn-close');
     closeBtn.addEventListener('click', closeModal);
 
     function closeModal() {
-      markupModal.innerHTML = '';
-      backDrop.classList.add('visually-hidden');
-      addToFavoritesBtn.removeEventListener(
-        'click',
-        addToFavoritesClickHandler
-      );
+      backDrop.classList.remove('is-open');
+      addToFavoritesBtn.removeEventListener('click', addToFavoritesClickHandler);
       closeBtn.removeEventListener('click', closeModal);
       document.removeEventListener('keydown', escapeKeyHandler);
-      backDrop.removeEventListener('click', backdropClickHandler);
+      giveRatingButton.removeEventListener('click', giveRatingHandler);
     }
 
     function escapeKeyHandler(e) {
@@ -177,16 +103,20 @@ export async function renderExercise(id) {
       }
     }
 
-    document.addEventListener('keydown', escapeKeyHandler);
-
-    function backdropClickHandler(e) {
-      if (e.target === backDrop) {
-        closeModal();
-      }
+    const giveRatingHandler = (event) => {
+      backDrop.classList.remove('visually-hidden');
+      markupModal.classList.add('hidden');
+      prepareGiveRatingModal(id, JSON.parse(localStorage.getItem('exerciseModalData'))['rating']);
+      modalGiveRating.classList.remove('hidden');
+      event.stopImmediatePropagation();
+      localStorage.removeItem('exerciseModalData');
     }
 
-    backDrop.addEventListener('click', backdropClickHandler);
-  } catch (error) {}
-}
+    giveRatingButton.addEventListener('click', giveRatingHandler);
 
-renderExercise(1);
+    document.addEventListener('keydown', escapeKeyHandler);
+
+  } catch (error) {
+
+  }
+}

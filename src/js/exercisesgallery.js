@@ -1,4 +1,7 @@
 import axios from 'axios';
+import iziToast from 'izitoast';
+import { openModalWindEx } from './modal-window-exercise.js';
+
 const exercisesTitle = document.querySelector('.exercises-gallery-label');
 const exercisesGallery = document.querySelector('.exercises-gallery-group');
 const filterButton = document.querySelector('.exercises-gallery-filter');
@@ -7,8 +10,8 @@ let titleExerciseSpan = null;
 const titleExerciseSlash = document.createElement('span');
 const inputSearchValue = document.querySelector('#filtre-key');
 const searchExerciseForm = document.querySelector('.search-tool');
+const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 
-import iziToast from 'izitoast';
 const cardErrorMessage = document.querySelector('.error-card-message');
 
 const BASE_URL = 'https://energyflow.b.goit.study/api/';
@@ -27,7 +30,6 @@ let urlOptions = {
 };
 const filterBodypart = 'bodypart';
 let toggle = 'filter';
-let workoutCountPages = 0;
 const defaultFilter = 'muscles';
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -132,10 +134,12 @@ function changeButtonColor(selectedFilter) {
       currentButton.style.color = 'var(--black)';
     }
   }
+  console.log('changeButtonColor function toggle is: ' + toggle);
 }
 
 function renderPagesIcon(totalPages) {
   let pagesMarkup = '';
+  pageButtonsContainer.innerHTML = '';
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1) {
       pagesMarkup += `<li>
@@ -146,8 +150,6 @@ function renderPagesIcon(totalPages) {
       <button class="page-button" type="button" id="${i}">${i}</button>`;
     }
   }
-
-  pageButtonsContainer.innerHTML = '';
   pageButtonsContainer.insertAdjacentHTML('afterbegin', pagesMarkup);
 }
 
@@ -185,13 +187,12 @@ function changeActiveButton(index) {
   });
 }
 
-// window.addEventListener('resize', event => {
-//   event.preventDefault();
-//   galleryForDesktop();
-//   handleFilter(defaultFilter);
-//   changeActiveButton(1);
-//   clearExerciseTitle();
-// });
+window.addEventListener('resize', event => {
+  event.preventDefault();
+  galleryForDesktop();
+  handleFilter(defaultFilter);
+  changeActiveButton(1);
+});
 
 function galleryForDesktop() {
   const widthScreen = document.documentElement.clientWidth;
@@ -253,6 +254,7 @@ function ratingStarRow(rating) {
   return row;
 }
 
+/* Search function */
 searchExerciseForm.addEventListener('click', event => {
   event.preventDefault();
   if (event.target.localName != 'svg') {

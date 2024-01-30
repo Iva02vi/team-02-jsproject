@@ -1,6 +1,6 @@
 @media screen and (min-width: 375px) {
   .filtred-section {
-    background: #e8e8e8;
+    background: var(--white-smoke);
     border-radius: 30px;
     margin-left: 20px;
     margin-bottom: 20px;
@@ -42,25 +42,15 @@
     letter-spacing: 0.96px;
     border-color: transparent;
     text-align: center;
-    /* display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        width: 31px;
-        height: 32px;
-        letter-spacing: 0.04em;
-        padding-left: 12px;
-        padding-right: 12px;
-        border-radius: 18px; */
     border-radius: 18px;
     margin-top: 20px;
     margin-bottom: 40px;
-    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .button-next-page:hover,
   .button-next-page:focus {
-    border-color: 1px solid #1b1b1b;
+    border: 1px solid var(--black);
   }
 
   .rating-card {
@@ -90,10 +80,6 @@
     left: 220px;
     transform: translatey(-50%);
     transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-  }
-
-  .container-filtred-exercise {
   }
 
   .exercises-gallery {
@@ -120,12 +106,6 @@
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* .muscles:hover,
-    .muscles:focus,
-    .muscles:active {
-        background-color: #7E847F;
-    } */
-
   .body-parts {
     color: var(--black);
     font-size: 14px;
@@ -142,7 +122,7 @@
   .body-parts:hover,
   .body-parts:focus,
   .body-parts:active {
-    background-color: #7e847f;
+    background-color: var(--dark-gray);
   }
 
   .equipment {
@@ -160,7 +140,7 @@
   .equipment:hover,
   .equipment:focus,
   .equipment:active {
-    background-color: #7e847f;
+    background-color: var(--dark-gray);
   }
 
   .input-submit-key {
@@ -179,9 +159,6 @@
     margin-bottom: 20px;
     outline: none;
     border: none;
-  }
-
-  .gallery-list-item {
   }
 
   .workout-box {
@@ -241,11 +218,8 @@
     justify-content: start;
   }
 
-  .rating-star {
-  }
-
   .workout-name {
-    color: #1b1b1b;
+    color: var(--black);
     font-feature-settings: 'clig' off, 'liga' off;
     font-size: 20px;
     font-weight: 400;
@@ -284,7 +258,7 @@
   }
 
   .amount-callories {
-    color: #1b1b1b;
+    color: var(--black);
     font-feature-settings: 'clig' off, 'liga' off;
     font-size: 12px;
     font-weight: 400;
@@ -302,7 +276,7 @@
   }
 
   .filter-type {
-    color: #1b1b1b;
+    color: var(--black);
     font-feature-settings: 'clig' off, 'liga' off;
     font-size: 12px;
     font-weight: 400;
@@ -320,31 +294,12 @@
   }
 
   .key-word {
-    color: #1b1b1b;
+    color: var(--black);
     font-feature-settings: 'clig' off, 'liga' off;
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
   }
-
-  /* .button-next-page {
-        border-radius: 18px;
-        border: 1px solid #1B1B1B;
-        display: flex;
-        padding: 0px 12px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        width: 31px;
-        height: 32px;
-        color: rgba(27, 27, 27, 0.40);
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 1.5;
-        letter-spacing: 0.04em;
-        padding-left: 12px;
-        padding-right: 12px;
-    } */
 
   .page-button-list {
     display: flex;
