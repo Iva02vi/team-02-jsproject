@@ -1,4 +1,7 @@
 import axios from 'axios';
+import iziToast from 'izitoast';
+import { openModalWindEx } from './modal-window-exercise.js';
+
 const exercisesTitle = document.querySelector('.exercises-gallery-label');
 const exercisesGallery = document.querySelector('.exercises-gallery-group');
 const filterButton = document.querySelector('.exercises-gallery-filter');
@@ -8,7 +11,6 @@ const titleExerciseSlash = document.createElement('span');
 const inputSearchValue = document.querySelector('#filtre-key');
 const searchExerciseForm = document.querySelector('.search-tool');
 
-import iziToast from 'izitoast';
 const cardErrorMessage = document.querySelector('.error-card-message');
 
 const BASE_URL = 'https://energyflow.b.goit.study/api/';
@@ -303,7 +305,6 @@ function buildWorkoutGallery(title, filter) {
   cardQueryParams[pageContent.content] = title;
   updateTitle(title);
   getListExercisesByName(cardQueryParams);
-
 }
 
 async function getListExercisesByName(queryParams) {
@@ -330,7 +331,7 @@ async function getListExercisesByName(queryParams) {
                         <p class="rating-title">${image.rating}
                           ${ratingRow}
                         </p>
-                            <button type="button" class="start-button">Start
+                            <button type="button" class="start-button" data-exercise-id=${image._id} >Start
                             <span class="arrow-icon">
                                 <svg class="start-arrow-icon" width="14" height="14" aria-label="start-arrow">
                                     <use href="./img/sprite.svg#icon-arrow"></use>
@@ -361,7 +362,17 @@ async function getListExercisesByName(queryParams) {
     }, '');
 
     exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
+
+    exercisesGallery.addEventListener('click', async (event) => {
+      let id;
+      const clickedButton = event.target;
+      if (event.target && event.target.closest('.start-button')) {
+        id = clickedButton.closest('.start-button').getAttribute('data-exercise-id');
+        await openModalWindEx(id);
+      }
+      })
     toggle = 'workout';
+
     if (totalPages < 3) {
       renderPagesIcon(totalPages);
     } else {
