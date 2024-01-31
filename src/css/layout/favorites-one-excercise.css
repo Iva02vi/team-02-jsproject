@@ -1,6 +1,5 @@
 .workout-box {
   max-width: 295px;
-  height: 165px;
   border-radius: 15px;
   background-color: var(--white);
   display: flex;
@@ -14,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   height: 26px;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 .workout-header-wrap {
@@ -81,7 +80,8 @@
 .workout-type {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
+  height: 20px;
 }
 
 .workout-name {
@@ -90,8 +90,10 @@
   font-weight: 400;
   line-height: 1.33;
   margin-left: 16px;
+  max-width: 223px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .workout-name::first-letter,
@@ -103,24 +105,24 @@
 
 .workout-description {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   flex-wrap: wrap;
   row-gap: 6px;
 }
 
 .description-item-name {
   display: flex;
-  gap: 4px;
+  gap: 3px;
   color: rgba(27, 27, 27, 0.4);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1.5;
-  gap: 4px;
+  gap: 3px;
 }
 
 .description-item-value {
   color: var(--black);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1.5;
 }
@@ -128,6 +130,7 @@
 @media screen and (min-width: 768px) {
   .workout-box {
     max-width: 313px;
+    height: 165px;
   }
 
   .start-button-item {
@@ -135,6 +138,7 @@
     height: 24px;
     font-size: 16px;
     line-height: 1.5;
+    color: var(--black);
   }
 
   .start-arrow-icon {
@@ -144,7 +148,12 @@
   }
 
   .workout-type {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    height: 32px;
+  }
+
+  .workout-name {
+    max-width: 239px;
   }
 }
 
@@ -155,7 +164,7 @@
     height: 141px;
   }
 
-  .workout-type {
-    margin-bottom: 8px;
+  .workout-name {
+    max-width: 352px;
   }
 }
