@@ -31,10 +31,13 @@ if (window.innerWidth < 768) {
 }
 function renderExerciseCards(arr) {
   exercisesGallery.innerHTML = '';
+  // const ratingRow = ratingStarRow(card.rating);
+  //     const ratingNumber = Number(card.rating).toFixed(1);
   const galleryItems = arr.reduce(
-    (html, card) =>
-      html +
-      `<li class="gallery-list-item">
+    (html, card) => {
+      const nameSliced = adjustLengthName(card.name);
+      return (html +
+        `<li class="gallery-list-item">
                 <div class="workout-box">
                     <div class="workout-header">
                         <div class="workout-header-wrap">
@@ -57,7 +60,7 @@ function renderExerciseCards(arr) {
                         <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
                             <use href=${svgLigthUrl}></use>
                         </svg>
-                        <h3 class="workout-name">${card.name}</h3>
+                        <h3 class="workout-name">${nameSliced}</h3>
                     </div>
                     <div class="workout-description">
                         <p class="description-item-name">Burned calories:
@@ -71,9 +74,8 @@ function renderExerciseCards(arr) {
                         </p>
                     </div>
                 </div>
-            </li>`,
-    ''
-  );
+            </li>`);
+    }, '');
   exercisesGallery.innerHTML = galleryItems;
 
   exercisesGallery.addEventListener('click', async event => {
@@ -114,3 +116,25 @@ export const renderFavorites = () => {
   }
   totalPages = Math.ceil(savedInStorageExercises.length / 3);
 };
+
+function adjustLengthName(name) {
+  const widthScreen = document.documentElement.clientWidth;
+  let fontSize = 20;
+  let boxWidth = 295;
+  let factor = 0.7;
+  if (widthScreen > 1439) {
+    fontSize = 24;
+    boxWidth = 424;
+    factor = 0.85;
+  } else if (widthScreen > 767) {
+    fontSize = 24;
+    boxWidth = 313;
+    factor = 0.8;
+  }
+
+  const maxCharacters = (boxWidth / (fontSize / 2)) * factor;
+  if (name.length > maxCharacters) {
+    return name.slice(0, maxCharacters) + '...';
+  }
+  return name;
+}

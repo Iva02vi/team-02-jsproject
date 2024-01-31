@@ -428,11 +428,11 @@ function adjustLengthName(name) {
   let fontSize = 20;
   let boxWidth = 295;
   let factor = 0.7;
-  if (widthScreen > 1440) {
+  if (widthScreen >= 1440) {
     fontSize = 24;
     boxWidth = 424;
     factor = 0.85;
-  } else if (widthScreen > 768) {
+  } else if (widthScreen >= 768) {
     fontSize = 24;
     boxWidth = 313;
     factor = 0.8;
