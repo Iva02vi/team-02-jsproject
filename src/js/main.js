@@ -1,3 +1,23 @@
+import axios from 'axios';
+
+const loader = document.querySelector('.loader');
+
+axios.interceptors.request.use(
+  request => {
+    loader.style.display = 'inline-block';
+    return request;
+  },
+  error => console.error(error)
+);
+
+axios.interceptors.response.use(
+  response => {
+    loader.style.display = 'none';
+    return response;
+  },
+  error => Promise.reject(error)
+);
+
 // Кнопка скролу догори
 const backToTopBtn = document.querySelector('.back-to-top');
 
