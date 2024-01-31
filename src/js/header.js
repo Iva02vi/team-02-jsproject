@@ -1,3 +1,5 @@
+import { renderFavorites } from "./favorites";
+
 // ============ navigation =============
   const firstChild = document.querySelector('.header-navigation-home');
   const secondChild = document.querySelector('.header-navigation-favorites');
@@ -16,6 +18,7 @@ if (path === '/team-02-jsproject/index.html' || path === '/team-02-jsproject/' |
   firstChild.classList.add('is-active');
   mobFirstChild.classList.add('is-active');
 } else if (path === '/team-02-jsproject/favorites.html' || path === '/favorites.html') {
+  renderFavorites();
   firstChild.classList.remove('is-active');
   mobFirstChild.classList.remove('is-active');
   secondChild.classList.add('is-active');
