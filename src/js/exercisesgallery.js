@@ -136,14 +136,13 @@ function changeButtonColor(selectedFilter) {
       currentButton.style.color = 'var(--black)';
     }
   }
-  console.log('changeButtonColor function toggle is: ' + toggle);
 }
 
-function renderPagesIcon(totalPages) {
+function renderPagesIcon(totalPages, activePage) {
   let pagesMarkup = '';
   pageButtonsContainer.innerHTML = '';
   for (let i = 1; i <= totalPages; i++) {
-    if (i === 1) {
+    if (i == activePage) {
       pagesMarkup += `<li>
       <button class="page-button active" type="button" id="${i}">${i}</button>
     </li>`;
@@ -377,9 +376,9 @@ async function getListExercisesByName(queryParams) {
     toggle = 'workout';
 
     if (totalPages < 3) {
-      renderPagesIcon(totalPages);
+      renderPagesIcon(totalPages, queryParams.page);
     } else {
-      renderPagesIcon(3);
+      renderPagesIcon(3, queryParams.page);
     }
   } catch (error) {
     console.log(error);
