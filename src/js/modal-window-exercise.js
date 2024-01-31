@@ -80,8 +80,6 @@ export async function renderExercise(id) {
       exercise => exercise._id === exerciseModalData._id
     );
 
-    console.log('find', index);
-
     if (index !== -1) {
       addToFavoritesText.innerText = 'Remove from favorites';
     } else {
@@ -129,7 +127,6 @@ export async function renderExercise(id) {
 
     function closeModal() {
       if (location.pathname.includes('/favorites.html')) {
-        console.log('favorites....');
         renderFavorites();
       }
       backDrop.classList.remove('is-open');
