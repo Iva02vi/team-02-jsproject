@@ -261,12 +261,8 @@ function ratingStarRow(rating) {
 }
 
 /* Search function */
-searchExerciseForm.addEventListener('click', event => {
+searchExerciseForm.addEventListener('submit', event => {
   event.preventDefault();
-  if (event.target.localName != 'svg') {
-    return;
-  }
-  page = 1;
 
   const searchValue = inputSearchValue.value.trim();
 
@@ -282,7 +278,7 @@ searchExerciseForm.addEventListener('click', event => {
 
   const cardQueryParams = {
     limit: adjustLimit(),
-    page: page,
+    page: 1, // Reset page to 1 when submitting the form
     keyword: searchValue,
   };
 
@@ -337,7 +333,7 @@ async function getListExercisesByName(queryParams) {
       const name = adjustLengthName(image.name);
       return (
         html +
-            `<li class="gallery-item-list" >
+        `<li class="gallery-item-list" >
                 <div class="workout-header-wrap">
                         <div class="workout-and-rating">
                             <p class="workout-item-title">WORKOUT</p>
@@ -382,14 +378,16 @@ async function getListExercisesByName(queryParams) {
 
     exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
 
-    exercisesGallery.addEventListener('click', async (event) => {
+    exercisesGallery.addEventListener('click', async event => {
       let id;
       const clickedButton = event.target;
       if (event.target && event.target.closest('.start-button-item')) {
-        id = clickedButton.closest('.start-button-item').getAttribute('data-exercise-id');
+        id = clickedButton
+          .closest('.start-button-item')
+          .getAttribute('data-exercise-id');
         await openModalWindEx(id);
       }
-      })
+    });
     toggle = 'workout';
 
     if (totalPages < 3) {
