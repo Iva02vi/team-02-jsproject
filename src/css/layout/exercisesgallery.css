@@ -405,7 +405,7 @@ workout-name::first-letter,
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
-    row-gap: 28px;
+    row-gap: 40px;
   }
 
   .exercises-item-background {
