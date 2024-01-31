@@ -11,6 +11,7 @@ const giveRatingCurrentRating = document.querySelector('.give-rating-p1');
 const backDrop = document.querySelector('.backdrop');
 const markupModal = document.querySelector('.modal-window');
 const starsUl = document.querySelector('.give-rating-stars');
+const API_URL = 'https://energyflow.b.goit.study/api';
 const NUMBER_OF_STARS = 5;
 const svgStarUrl = new URL('/img/sprite.svg#icon-Star-2', import.meta.url);
 let selectedRating;
