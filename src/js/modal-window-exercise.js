@@ -2,7 +2,6 @@ import axios from 'axios';
 import iziToast from 'izitoast';
 
 import { prepareGiveRatingModal } from './give-rating';
-import { renderFavorites } from './favorites';
 
 const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
 const backDrop = document.querySelector('.backdrop');
@@ -126,9 +125,6 @@ export async function renderExercise(id) {
     closeBtn.addEventListener('click', closeModal);
 
     function closeModal() {
-      if (location.pathname.includes('/favorites.html')) {
-        renderFavorites();
-      }
       backDrop.classList.remove('is-open');
       addToFavoritesBtn.removeEventListener(
         'click',
