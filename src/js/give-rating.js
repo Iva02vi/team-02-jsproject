@@ -48,9 +48,10 @@ const submitFormHandler = async event => {
       review: event.target.comment.value,
     });
     iziToast.success({
-      message: 'Thank you for your review!',
+      message: 'Thanks for your review!',
       position: 'topRight',
       icon: '',
+      zindex: 9999999999,
     });
     giveRatingForm.reset();
     showModalExercise();
@@ -60,6 +61,7 @@ const submitFormHandler = async event => {
       message: e.response?.data?.message || e.message,
       position: 'topRight',
       icon: '',
+      zindex: 9999999999,
     });
   } finally {
     giveRatingSendBtn.disabled = false;
