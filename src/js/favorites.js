@@ -12,6 +12,8 @@ const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 const KEY = 'favorites';
 const storageFetch = localStorage.getItem(KEY);
 const savedInStorageExercises = JSON.parse(storageFetch);
+const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
+const svgTrashhUrl = new URL('/img/sprite.svg#icon-trash', import.meta.url);
 
 const limitPerPage = 8;
 let currentPage = 1;
@@ -48,7 +50,7 @@ function renderExerciseCards(arr) {
                             <span class="workout-title">WORKOUT</span>
                             <button type="button" class="delete-workout-btn" id="${card._id}">                            
                                 <svg class="trash-icon" id="${card._id}" width="16" height="16" aria-label="trash-icon">
-                                  <use href="./img/sprite.svg#icon-trash" id="${card._id}"></use>
+                                  <use href=${svgTrashhUrl} id="${card._id}"></use>
                                 </svg>
                             </button>
                         </div>
@@ -62,7 +64,7 @@ function renderExerciseCards(arr) {
                     </div>
                     <div class="workout-type">
                         <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
-                            <use href="./img/sprite.svg#icon-lighticon"></use>
+                            <use href="${svgLigthUrl}"></use>
                         </svg>
                         <h3 class="workout-name">${card.name}</h3>
                     </div>
