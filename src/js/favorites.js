@@ -35,14 +35,47 @@ if (window.innerWidth < 768) {
   showElem(mobilePagination);
 }
 
-function renderExerciseCards(arr) {
-  if (!exercisesGallery) {
-    return; // Перевірка на наявність елементу exercisesGallery
+function renderPaginationButtons() {
+  mobilePagination.innerHTML = '';
+
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement('favorites-mobile-pagination');
+    button.textContent = i;
+    button.classList.add('favorites-pagination-button');
+    button.addEventListener('click', () => {
+      currentPage = i;
+      renderExerciseCards(savedInStorageExercises);
+    });
+
+    mobilePagination.appendChild(button);
   }
+}
+
+export const renderFavorites = () => {
+  savedInStorageExercises = JSON.parse(localStorage.getItem(KEY)) || [];
+
+  if (!savedInStorageExercises || savedInStorageExercises.length === 0) {
+    hideElem(exercisesGallery);
+    hideElem(mobilePagination);
+  } else {
+    hideElem(exercisesNotFound);
+    showElem(exercisesGallery);
+    showElem(mobilePagination);
+    totalPages = Math.ceil(savedInStorageExercises.length / limitPerPage);
+    renderPaginationButtons();
+    renderExerciseCards(savedInStorageExercises);
+  }
+};
+
+function renderExerciseCards(arr) {
+  const startIndex = (currentPage - 1) * limitPerPage;
+  const endIndex = startIndex + limitPerPage;
+
+  const visibleExercises = arr.slice(startIndex, endIndex);
 
   exercisesGallery.innerHTML = '';
 
-  const galleryItems = arr.reduce((html, card) => {
+  const galleryItems = visibleExercises.reduce((html, card) => {
     const nameSliced = adjustLengthName(card.name);
     return (
       html +
@@ -86,6 +119,7 @@ function renderExerciseCards(arr) {
         </li>`
     );
   }, '');
+
   exercisesGallery.innerHTML = galleryItems;
 
   exercisesGallery.addEventListener('click', async event => {
@@ -115,18 +149,6 @@ function renderExerciseCards(arr) {
     }
   });
 }
-
-export const renderFavorites = () => {
-  savedInStorageExercises = JSON.parse(localStorage.getItem(KEY)) || {};
-  if (!savedInStorageExercises || savedInStorageExercises.length === 0) {
-    hideElem(exercisesGallery);
-  } else {
-    hideElem(exercisesNotFound);
-    renderExerciseCards(savedInStorageExercises);
-  }
-  totalPages = Math.ceil(savedInStorageExercises.length / 3);
-  renderExerciseCards(savedInStorageExercises);
-};
 
 function adjustLengthName(name) {
   const widthScreen = document.documentElement.clientWidth;
