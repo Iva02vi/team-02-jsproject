@@ -13,7 +13,7 @@ const KEY = 'favorites';
 const storageFetch = localStorage.getItem(KEY);
 const savedInStorageExercises = JSON.parse(storageFetch);
 
-const limitPerPage = 3;
+const limitPerPage = 8;
 let currentPage = 1;
 let lastIdx = currentPage * limitPerPage;
 let firstIdx = lastIdx - limitPerPage;
@@ -204,3 +204,36 @@ exercisesGallery.addEventListener('click', event => {
     }
   }
 });
+
+export const renderFavorites = () => {
+  savedInStorageExercises = JSON.parse(localStorage.getItem(KEY)) || {};
+  if (!savedInStorageExercises || savedInStorageExercises.length === 0) {
+    hideElem(exercisesGallery);
+  } else {
+    hideElem(exercisesNotFound);
+    renderExerciseCards(savedInStorageExercises);
+  }
+  totalPages = Math.ceil(savedInStorageExercises.length / 3);
+};
+
+function adjustLengthName(name) {
+  const widthScreen = document.documentElement.clientWidth;
+  let fontSize = 20;
+  let boxWidth = 295;
+  let factor = 0.7;
+  if (widthScreen > 1439) {
+    fontSize = 24;
+    boxWidth = 424;
+    factor = 0.85;
+  } else if (widthScreen > 767) {
+    fontSize = 24;
+    boxWidth = 313;
+    factor = 0.8;
+  }
+
+  const maxCharacters = (boxWidth / (fontSize / 2)) * factor;
+  if (name.length > maxCharacters) {
+    return name.slice(0, maxCharacters) + '...';
+  }
+  return name;
+}
