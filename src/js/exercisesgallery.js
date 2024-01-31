@@ -10,6 +10,7 @@ let titleExerciseSpan = null;
 const titleExerciseSlash = document.createElement('span');
 const inputSearchValue = document.querySelector('#filtre-key');
 const searchExerciseForm = document.querySelector('.search-tool');
+const searchButton = document.querySelector('.icon-search');
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
 const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
@@ -31,35 +32,12 @@ let urlOptions = {
   limit: 8,
 };
 let workoutCountPages = 0;
-const filterBodypart = 'bodypart';
+let isSearchFormActive = false;
 let toggle = 'filter';
 const defaultFilter = 'muscles';
 const axiosInstance = axios.create({
   baseURL: baseURL,
 });
-
-function renderExercises(images) {
-  exercisesGallery.innerHTML = '';
-  const newImages = images.results.map(image => {
-    return `<li class="exercises-item-background">
-      <a href="${image.imgUrl}">
-      <div>
-        <img
-          class="exercises-item"
-          src="${image.imgUrl}"
-          alt="${image.name}">
-          <div class="text-card">
-          <p class = "name-card">${image.name}</p>
-          <p class = "type-card">${image.filter}</p>
-          </div>
-          </div>
-      </a>
-    </li>`;
-  });
-
-  exercisesGallery.insertAdjacentHTML('beforeend', newImages.join(''));
-  return images;
-}
 
 filterButton.addEventListener('click', function (event) {
   clearExerciseTitle();
@@ -72,135 +50,6 @@ filterButton.addEventListener('click', function (event) {
     handleFilter(buttonName);
   }
 });
-
-function handleFilter(buttonName) {
-  searchExerciseForm.style.display = 'none';
-
-  let selectedFilter = {};
-  galleryForDesktop();
-  switch (buttonName) {
-    case 'body':
-      urlOptions.filter = 'Body parts';
-      selectedFilter = filterButton.querySelectorAll(
-        `button[name="${buttonName}"]`
-      );
-      break;
-    case 'equipment':
-      urlOptions.filter = 'Equipment';
-      selectedFilter = filterButton.querySelectorAll(
-        `button[name="${buttonName}"]`
-      );
-      break;
-    default:
-      urlOptions.filter = 'Muscles';
-      selectedFilter = filterButton.querySelectorAll(
-        `button[name="${buttonName}"]`
-      );
-  }
-  changeButtonColor(selectedFilter);
-
-  const queryStr = new URLSearchParams(urlOptions).toString();
-  const apiUrl = `?${queryStr}`;
-  fetchExercises(apiUrl)
-    .then(images => renderExercises(images))
-    .then(imgages => renderPagesIcon(imgages.totalPages, 1))
-    .catch(error => console.error(error));
-}
-
-function fetchUrl() {
-  const queryStr = new URLSearchParams(urlOptions).toString();
-  const apiUrl = `?${queryStr}`;
-  fetchExercises(apiUrl)
-    .then(images => renderExercises(images))
-    .catch(error => console.error(error));
-}
-
-async function fetchExercises(apiUrl) {
-  try {
-    const response = await axiosInstance.get(apiUrl);
-    // totalPages = response.data.totalPages;
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function changeButtonColor(selectedFilter) {
-  const buttons = filterButton.querySelectorAll('button');
-  const selectedFilterArray = Array.from(selectedFilter);
-  for (let i = 0; i < buttons.length; i++) {
-    const currentButton = buttons[i];
-    if (selectedFilterArray.includes(currentButton)) {
-      currentButton.style.backgroundColor = 'var(--dark-gray)';
-      currentButton.style.color = 'var(--white)';
-    } else {
-      currentButton.style.backgroundColor = 'var(--white-smoke)';
-      currentButton.style.color = 'var(--black)';
-    }
-  }
-}
-
-function renderPagesIcon(totalPages, activePage) {
-  let pagesMarkup = '';
-  pageButtonsContainer.innerHTML = '';
-  for (let i = 1; i <= totalPages; i++) {
-    if (i == activePage) {
-      pagesMarkup += `<li>
-      <button class="page-button active" type="button" id="${i}">${i}</button>
-    </li>`;
-    } else {
-      pagesMarkup += `<li>
-      <button class="page-button" type="button" id="${i}">${i}</button>`;
-    }
-  }
-  pageButtonsContainer.insertAdjacentHTML('afterbegin', pagesMarkup);
-}
-
-pageButtonsContainer.addEventListener('click', function (event) {
-  const clickedButton = event.target.closest('.page-button');
-
-  if (clickedButton) {
-    const buttonValue = clickedButton.id;
-
-    changeActiveButton(buttonValue);
-  }
-});
-
-function changeActiveButton(index) {
-  const buttons = document.querySelectorAll('.page-button');
-
-  buttons.forEach(button => {
-    if (button.id === index) {
-      button.classList.add('active');
-      switch (toggle) {
-        case 'filter':
-          urlOptions.page = index;
-          fetchUrl();
-          break;
-        case 'workout':
-          page = index;
-          const cardQueryParams = { limit: adjustLimit(), page: page };
-          cardQueryParams[pageContent.content] = pageContent.title;
-          getListExercisesByName(cardQueryParams);
-          break;
-      }
-    } else {
-      button.classList.remove('active');
-    }
-  });
-}
-
-function galleryForDesktop() {
-  const widthScreen = document.documentElement.clientWidth;
-
-  if (widthScreen >= 1440) {
-    urlOptions.page = 1;
-    urlOptions.limit = 12;
-  } else {
-    urlOptions.page = 1;
-    urlOptions.limit = 8;
-  }
-}
 
 exercisesGallery.addEventListener('click', event => {
   event.preventDefault();
@@ -229,79 +78,80 @@ exercisesGallery.addEventListener('click', event => {
   }
 });
 
-function cleanAll() {
-  closeErrorMessage();
-  clearExerciseTitle();
-  exercisesGallery.innerHTML = '';
-  pageButtonsContainer.innerHTML = '';
-}
+pageButtonsContainer.addEventListener('click', function (event) {
+  const clickedButton = event.target.closest('.page-button');
 
-function ratingStarRow(rating) {
-  let row = '';
-  rating = Math.floor(rating);
-  for (let index = 0; index < rating; index++) {
-    row += `
-        <span class="rating-star-icon">
-            <svg class="rating-star" width="18" height="18" aria-label="rating-star">
-                   <use href=${svgStarUrl}></use>
-            </svg>
-        </span>`;
+  if (clickedButton) {
+    const buttonValue = clickedButton.id;
+
+    changeActivePageButton(buttonValue);
   }
-  return row;
-}
-
-/* Search function */
-searchExerciseForm.addEventListener('submit', event => {
-  event.preventDefault();
-
-  const searchValue = inputSearchValue.value.trim();
-
-  if (searchValue.length === 0) {
-    iziToast.error({
-      title: 'Error',
-      position: 'topCenter',
-      message: 'Sorry, Please choose an exercise.',
-    });
-    return;
-  }
-  cleanAll();
-
-  const cardQueryParams = {
-    limit: adjustLimit(),
-    page: 1, // Reset page to 1 when submitting the form
-    keyword: searchValue,
-  };
-
-  cardQueryParams[pageContent.content] = pageContent.title;
-  inputSearchValue.value = '';
-  getListExercisesByName(cardQueryParams);
 });
 
-function adjustLimit() {
-  const widthScreen = document.documentElement.clientWidth;
-  if (widthScreen >= 768) {
-    return 12;
+function handleFilter(buttonName) {
+  searchExerciseForm.style.display = 'none';
+
+  let selectedFilter = {};
+  galleryForDesktop();
+  switch (buttonName) {
+    case 'body':
+      urlOptions.filter = 'Body parts';
+      selectedFilter = filterButton.querySelectorAll(
+        `button[name="${buttonName}"]`
+      );
+      break;
+    case 'equipment':
+      urlOptions.filter = 'Equipment';
+      selectedFilter = filterButton.querySelectorAll(
+        `button[name="${buttonName}"]`
+      );
+      break;
+    default:
+      urlOptions.filter = 'Muscles';
+      selectedFilter = filterButton.querySelectorAll(
+        `button[name="${buttonName}"]`
+      );
   }
-  return 8;
+  changeFilterColor(selectedFilter);
+
+  const queryStr = new URLSearchParams(urlOptions).toString();
+  const apiUrl = `?${queryStr}`;
+  fetchExercises(apiUrl)
+    .then(images => renderExercises(images))
+    .then(imgages => renderPagesIcon(imgages.totalPages, 1))
+    .catch(error => console.error(error));
 }
 
-function openErrorMessage() {
-  cardErrorMessage.style.display = 'block';
+function changeFilterColor(selectedFilter) {
+  const buttons = filterButton.querySelectorAll('button');
+  const selectedFilterArray = Array.from(selectedFilter);
+  for (let i = 0; i < buttons.length; i++) {
+    const currentButton = buttons[i];
+    if (selectedFilterArray.includes(currentButton)) {
+      currentButton.style.backgroundColor = 'var(--dark-gray)';
+      currentButton.style.color = 'var(--white)';
+    } else {
+      currentButton.style.backgroundColor = 'var(--white-smoke)';
+      currentButton.style.color = 'var(--black)';
+    }
+  }
 }
 
-function closeErrorMessage() {
-  cardErrorMessage.style.display = 'none';
+function fetchUrl() {
+  const queryStr = new URLSearchParams(urlOptions).toString();
+  const apiUrl = `?${queryStr}`;
+  fetchExercises(apiUrl)
+    .then(images => renderExercises(images))
+    .catch(error => console.error(error));
 }
-closeErrorMessage();
 
-function buildWorkoutGallery(title, filter) {
-  pageContent.title = title;
-  pageContent.content = filter;
-  page = 1;
-  const cardQueryParams = { limit: adjustLimit(), page: page };
-  cardQueryParams[pageContent.content] = title;
-  updateTitle(title);
-  getListExercisesByName(cardQueryParams);
+async function fetchExercises(apiUrl) {
+  try {
+    const response = await axiosInstance.get(apiUrl);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function getListExercisesByName(queryParams) {
@@ -390,6 +240,167 @@ async function getListExercisesByName(queryParams) {
   }
 }
 
+function renderExercises(images) {
+  exercisesGallery.innerHTML = '';
+  const newImages = images.results.map(image => {
+    return `<li class="exercises-item-background">
+      <a href="${image.imgUrl}">
+      <div>
+        <img
+          class="exercises-item"
+          src="${image.imgUrl}"
+          alt="${image.name}">
+          <div class="text-card">
+          <p class = "name-card">${image.name}</p>
+          <p class = "type-card">${image.filter}</p>
+          </div>
+          </div>
+      </a>
+    </li>`;
+  });
+
+  exercisesGallery.insertAdjacentHTML('beforeend', newImages.join(''));
+  return images;
+}
+
+function renderPagesIcon(totalPages, activePage) {
+  let pagesMarkup = '';
+  pageButtonsContainer.innerHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    if (i == activePage) {
+      pagesMarkup += `<li>
+      <button class="page-button active" type="button" id="${i}">${i}</button>
+    </li>`;
+    } else {
+      pagesMarkup += `<li>
+      <button class="page-button" type="button" id="${i}">${i}</button>`;
+    }
+  }
+  pageButtonsContainer.insertAdjacentHTML('afterbegin', pagesMarkup);
+}
+
+function changeActivePageButton(index) {
+  const buttons = document.querySelectorAll('.page-button');
+
+  buttons.forEach(button => {
+    if (button.id === index) {
+      button.classList.add('active');
+      switch (toggle) {
+        case 'filter':
+          urlOptions.page = index;
+          fetchUrl();
+          break;
+        case 'workout':
+          page = index;
+          const cardQueryParams = { limit: adjustLimit(), page: page };
+          cardQueryParams[pageContent.content] = pageContent.title;
+          getListExercisesByName(cardQueryParams);
+          break;
+      }
+    } else {
+      button.classList.remove('active');
+    }
+  });
+}
+
+function galleryForDesktop() {
+  const widthScreen = document.documentElement.clientWidth;
+
+  if (widthScreen >= 1440) {
+    urlOptions.page = 1;
+    urlOptions.limit = 12;
+  } else {
+    urlOptions.page = 1;
+    urlOptions.limit = 8;
+  }
+}
+
+function cleanAll() {
+  closeErrorMessage();
+  clearExerciseTitle();
+  exercisesGallery.innerHTML = '';
+  pageButtonsContainer.innerHTML = '';
+}
+
+function ratingStarRow(rating) {
+  let row = '';
+  rating = Math.floor(rating);
+  for (let index = 0; index < rating; index++) {
+    row += `
+        <span class="rating-star-icon">
+            <svg class="rating-star" width="18" height="18" aria-label="rating-star">
+                   <use href=${svgStarUrl}></use>
+            </svg>
+        </span>`;
+  }
+  return row;
+}
+
+/* Search function */
+searchButton.addEventListener('click', event => {
+  event.preventDefault();
+  const searchValue = inputSearchValue.value.trim();
+  doSearchExercise(searchValue);
+});
+
+searchExerciseForm.addEventListener('focus', () => {
+  isSearchFormActive = true;
+});
+
+searchExerciseForm.addEventListener('blur', () => {
+  isSearchFormActive = false;
+});
+
+searchExerciseForm.addEventListener('keypress', event => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const searchValue = inputSearchValue.value.trim();
+    doSearchExercise(searchValue);
+  }
+});
+
+function doSearchExercise(searchValue) {
+  if (searchValue.length === 0) {
+    iziToast.error({
+      title: 'Error',
+      position: 'topRight',
+      message: 'Sorry, Please choose an exercise.',
+      backgroundColor: 'var(--dark-gray-hover)',
+      messageColor: 'var(--white-smoke)',
+    });
+    return;
+  }
+  cleanAll();
+
+  const cardQueryParams = {
+    limit: adjustLimit(),
+    page: 1, // Reset page to 1 when submitting the form
+    keyword: searchValue,
+  };
+
+  cardQueryParams[pageContent.content] = pageContent.title;
+  inputSearchValue.value = '';
+  getListExercisesByName(cardQueryParams);
+}
+
+function openErrorMessage() {
+  cardErrorMessage.style.display = 'block';
+}
+
+function closeErrorMessage() {
+  cardErrorMessage.style.display = 'none';
+}
+
+function buildWorkoutGallery(title, filter) {
+  pageContent.title = title;
+  pageContent.content = filter;
+  page = 1;
+  const cardQueryParams = { limit: adjustLimit(), page: page };
+  cardQueryParams[pageContent.content] = title;
+  updateTitle(title);
+  getListExercisesByName(cardQueryParams);
+}
+
 function updateTitle(title) {
   titleExerciseSpan = document.createElement('span');
   titleExerciseSpan.classList.add('exercise-title-card');
@@ -409,6 +420,14 @@ function clearExerciseTitle() {
     titleExerciseSpan = null;
     closeErrorMessage();
   }
+}
+
+function adjustLimit() {
+  const widthScreen = document.documentElement.clientWidth;
+  if (widthScreen >= 768) {
+    return 12;
+  }
+  return 8;
 }
 
 function adjustLengthName(name) {
@@ -433,4 +452,5 @@ function adjustLengthName(name) {
   return name;
 }
 
+closeErrorMessage();
 handleFilter(defaultFilter);
