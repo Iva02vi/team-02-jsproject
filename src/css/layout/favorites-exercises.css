@@ -44,6 +44,34 @@
     text-align: center;
 }
 
+.favorites-mobile-pagination {
+    display: none;
+    justify-content: center;
+    margin: auto;
+    width: 71px;
+    gap: 8px;
+}
+
+.favorites-pagination-button {
+    border-radius: 18px;
+    border-color: transparent;
+    background-color: transparent;
+    color: rgba(27, 27, 27, 0.4);
+    width: 31px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fav-active-page {
+    color: var(--black);
+    border: 1px solid var(--black);
+}
+
 @media screen and (min-width: 768px) {
 
     .favorites-page-items-gallery {

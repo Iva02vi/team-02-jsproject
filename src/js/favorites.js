@@ -6,6 +6,7 @@ const exercisesNotFound = document.querySelector(
 const exercisesGallery = document.querySelector(
   '.favorites-page-items-gallery'
 );
+const mobilePagination = document.querySelector(".favorites-mobile-pagination");
 
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 const KEY = 'favorites';
@@ -14,10 +15,16 @@ const savedInStorageExercises = JSON.parse(storageFetch);
 
 const limitPerPage = 3;
 let currentPage = 1;
-let totalPages = Math.ceil(savedInStorageExercises.length / 3);
+let lastIdx = currentPage * limitPerPage;
+let firstIdx = lastIdx - limitPerPage;
+let markup = "";
+let newStorageFetch;
+let actualExercisesList;
+let paginationButtons;
+let totalPages = Math.ceil(savedInStorageExercises.length / limitPerPage);
 
-console.log(totalPages);
-console.log(savedInStorageExercises);
+console.log("totalPages: ", totalPages);
+console.log("savedInStorageExercises.length:", savedInStorageExercises.length);
 
 function hideElem(elem) {
   elem.style.display = 'none';
@@ -25,7 +32,12 @@ function hideElem(elem) {
 function showElem(elem) {
   elem.style.display = 'flex';
 }
+
+if(window.innerWidth < 768) {
+  showElem(mobilePagination);
+}
 function renderExerciseCards(arr) {
+  exercisesGallery.innerHTML = "";
   const galleryItems = arr.reduce(
     (html, card) =>
       html +
@@ -72,6 +84,7 @@ function renderExerciseCards(arr) {
   exercisesGallery.innerHTML = galleryItems;
 }
 
+
 if (storageFetch === null || savedInStorageExercises.length === 0) {
   hideElem(exercisesGallery);
 } else {
@@ -79,7 +92,6 @@ if (storageFetch === null || savedInStorageExercises.length === 0) {
   renderExerciseCards(savedInStorageExercises);
 }
 
-///
 exercisesGallery.addEventListener('click', async event => {
   let id;
   const clickedButton = event.target;
@@ -90,18 +102,102 @@ exercisesGallery.addEventListener('click', async event => {
   }
 });
 
+if(window.innerWidth < 768) {
+  markup = "";
+  mobilePagination.innerHTML = "";
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1) {
+      markup += `
+        <li>
+          <button class="favorites-pagination-button fav-active-page" type="button" id="${i}">${i}</button>
+        </li>`;
+    } else {
+      markup += `
+        <li>
+          <button class="favorites-pagination-button" type="button" id="${i}">${i}</button>
+        </li>`;
+    }
+  }
+  mobilePagination.innerHTML = markup;
+
+  renderExerciseCards(savedInStorageExercises.slice(firstIdx, lastIdx));
+
+  mobilePagination.addEventListener("click", event => {
+    event.preventDefault();
+    if(event.target.classList.value.includes("favorites-pagination-button")) {
+      currentPage = event.target.id;
+      lastIdx = currentPage * limitPerPage;
+      firstIdx = lastIdx - limitPerPage;
+      newStorageFetch = localStorage.getItem(KEY);
+      actualExercisesList = JSON.parse(newStorageFetch);
+      renderExerciseCards(actualExercisesList.slice(firstIdx, lastIdx));
+
+      const clickedButton = event.target.closest(".favorites-pagination-button");
+      paginationButtons = document.querySelectorAll(".favorites-pagination-button");
+      paginationButtons.forEach(button => {
+        if (button.id === clickedButton.id) {
+          button.classList.add("fav-active-page");
+        } else {
+          button.classList.remove("fav-active-page");
+        }
+      })
+      window.scrollBy({
+        top: 700,
+        behavior: "smooth",
+      });
+    }
+  });
+}
+
+
+
 exercisesGallery.addEventListener('click', event => {
+  event.preventDefault();
   if(event.target.className === "delete-workout-btn") {
-    const newStorageFetch = localStorage.getItem(KEY);
-    const actualExercisesList = JSON.parse(newStorageFetch);
+    newStorageFetch = localStorage.getItem(KEY);
+    actualExercisesList = JSON.parse(newStorageFetch);
     const filteredArr = actualExercisesList.filter((card) => card._id !== event.target.id);
     localStorage.setItem(KEY, JSON.stringify(filteredArr));
 
     if(filteredArr.length === 0) {
         hideElem(exercisesGallery);
         showElem(exercisesNotFound);
+        window.scrollBy({
+          top: 700,
+          behavior: "smooth",
+        });
+        if(window.innerWidth < 768) {
+          hideElem(mobilePagination);
+        }
     } else {
+      if(window.innerWidth < 768) {
+        totalPages = Math.ceil(filteredArr.length / limitPerPage);
+        markup = "";
+        for (let i = 1; i <= totalPages; i++) {
+          if (i === Number(currentPage)) {
+            markup += `
+              <li>
+                <button class="favorites-pagination-button fav-active-page" type="button" id="${i}">${i}</button>
+              </li>`;
+          } else {
+            markup += `
+              <li>
+                <button class="favorites-pagination-button" type="button" id="${i}">${i}</button>
+              </li>`;
+          }
+        }
+        console.log("currentPage: ", currentPage);
+        mobilePagination.innerHTML = markup;
+        lastIdx = currentPage * limitPerPage;
+        firstIdx = lastIdx - limitPerPage;
+        renderExerciseCards(filteredArr.slice(firstIdx, lastIdx));
+        window.scrollBy({
+          top: 700,
+          behavior: "smooth",
+        });
+      } else {
         renderExerciseCards(filteredArr);
+      }
     }
   }
 });
