@@ -40,7 +40,7 @@ function renderExerciseCards(arr) {
                             </button>
                         </div>
                         <div class="start-button-wrap">
-                            <button type="button" class="start-button" id=${card._id}>Start
+                            <button type="button" class="start-button-item" id=${card._id}>Start
                                 <svg class="start-arrow-icon" id=${card._id} width="14" height="14" aria-label="start-arrow">
                                   <use href=${svgArrowUrl}></use>
                                 </svg>
@@ -74,8 +74,8 @@ function renderExerciseCards(arr) {
     let id;
     const clickedButton = event.target;
     console.log(clickedButton);
-    if (clickedButton && clickedButton.closest('.start-button')) {
-      id = clickedButton.closest('.start-button').getAttribute('id');
+    if (clickedButton && clickedButton.closest('.start-button-item')) {
+      id = clickedButton.closest('.start-button-item').getAttribute('id');
       await openModalWindEx(id);
     }
   });

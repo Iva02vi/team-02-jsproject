@@ -3,7 +3,6 @@
   padding: 40px 20px;
   border-radius: 50px;
   margin-bottom: 16px;
-  width: 100%;
 }
 
 .exercises-gallery-label {
@@ -64,9 +63,9 @@
   width: 295px;
   height: 232px;
   border-radius: 12px;
-  border: 1px solid rgba(246, 246, 246, 0.3);
   overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .exercises-item-background::before {
@@ -80,8 +79,10 @@
   z-index: 100;
 }
 
-.exercises-item-background:hover {
+.exercises-item-background:hover,
+.exercises-item-background:focus {
   transform: scale(1.03);
+  box-shadow: 5px 10px 15px var(--dark-gray);
   cursor: pointer;
 }
 
@@ -94,7 +95,7 @@
   letter-spacing: 0.05em;
   font-weight: 400;
   line-height: 1;
-  color: #f6f6f6;
+  color: var(--white-smoke);
   text-align: center;
   z-index: 102;
 }
@@ -140,8 +141,8 @@
 }
 
 .page-button.active {
-  color: #1b1b1b;
-  border: 1px solid #1b1b1b;
+  color: var(--black);
+  border: 1px solid var(--black);
 }
 
 .search-tool {
@@ -166,12 +167,15 @@
   border-radius: 15px;
   background-color: var(--white);
   padding: 16px 16px 16px 16px;
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   /*****RENAMED****/
 }
 
 .gallery-item-list:hover {
   transform: scale(1.03);
+  box-shadow: 5px 10px 15px var(--dark-gray);
+  cursor: pointer;
 }
 
 .start-workout-icon {
@@ -308,7 +312,7 @@ workout-name::first-letter,
 
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
-    padding: 64px 48px 64px 48px;
+    padding: 64px 48px;
   }
   .exercises-gallery-label {
     font-size: 44px;
@@ -335,9 +339,16 @@ workout-name::first-letter,
     font-size: 16px;
     line-height: 1.5em;
     border-style: none;
-
+    box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
     box-sizing: border-box;
     resize: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .filter-button:hover,
+  .filter-button:focus {
+    transform: scale(1.03);
+    box-shadow: 5px 10px 15px var(--dark-gray);
   }
 
   .exercises-gallery-group {
@@ -373,7 +384,7 @@ workout-name::first-letter,
 
 @media screen and (min-width: 1440px) {
   .exercises-gallery-background {
-    padding: 64px 48px 64px 48px;
+    padding: 64px 48px;
   }
   .exercises-gallery-label {
     font-size: 44px;
