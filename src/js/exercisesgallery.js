@@ -47,6 +47,7 @@ filterButton.addEventListener('click', function (event) {
   if (event.target.tagName === 'BUTTON') {
     toggle = 'filter';
     const buttonName = event.target.getAttribute('name');
+    handleWindowResize();
     handleFilter(buttonName);
   }
 });
@@ -67,6 +68,7 @@ exercisesGallery.addEventListener('click', event => {
       filter = filter.slice(0, -1);
     }
 
+    handleWindowResize();
     buildWorkoutGallery(name, filter);
 
     if (workoutCountPages === 0) return;
@@ -425,7 +427,7 @@ function clearExerciseTitle() {
 function adjustLimit() {
   const widthScreen = document.documentElement.clientWidth;
   if (widthScreen >= 768) {
-    return 12;
+    return 9;
   }
   return 8;
 }
@@ -454,3 +456,36 @@ function adjustLengthName(name) {
 
 closeErrorMessage();
 handleFilter(defaultFilter);
+
+/*!!!experimental functions: update gap desktop for exercise and workout gallery!!!!*/
+
+let previousWidth = window.innerWidth || window.clientWidth;
+window.addEventListener('load', handleWindowResize);
+window.addEventListener('resize', () => {
+  const currentWidth = window.innerWidth;
+
+  if (currentWidth !== previousWidth) {
+    handleWindowResize();
+    previousWidth = currentWidth;
+  }
+});
+
+function handleWindowResize() {
+  const windowWidth = document.documentElement.clientWidth;
+  if (windowWidth >= 1440) {
+    switch (toggle) {
+      case 'filter':
+        exercisesGallery.style.cssText = '';
+        exercisesGallery.style.rowGap = '40px';
+        break;
+      case 'workout':
+        exercisesGallery.style.cssText = '';
+        exercisesGallery.style.rowGap = '28px';
+        break;
+      default:
+        exercisesGallery.style.cssText = '';
+    }
+  } else {
+    exercisesGallery.style.cssText = '';
+  }
+}
