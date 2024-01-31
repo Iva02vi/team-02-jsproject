@@ -249,12 +249,14 @@ function cleanAll() {
 function ratingStarRow(rating) {
   let row = '';
   rating = Math.floor(rating);
+  for (let index = 0; index < rating; index++) {
     row += `
         <span class="rating-star-icon">
             <svg class="rating-star" width="18" height="18" aria-label="rating-star">
                    <use href=${svgStarUrl}></use>
             </svg>
         </span>`;
+  }
   return row;
 }
 
@@ -267,7 +269,6 @@ searchExerciseForm.addEventListener('click', event => {
   page = 1;
 
   const searchValue = inputSearchValue.value.trim();
-  console.log(searchValue);
 
   if (searchValue.length === 0) {
     iziToast.error({

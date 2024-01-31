@@ -82,7 +82,8 @@ export async function renderExercise(id) {
           message: 'Exercise removed from favorites',
           messageColor: 'var(--black)',
           backgroundColor: 'var(--dark-gray)',
-          position: 'topRight'
+          position: 'topRight',
+          zindex: 9999999999
         });
       } else {
         favorites.push(exerciseModalData);
@@ -91,7 +92,8 @@ export async function renderExercise(id) {
           message: 'Exercise added to favorites',
           messageColor: 'var(--white-smoke)',
           backgroundColor: 'var(--dark-gray)',
-          position: 'topRight'
+          position: 'topRight',
+          zindex: 9999999999
         });
       }
 
@@ -134,7 +136,8 @@ export async function renderExercise(id) {
 
   } catch (error) {
       iziToast.error({
-        message: error.message
+        message: error.message,
+        zindex: 9999999999
       })
   }
 }

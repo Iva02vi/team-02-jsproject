@@ -79,7 +79,6 @@ function renderExerciseCards(arr) {
   exercisesGallery.addEventListener('click', async event => {
     let id;
     const clickedButton = event.target;
-    console.log(clickedButton);
     if (clickedButton && clickedButton.closest('.start-button-item')) {
       id = clickedButton.closest('.start-button-item').getAttribute('id');
       await openModalWindEx(id);
