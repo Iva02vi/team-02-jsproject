@@ -10,7 +10,6 @@ const giveRatingSendBtn = giveRatingForm.querySelector('button[type="submit"]');
 const giveRatingCurrentRating = document.querySelector('.give-rating-p1');
 const backDrop = document.querySelector('.backdrop');
 const markupModal = document.querySelector('.modal-window');
-const API_URL = 'https://energyflow.b.goit.study/api';
 const starsUl = document.querySelector('.give-rating-stars');
 const NUMBER_OF_STARS = 5;
 const svgStarUrl = new URL('/img/sprite.svg#icon-Star-2', import.meta.url);
@@ -19,22 +18,20 @@ let exerciseId;
 
 const starClickHandler = (event, liStar) => {
   selectedRating = event.currentTarget.querySelector('input').value;
-  const selectedItems = Array.from(liStar).slice(0, selectedRating);
-  const unselectedItems = Array.from(liStar).slice(selectedRating);
-  selectedItems.forEach(li => li.classList.add('li-selected'));
-  unselectedItems.forEach(li =>
-    li.classList.replace('li-selected', 'li-unselected')
-  );
+  updateStars(liStar);
 };
 
 const starHoverHandler = (event, liStar) => {
+  updateStars(liStar);
+};
+
+const updateStars = liStar => {
   const tempRating = event.currentTarget.querySelector('input').value;
-  const selectedItems = Array.from(liStar).slice(0, tempRating);
-  const unselectedItems = Array.from(liStar).slice(tempRating);
-  selectedItems.forEach(li => li.classList.add('li-selected'));
-  unselectedItems.forEach(li =>
-    li.classList.replace('li-selected', 'li-unselected')
-  );
+  liStar.forEach((li, index) => {
+    const isSelected = index < tempRating;
+    li.classList.toggle('li-selected', isSelected);
+    li.classList.toggle('li-unselected', !isSelected);
+  });
 };
 
 const submitFormHandler = async event => {
@@ -86,8 +83,7 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
     >
       <use href="${svgStarUrl}"></use>
     </svg>`;
-  const lies = [];
-  for (let i = 0; i < NUMBER_OF_STARS; i++) {
+  const lies = Array.from({ length: NUMBER_OF_STARS }, (_, index) => {
     const li = document.createElement('li');
     li.classList.add('li-star');
     const label = document.createElement('label');
@@ -96,10 +92,10 @@ export const prepareGiveRatingModal = (exercise_id, currentRating) => {
     const checkboxInput = document.createElement('input');
     checkboxInput.setAttribute('type', 'checkbox');
     checkboxInput.style.display = 'none';
-    checkboxInput.setAttribute('value', `${i + 1}`);
+    checkboxInput.setAttribute('value', `${index + 1}`);
     li.append(label, checkboxInput);
-    lies.push(li);
-  }
+    return li;
+  });
   starsUl.append(...lies);
 
   const liStar = starsUl.querySelectorAll('li');
