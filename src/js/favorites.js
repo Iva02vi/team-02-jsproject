@@ -6,6 +6,7 @@ const exercisesNotFound = document.querySelector(
 const exercisesGallery = document.querySelector(
   '.favorites-page-items-gallery'
 );
+const favPageItems = document.querySelector(".favorites-page-items");
 const mobilePagination = document.querySelector('.favorites-mobile-pagination');
 
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
@@ -25,14 +26,17 @@ let actualExercisesList;
 let paginationButtons;
 let totalPages = Math.ceil(savedInStorageExercises.length / limitPerPage);
 
-console.log('totalPages: ', totalPages);
-console.log('savedInStorageExercises.length:', savedInStorageExercises.length);
-
 function hideElem(elem) {
   elem.style.display = 'none';
+  if (elem === exercisesGallery && innerWidth > 768){
+    favPageItems.style.paddingRight = "48px";
+  }
 }
 function showElem(elem) {
   elem.style.display = 'flex';
+  if (elem === exercisesGallery && innerWidth > 768){
+    favPageItems.style.paddingRight = "0";
+  }
 }
 
 if (window.innerWidth < 768) {
@@ -55,7 +59,7 @@ function renderExerciseCards(arr) {
                             </button>
                         </div>
                         <div class="start-button-wrap">
-                            <button type="button" class="start-button" id=${card._id}>Start
+                            <button type="button" class="start-button-item" id=${card._id}>Start
                                 <svg class="start-arrow-icon" id=${card._id} width="14" height="14" aria-label="start-arrow">
                                   <use href=${svgArrowUrl}></use>
                                 </svg>
@@ -96,7 +100,6 @@ if (storageFetch === null || savedInStorageExercises.length === 0) {
 exercisesGallery.addEventListener('click', async event => {
   let id;
   const clickedButton = event.target;
-  console.log(clickedButton);
   if (clickedButton && clickedButton.closest('.start-button')) {
     id = clickedButton.closest('.start-button').getAttribute('id');
     await openModalWindEx(id);
@@ -191,7 +194,6 @@ exercisesGallery.addEventListener('click', event => {
               </li>`;
           }
         }
-        console.log('currentPage: ', currentPage);
         mobilePagination.innerHTML = markup;
         lastIdx = currentPage * limitPerPage;
         firstIdx = lastIdx - limitPerPage;
@@ -217,25 +219,3 @@ export const renderFavorites = () => {
   }
   totalPages = Math.ceil(savedInStorageExercises.length / 3);
 };
-
-function adjustLengthName(name) {
-  const widthScreen = document.documentElement.clientWidth;
-  let fontSize = 20;
-  let boxWidth = 295;
-  let factor = 0.7;
-  if (widthScreen > 1439) {
-    fontSize = 24;
-    boxWidth = 424;
-    factor = 0.85;
-  } else if (widthScreen > 767) {
-    fontSize = 24;
-    boxWidth = 313;
-    factor = 0.8;
-  }
-
-  const maxCharacters = (boxWidth / (fontSize / 2)) * factor;
-  if (name.length > maxCharacters) {
-    return name.slice(0, maxCharacters) + '...';
-  }
-  return name;
-}
