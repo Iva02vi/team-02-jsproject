@@ -103,7 +103,7 @@ function handleFilter(buttonName) {
   const apiUrl = `?${queryStr}`;
   fetchExercises(apiUrl)
     .then(images => renderExercises(images))
-    .then(imgages => renderPagesIcon(imgages.totalPages))
+    .then(imgages => renderPagesIcon(imgages.totalPages, 1))
     .catch(error => console.error(error));
 }
 
