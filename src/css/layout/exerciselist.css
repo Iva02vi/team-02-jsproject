@@ -444,6 +444,7 @@
     margin-left: 60px;
     margin-top: 16px;
     gap: 6px;
+    background-color: transparent;
   }
 
   .workout-name {

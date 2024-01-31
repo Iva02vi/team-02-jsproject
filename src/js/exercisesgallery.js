@@ -11,6 +11,8 @@ const titleExerciseSlash = document.createElement('span');
 const inputSearchValue = document.querySelector('#filtre-key');
 const searchExerciseForm = document.querySelector('.search-tool');
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
+const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
+const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
 
 const cardErrorMessage = document.querySelector('.error-card-message');
 
@@ -117,6 +119,7 @@ function fetchUrl() {
 async function fetchExercises(apiUrl) {
   try {
     const response = await axiosInstance.get(apiUrl);
+    // totalPages = response.data.totalPages;
     return response.data;
   } catch (error) {
     console.error(error);
@@ -136,14 +139,13 @@ function changeButtonColor(selectedFilter) {
       currentButton.style.color = 'var(--black)';
     }
   }
-  console.log('changeButtonColor function toggle is: ' + toggle);
 }
 
-function renderPagesIcon(totalPages) {
+function renderPagesIcon(totalPages, activePage) {
   let pagesMarkup = '';
   pageButtonsContainer.innerHTML = '';
   for (let i = 1; i <= totalPages; i++) {
-    if (i === 1) {
+    if (i == activePage) {
       pagesMarkup += `<li>
       <button class="page-button active" type="button" id="${i}">${i}</button>
     </li>`;
@@ -247,10 +249,10 @@ function cleanAll() {
 function ratingStarRow(rating) {
   let row = '';
   rating = Math.floor(rating);
-  row += `
+    row += `
         <span class="rating-star-icon">
             <svg class="rating-star" width="18" height="18" aria-label="rating-star">
-                   <use href="./img/sprite.svg#icon-Star-1"></use>
+                   <use href=${svgStarUrl}></use>
             </svg>
         </span>`;
   return row;
@@ -265,6 +267,7 @@ searchExerciseForm.addEventListener('click', event => {
   page = 1;
 
   const searchValue = inputSearchValue.value.trim();
+  console.log(searchValue);
 
   if (searchValue.length === 0) {
     iziToast.error({
@@ -314,6 +317,90 @@ function buildWorkoutGallery(title, filter) {
   getListExercisesByName(cardQueryParams);
 }
 
+async function getListExercisesByName(queryParams) {
+  try {
+    const res = await axios.get(`${BASE_URL}exercises`, {
+      params: queryParams,
+    });
+    const { totalPages, results } = res.data;
+    if (results.length == 0) {
+      exercisesGallery.innerHTML = '';
+      openErrorMessage();
+      return;
+    }
+    let renderExersisesByName = results.reduce((html, image) => {
+      exercisesGallery.innerHTML = '';
+      pageButtonsContainer.innerHTML = '';
+      const ratingRow = ratingStarRow(image.rating);
+      const ratingNumber = Number(image.rating).toFixed(1);
+      const name = adjustLengthName(image.name);
+      return (
+        html +
+            `<li class="gallery-item-list" >
+                <div class="workout-header-wrap">
+                        <div class="workout-and-rating">
+                            <p class="workout-item-title">WORKOUT</p>
+                            <p class="rating-title-item">${ratingNumber}
+                                ${ratingRow}
+                            </p>
+                            </div>
+                        <div class="start-button-wrap">
+                            <button type="button" class="start-button-item" data-exercise-id=${image._id}>Start
+                                <svg class="start-workout-icon" width="14" height="14" aria-label="start-arrow">
+                                    <use href=${svgArrowUrl}></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                       <div class="workout-type-item">
+                        <svg  width="24" height="24" aria-label="run-man">
+                            <use href=${svgLigthUrl}></use>
+                        </svg>
+                        <p class="workout-name-item">${name}</p>
+                    </div>
+                <div class="workout-items-box">
+                
+                 
+                    <div class="workout-description">
+                        <p class="description-item-name">Burned calories:
+                            <span class="description-item-value">${image.burnedCalories} / ${image.time} min</span>
+                        </p>
+                        <p class="description-item-name">Body part:
+                            <span class="description-item-value">${image.bodyPart}</span>
+                        </p>
+                        <p class="description-item-name">Target:
+                            <span class="description-item-value">${image.target}</span>
+                        </p>
+                    </div> 
+            </li>`
+      );
+    }, '');
+
+    workoutCountPages = res.data.totalPages;
+    exercisesGallery.innerHTML = '';
+
+    exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
+
+    exercisesGallery.addEventListener('click', async (event) => {
+      let id;
+      const clickedButton = event.target;
+      if (event.target && event.target.closest('.start-button-item')) {
+        id = clickedButton.closest('.start-button-item').getAttribute('data-exercise-id');
+        await openModalWindEx(id);
+      }
+      })
+    toggle = 'workout';
+
+    if (totalPages < 3) {
+      renderPagesIcon(totalPages, queryParams.page);
+    } else {
+      renderPagesIcon(3, queryParams.page);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function updateTitle(title) {
   titleExerciseSpan = document.createElement('span');
   titleExerciseSpan.classList.add('exercise-title-card');
@@ -335,88 +422,11 @@ function clearExerciseTitle() {
   }
 }
 
-async function getListExercisesByName(queryParams) {
-  try {
-    const res = await axios.get(`${BASE_URL}exercises`, {
-      params: queryParams,
-    });
-    const { totalPages, results } = res.data;
-    if (results.length == 0) {
-      exercisesGallery.innerHTML = '';
-      openErrorMessage();
-      return;
-    }
-
-    let renderExersisesByName = results.reduce((html, image) => {
-      const ratingRow = ratingStarRow(image.rating);
-      const ratingNumber = Number(image.rating).toFixed(1);
-      const name = adjustLengthName(image.name);
-      return (
-        html +
-        `<li class="gallery-item-list">
-                <div class="workout-header-wrap">
-                        <div class= "workout-and-rating">
-                            <p class="workout-item-title">WORKOUT</p>
-                            <p class="rating-title-item">${ratingNumber}
-                                ${ratingRow}
-                            </p>
-                            </div>
-                        <div class="start-button-wrap">
-                            <button type="button" class="start-button-item">Start
-                                <svg class="start-workout-icon" width="14" height="14" aria-label="start-arrow">
-                                    <use href="./img/sprite.svg#icon-arrow"></use>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                       <div class="workout-type-item">
-                        <svg  width="24" height="24" aria-label="run-man">
-                            <use href="./img/sprite.svg#icon-lighticon"></use>
-                        </svg>
-                        <p class="workout-name-item">${name}</p>
-                    </div>
-                <div class="workout-items-box">
-                
-                 
-                    <div class="workout-description">
-                        <p class="description-item-name">Burned calories:
-                            <span class="description-item-value">${image.burnedCalories} / ${image.time} min</span>
-                        </p>
-                        <p class="description-item-name">Body part:
-                            <span class="description-item-value">${image.bodyPart}</span>
-                        </p>
-                        <p class="description-item-name">Target:
-                            <span class="description-item-value">${image.target}</span>
-                        </p>
-                    </div> 
-            </li>`
-      );
-    }, '');
-    // workoutCountPages = Math.ceil(res.data.totalPages / res.data.perPage);
-
-    exercisesGallery.addEventListener('click', async (event) => {
-      let id;
-      const clickedButton = event.target;
-      if (event.target && event.target.closest('.start-button')) {
-        id = clickedButton.closest('.start-button').getAttribute('data-exercise-id');
-        await openModalWindEx(id);
-      }
-      })
-
-    workoutCountPages = res.data.totalPages;
-    exercisesGallery.innerHTML = '';
-    exercisesGallery.insertAdjacentHTML('beforeend', renderExersisesByName);
-    toggle = 'workout';
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function adjustLengthName(name) {
   const widthScreen = document.documentElement.clientWidth;
   let fontSize = 20;
   let boxWidth = 295;
-  let factor = 0.75;
+  let factor = 0.7;
   if (widthScreen > 1440) {
     fontSize = 24;
     boxWidth = 424;

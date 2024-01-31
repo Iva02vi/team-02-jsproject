@@ -1,6 +1,10 @@
 import axios from 'axios';
 import iziToast from 'izitoast';
 
+import { prepareGiveRatingModal } from './give-rating';
+import { renderFavorites } from './favorites';
+
+const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
 const backDrop = document.querySelector('.backdrop');
 
 export async function openModalWindEx(id) {
@@ -8,7 +12,6 @@ export async function openModalWindEx(id) {
   return renderExercise(id);
 }
 
-import { prepareGiveRatingModal } from './give-rating';
 const modalGiveRating = document.querySelector('.modal-give-rating');
 const giveRatingButton = document.querySelector('.modal-btn-rating');
 
@@ -26,14 +29,14 @@ export async function renderExercise(id) {
         stars.innerHTML += `<li>
 
       <svg class="modal-rating-stars-svg" width="18" height="18">
-        <use href="../img/sprite.svg#icon-Star-1"></use>
+        <use href=${svgStarUrl}></use>
       </svg>
     </li>`;
       } else {
         stars.innerHTML += `<li>
 
         <svg class="modal-rating-stars-svg" width="18" height="18">
-          <use href="../img/sprite.svg#icon-Star-1"></use>
+          <use href=${svgStarUrl}></use>
         </svg>
       </li>`;
       }
@@ -51,16 +54,25 @@ export async function renderExercise(id) {
     const addToFavoritesBtn = document.querySelector('.modal-btn-favorites');
     const addToFavoritesText = document.querySelector('.modal-btn-favorites-text');
 
+
+    let initFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
+    console.log('find', initFavorites.find(exercise => exercise._id === exerciseModalData._id))
+    if (initFavorites.find(exercise => exercise._id === exerciseModalData._id)) {
+      addToFavoritesText.innerText = 'Remove from favorites';
+    } else {
+      addToFavoritesText.innerText = 'Add to favorites';
+    }
+
     addToFavoritesBtn.addEventListener('click', addToFavoritesClickHandler);
 
     function addToFavoritesClickHandler(e) {
-      e.stopPropagation();
+      e.stopImmediatePropagation();
       e.preventDefault();
-      let favorites = JSON.parse(localStorage.getItem("favorites"))
+      let favorites = JSON.parse(localStorage.getItem("favorites"));
       if (favorites == undefined) {
         favorites = [];
       }
-
+      
       const index = favorites.findIndex((exercise) => exercise.name === exerciseModalData.name);
 
       if (index !== -1) {
@@ -68,8 +80,8 @@ export async function renderExercise(id) {
         addToFavoritesText.innerText = 'Add to favorites';
         iziToast.show({
           message: 'Exercise removed from favorites',
-          messageColor: '#f7f7fc',
-          backgroundColor: '#3939db',
+          messageColor: 'var(--black)',
+          backgroundColor: 'var(--dark-gray)',
           position: 'topRight'
         });
       } else {
@@ -77,19 +89,23 @@ export async function renderExercise(id) {
         addToFavoritesText.innerText = 'Remove from favorites';
         iziToast.show({
           message: 'Exercise added to favorites',
-          messageColor: '#f7f7fc',
-          backgroundColor: '#219c2b',
+          messageColor: 'var(--white-smoke)',
+          backgroundColor: 'var(--dark-gray)',
           position: 'topRight'
         });
       }
 
-        localStorage.setItem("favorites", JSON.stringify(favorites))
+      localStorage.setItem("favorites", JSON.stringify(favorites))
     }
 
     const closeBtn = document.querySelector('.modal-btn-close');
     closeBtn.addEventListener('click', closeModal);
 
     function closeModal() {
+      if (location.pathname.includes('/favorites.html')) {
+        console.log('favorites....')
+        renderFavorites();
+      }
       backDrop.classList.remove('is-open');
       addToFavoritesBtn.removeEventListener('click', addToFavoritesClickHandler);
       closeBtn.removeEventListener('click', closeModal);
