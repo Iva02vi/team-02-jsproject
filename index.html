@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Energy.flow provides comprehensive support in the field of fitness and nutrition."
+    />
+    <link rel="icon" type="image/svg+xml" href="/team-02-jsproject/assets/favicon-7c748e16.svg" />
+    <title>EnergyFlow</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Energy.flow provides comprehensive support in the field of fitness and nutrition." />
-  <link rel="icon" type="image/svg+xml" href="/team-02-jsproject/assets/favicon-7c748e16.svg" />
-  <title>EnergyFlow</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
+      integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    
+    <script type="module" crossorigin src="/team-02-jsproject/commonHelpers2.js"></script>
+    <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/vendor-8cce9181.js">
+    <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/mob-menu-e5dbbc17.js">
+    <link rel="stylesheet" href="/team-02-jsproject/assets/vendor-e5212ee8.css">
+    <link rel="stylesheet" href="/team-02-jsproject/assets/styles-4c72bc09.css">
+  </head>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
-    integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-  <script type="module" crossorigin src="/team-02-jsproject/commonHelpers2.js"></script>
-  <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/vendor-8cce9181.js">
-  <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/mob-menu-f5d7a1ba.js">
-  <link rel="stylesheet" href="/team-02-jsproject/assets/vendor-e5212ee8.css">
-  <link rel="stylesheet" href="/team-02-jsproject/assets/styles-4c72bc09.css">
-</head>
-
-<body>
-  <header class="header-page container">
+  <body>
+    <header class="header-page container">
   <div class="header-main">
     <nav class="header-nav">
       <a class="header-logo" href="./index.html">energy.flow</a>
@@ -64,9 +69,8 @@
     </button>
   </div>
 </header>
-  <span class="loader"></span>
-  <main>
-    <section class="hero-section">
+    <main>
+      <section class="hero-section">
   <div class="container hero-container">
     <div class="hero-foto-tag">
       <ul class="hero-list">
@@ -122,7 +126,7 @@
   </div>
 </section>
 
-    <section class="container quote-section" id="quote">
+      <section class="container quote-section" id="quote">
   <div class="quote-container">
     <div class="quote-for-today">
       <div class="quote-title-icon">
@@ -145,7 +149,7 @@
   </div>
 </section>
 
-    <div class="container">
+      <div class="container">
   <div class="exercises-gallery-background">
     <h2 class="exercises-gallery-label">Exercises</h2>
     <div class="filter-kit">
@@ -167,12 +171,20 @@
         </li>
       </ul>
       <form class="filtred-submit">
-        <label for="submit-key-request" class="submit-key-form search-tool">
-          <input type="text" class="input-submit-key" name="submit-key-request" id="filtre-key" placeholder="Search" />
-          <svg class="icon-search" width="18" height="18" aria-label="search">
-            <use href="/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-search"></use>
-          </svg>
-        </label>
+        <div class="submit-key-form search-tool">
+          <label for="filtre-key" class="label-search">
+            <svg class="icon-search" width="18" height="18" aria-label="search">
+              <use href="/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-search"></use>
+            </svg>
+          </label>
+          <input
+            type="text"
+            class="input-submit-key"
+            name="submit-key-request"
+            id="filtre-key"
+            placeholder="Search"
+          />
+        </div>
       </form>
     </div>
     <ul class="exercises-gallery-group"></ul>
@@ -186,7 +198,8 @@
     <ul class="page-buttons-container"></ul>
   </div>
 </div>
-    <section class="information-section container">
+
+      <section class="information-section container">
   <h2 class="visually-hidden">Information</h2>
   <div class="information-section-img-container"></div>
   <div class="information-section-text-container section">
@@ -207,7 +220,7 @@
     </div>
   </div>
 </section>
-    <section class="modal-give-rating hidden">
+      <section class="modal-give-rating hidden">
   <button class="give-rating-close" type="button">
     <svg class="icon-x" width="24" height="24" aria-label="modal close icon">
       <use href="/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-close"></use>
@@ -228,6 +241,7 @@
       placeholder="Email"
       pattern="[\w]+(\.[\w]+)*@([\w]+\.)+[a-zA-Z]{2,7}"
       required
+      autocomplete="email"
     />
 
     <textarea
@@ -241,8 +255,8 @@
   </form>
 </section>
 
-  </main>
-  <footer class="footer container">
+    </main>
+    <footer class="footer container">
   <div class="footer-container">
     <div class="footer-main-info-container">
       <div class="footer-logo-social">
@@ -324,6 +338,7 @@
                 aria-label="mail"
                 pattern="[\w]+(\.[\w]+)*@([\w]+\.)+[a-zA-Z]{2,7}"
                 required
+                autocomplete="email"
               />
             </label>
             <button class="footer-modal-button" type="submit">Send</button>
@@ -348,7 +363,7 @@
   </div>
 </footer>
 
-  <div class="backdrop">
+    <div class="backdrop">
   <div class="modal-wrapper">
     <div class="modal-window">
       <button class="modal-btn-close" type="button" aria-label="Modal close">
@@ -431,7 +446,7 @@
     </div>
   </div>
 </div>
-  <!-- ========== Mobile menu ========== -->
+    <!-- ========== Mobile menu ========== -->
 
 <div class="mobile-menu">
   <div class="menu-wrapper section">
@@ -482,23 +497,25 @@
     </div>
   </div>
 </div>
-  <div class="back-to-top">
-    <svg class="scroll-arrow" width="22" height="22">
-      <use href="/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-arrow-up"></use>
-    </svg>
-  </div>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/body-scroll-lock/3.1.5/bodyScrollLock.min.js"
-    integrity="sha512-HowizSDbQl7UPEAsPnvJHlQsnBmU2YMrv7KkTBulTLEGz9chfBoWYyZJL+MUO6p/yBuuMO/8jI7O29YRZ2uBlA=="
-    crossorigin="anonymous"></script>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-</body>
-
+    <div class="back-to-top">
+      <svg class="scroll-arrow" width="22" height="22">
+        <use href="/team-02-jsproject/assets/sprite-7048d1fb.svg#icon-arrow-up"></use>
+      </svg>
+    </div>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/body-scroll-lock/3.1.5/bodyScrollLock.min.js"
+      integrity="sha512-HowizSDbQl7UPEAsPnvJHlQsnBmU2YMrv7KkTBulTLEGz9chfBoWYyZJL+MUO6p/yBuuMO/8jI7O29YRZ2uBlA=="
+      crossorigin="anonymous"
+    ></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </body>
 </html>
