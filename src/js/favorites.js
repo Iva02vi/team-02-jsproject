@@ -6,6 +6,7 @@ const exercisesNotFound = document.querySelector(
 const exercisesGallery = document.querySelector(
   '.favorites-page-items-gallery'
 );
+const mobilePagination = document.querySelector('.favorites-mobile-pagination');
 
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
@@ -24,7 +25,12 @@ function hideElem(elem) {
 function showElem(elem) {
   elem.style.display = 'flex';
 }
+
+if (window.innerWidth < 768) {
+  showElem(mobilePagination);
+}
 function renderExerciseCards(arr) {
+  exercisesGallery.innerHTML = '';
   const galleryItems = arr.reduce(
     (html, card) =>
       html +
