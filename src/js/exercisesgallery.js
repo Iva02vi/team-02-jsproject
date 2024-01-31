@@ -30,6 +30,7 @@ let urlOptions = {
   page: 1,
   limit: 8,
 };
+let workoutCountPages = 0;
 const filterBodypart = 'bodypart';
 let toggle = 'filter';
 const defaultFilter = 'muscles';
@@ -59,8 +60,6 @@ function renderExercises(images) {
   exercisesGallery.insertAdjacentHTML('beforeend', newImages.join(''));
   return images;
 }
-
-let workoutCountPages = 0;
 
 filterButton.addEventListener('click', function (event) {
   clearExerciseTitle();
@@ -190,13 +189,6 @@ function changeActiveButton(index) {
     }
   });
 }
-
-window.addEventListener('resize', event => {
-  event.preventDefault();
-  galleryForDesktop();
-  handleFilter(defaultFilter);
-  changeActiveButton(1);
-});
 
 function galleryForDesktop() {
   const widthScreen = document.documentElement.clientWidth;
