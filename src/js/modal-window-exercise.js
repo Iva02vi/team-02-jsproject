@@ -80,8 +80,8 @@ export async function renderExercise(id) {
         addToFavoritesText.innerText = 'Add to favorites';
         iziToast.show({
           message: 'Exercise removed from favorites',
-          messageColor: '#f7f7fc',
-          backgroundColor: '#3939db',
+          messageColor: 'var(--black)',
+          backgroundColor: 'var(--dark-gray)',
           position: 'topRight'
         });
       } else {
@@ -89,8 +89,8 @@ export async function renderExercise(id) {
         addToFavoritesText.innerText = 'Remove from favorites';
         iziToast.show({
           message: 'Exercise added to favorites',
-          messageColor: '#f7f7fc',
-          backgroundColor: '#219c2b',
+          messageColor: 'var(--white-smoke)',
+          backgroundColor: 'var(--dark-gray)',
           position: 'topRight'
         });
       }
