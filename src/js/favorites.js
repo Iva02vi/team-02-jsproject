@@ -8,16 +8,15 @@ const exercisesGallery = document.querySelector(
 );
 
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
+const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
+const svgTrashhUrl = new URL('/img/sprite.svg#icon-trash', import.meta.url);
+
 const KEY = 'favorites';
-const storageFetch = localStorage.getItem(KEY);
-const savedInStorageExercises = JSON.parse(storageFetch);
+let savedInStorageExercises = JSON.parse(localStorage.getItem(KEY));
 
 const limitPerPage = 3;
 let currentPage = 1;
-let totalPages = Math.ceil(savedInStorageExercises.length / 3);
-
-console.log(totalPages);
-console.log(savedInStorageExercises);
+let totalPages;
 
 function hideElem(elem) {
   elem.style.display = 'none';
@@ -36,7 +35,7 @@ function renderExerciseCards(arr) {
                             <span class="workout-title">WORKOUT</span>
                             <button type="button" class="delete-workout-btn" id="${card._id}">                            
                                 <svg class="trash-icon" id="${card._id}" width="16" height="16" aria-label="trash-icon">
-                                  <use href="./img/sprite.svg#icon-trash" id="${card._id}"></use>
+                                  <use href=${svgTrashhUrl} id="${card._id}"></use>
                                 </svg>
                             </button>
                         </div>
@@ -50,7 +49,7 @@ function renderExerciseCards(arr) {
                     </div>
                     <div class="workout-type">
                         <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
-                            <use href="./img/sprite.svg#icon-lighticon"></use>
+                            <use href=${svgLigthUrl}></use>
                         </svg>
                         <h3 class="workout-name">${card.name}</h3>
                     </div>
@@ -70,38 +69,43 @@ function renderExerciseCards(arr) {
     ''
   );
   exercisesGallery.innerHTML = galleryItems;
-}
 
-if (storageFetch === null || savedInStorageExercises.length === 0) {
-  hideElem(exercisesGallery);
-} else {
-  hideElem(exercisesNotFound);
-  renderExerciseCards(savedInStorageExercises);
-}
+  exercisesGallery.addEventListener('click', async event => {
+    let id;
+    const clickedButton = event.target;
+    console.log(clickedButton);
+    if (clickedButton && clickedButton.closest('.start-button')) {
+      id = clickedButton.closest('.start-button').getAttribute('id');
+      await openModalWindEx(id);
+    }
+  });
 
-///
-exercisesGallery.addEventListener('click', async event => {
-  let id;
-  const clickedButton = event.target;
-  console.log(clickedButton);
-  if (clickedButton && clickedButton.closest('.start-button')) {
-    id = clickedButton.closest('.start-button').getAttribute('id');
-    await openModalWindEx(id);
-  }
-});
+  exercisesGallery.addEventListener('click', event => {
+    if (event.target.className === 'delete-workout-btn') {
+      const newStorageFetch = localStorage.getItem(KEY);
+      const actualExercisesList = JSON.parse(newStorageFetch);
+      const filteredArr = actualExercisesList.filter(
+        card => card._id !== event.target.id
+      );
+      localStorage.setItem(KEY, JSON.stringify(filteredArr));
 
-exercisesGallery.addEventListener('click', event => {
-  if(event.target.className === "delete-workout-btn") {
-    const newStorageFetch = localStorage.getItem(KEY);
-    const actualExercisesList = JSON.parse(newStorageFetch);
-    const filteredArr = actualExercisesList.filter((card) => card._id !== event.target.id);
-    localStorage.setItem(KEY, JSON.stringify(filteredArr));
-
-    if(filteredArr.length === 0) {
+      if (filteredArr.length === 0) {
         hideElem(exercisesGallery);
         showElem(exercisesNotFound);
-    } else {
+      } else {
         renderExerciseCards(filteredArr);
+      }
     }
+  });
+}
+
+export const renderFavorites = () => {
+  savedInStorageExercises = JSON.parse(localStorage.getItem(KEY)) || {};
+  if (!savedInStorageExercises || savedInStorageExercises.length === 0) {
+    hideElem(exercisesGallery);
+  } else {
+    hideElem(exercisesNotFound);
+    renderExerciseCards(savedInStorageExercises);
   }
-});
+  totalPages = Math.ceil(savedInStorageExercises.length / 3);
+};

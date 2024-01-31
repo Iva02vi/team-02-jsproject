@@ -11,6 +11,8 @@ const titleExerciseSlash = document.createElement('span');
 const inputSearchValue = document.querySelector('#filtre-key');
 const searchExerciseForm = document.querySelector('.search-tool');
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
+const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
+const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
 
 const cardErrorMessage = document.querySelector('.error-card-message');
 
@@ -243,7 +245,7 @@ function ratingStarRow(rating) {
     row += `
         <span class="rating-star-icon">
             <svg class="rating-star" width="18" height="18" aria-label="rating-star">
-                   <use href="./img/sprite.svg#icon-Star-1"></use>
+                   <use href=${svgStarUrl}></use>
             </svg>
         </span>`;
   }
@@ -343,7 +345,7 @@ async function getListExercisesByName(queryParams) {
                     </div>
                     <div class="workout-type">
                         <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
-                            <use href="../img/sprite.svg#icon-lighticon"></use>
+                            <use href=${svgLigthUrl}></use>
                         </svg>
                         <p class="workout-name">${image.name}</p>
                     </div>
