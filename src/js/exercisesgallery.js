@@ -58,6 +58,8 @@ function renderExercises(images) {
   return images;
 }
 
+let workoutCountPages = 0;
+
 filterButton.addEventListener('click', function (event) {
   clearExerciseTitle();
   closeErrorMessage();
