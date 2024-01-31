@@ -201,7 +201,7 @@ window.addEventListener('resize', event => {
 function galleryForDesktop() {
   const widthScreen = document.documentElement.clientWidth;
 
-  if (widthScreen > 1440) {
+  if (widthScreen >= 1440) {
     urlOptions.page = 1;
     urlOptions.limit = 12;
   } else {
@@ -293,7 +293,7 @@ searchExerciseForm.addEventListener('click', event => {
 
 function adjustLimit() {
   const widthScreen = document.documentElement.clientWidth;
-  if (widthScreen > 768) {
+  if (widthScreen >= 768) {
     return 12;
   }
   return 8;
