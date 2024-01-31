@@ -20,7 +20,7 @@
     
     <script type="module" crossorigin src="/team-02-jsproject/commonHelpers2.js"></script>
     <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/vendor-8cce9181.js">
-    <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/mob-menu-e5dbbc17.js">
+    <link rel="modulepreload" crossorigin href="/team-02-jsproject/assets/mob-menu-9cc952d5.js">
     <link rel="stylesheet" href="/team-02-jsproject/assets/vendor-e5212ee8.css">
     <link rel="stylesheet" href="/team-02-jsproject/assets/styles-4c72bc09.css">
   </head>
@@ -69,6 +69,7 @@
     </button>
   </div>
 </header>
+    <span class="loader"></span>
     <main>
       <section class="hero-section">
   <div class="container hero-container">
@@ -230,7 +231,7 @@
   <form class="give-rating-form">
     <h2 class="give-rating-form-review">Rating</h2>
     <div class="give-rating-p1-stars">
-      <p class="give-rating-p1">0.0></p>
+      <p class="give-rating-p1">0.0</p>
       <ul class="give-rating-stars"></ul>
     </div>
 
@@ -238,6 +239,7 @@
       class="give-rating-email"
       type="email"
       name="email"
+      id="give-rating-email"
       placeholder="Email"
       pattern="[\w]+(\.[\w]+)*@([\w]+\.)+[a-zA-Z]{2,7}"
       required
