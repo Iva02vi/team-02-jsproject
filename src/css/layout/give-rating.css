@@ -1,6 +1,9 @@
+.give-rating-btn-send {
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .give-rating-btn-send:hover {
   background-color: var(--dark-gray-hover);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .give-rating-email,
@@ -36,7 +39,7 @@
     background: var(--white-smoke);
   }
   .icon-x {
-    color: #1b1b1b;
+    color: var(--black);
     border: none;
   }
   .give-rating-form-review {
@@ -67,10 +70,11 @@
     height: 24px;
   }
   .li-star {
-    fill: #7e847f;
+    fill: var(--dark-gray);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .li-unselected {
-    fill: #7e847f;
+    fill: var(--dark-gray);
   }
   .li-selected {
     fill: #eea10c;
@@ -190,6 +194,7 @@
   }
   .li-star {
     fill: var(--dark-gray);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .li-unselected {
     fill: var(--dark-gray);
