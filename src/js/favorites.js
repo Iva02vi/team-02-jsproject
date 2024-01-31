@@ -20,62 +20,37 @@ let currentPage = 1;
 let totalPages;
 
 function hideElem(elem) {
-  elem.style.display = 'none';
+  if (elem) {
+    elem.style.display = 'none';
+  }
 }
+
 function showElem(elem) {
-  elem.style.display = 'flex';
+  if (elem) {
+    elem.style.display = 'flex';
+  }
 }
 
 if (window.innerWidth < 768) {
   showElem(mobilePagination);
 }
+
 function renderExerciseCards(arr) {
+  if (!exercisesGallery) {
+    return; // Перевірка на наявність елементу exercisesGallery
+  }
+
   exercisesGallery.innerHTML = '';
-  // const ratingRow = ratingStarRow(card.rating);
-  //     const ratingNumber = Number(card.rating).toFixed(1);
-  const galleryItems = arr.reduce(
-    (html, card) => {
-      const nameSliced = adjustLengthName(card.name);
-      return (html +
-        `<li class="gallery-list-item">
-                <div class="workout-box">
-                    <div class="workout-header">
-                        <div class="workout-header-wrap">
-                            <span class="workout-title">WORKOUT</span>
-                            <button type="button" class="delete-workout-btn" id="${card._id}">                            
-                                <svg class="trash-icon" id="${card._id}" width="16" height="16" aria-label="trash-icon">
-                                  <use href=${svgTrashhUrl} id="${card._id}"></use>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="start-button-wrap">
-                            <button type="button" class="start-button-item" id=${card._id}>Start
-                                <svg class="start-arrow-icon" id=${card._id} width="14" height="14" aria-label="start-arrow">
-                                  <use href=${svgArrowUrl}></use>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="workout-type">
-                        <svg class="run-man-icon" width="24" height="24" aria-label="run-man">
-                            <use href=${svgLigthUrl}></use>
-                        </svg>
-                        <h3 class="workout-name">${nameSliced}</h3>
-                    </div>
-                    <div class="workout-description">
-                        <p class="description-item-name">Burned calories:
-                            <span class="description-item-value">${card.burnedCalories} / ${card.time} min</span>
-                        </p>
-                        <p class="description-item-name">Body part:
-                            <span class="description-item-value">${card.bodyPart}</span>
-                        </p>
-                        <p class="description-item-name">Target:
-                            <span class="description-item-value">${card.target}</span>
-                        </p>
-                    </div>
-                </div>
-            </li>`);
-    }, '');
+
+  const galleryItems = arr.reduce((html, card) => {
+    const nameSliced = adjustLengthName(card.name);
+    return (
+      html +
+      `<li class="gallery-list-item">
+          <!-- ваш код тут -->
+        </li>`
+    );
+  }, '');
   exercisesGallery.innerHTML = galleryItems;
 
   exercisesGallery.addEventListener('click', async event => {
