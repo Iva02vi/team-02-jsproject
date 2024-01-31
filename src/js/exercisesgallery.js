@@ -202,8 +202,6 @@ function galleryForDesktop() {
   }
 }
 
-handleFilter(defaultFilter);
-
 exercisesGallery.addEventListener('click', event => {
   event.preventDefault();
   const cardElement = event.target.closest('.exercises-item-background');
@@ -434,3 +432,5 @@ function adjustLengthName(name) {
   }
   return name;
 }
+
+handleFilter(defaultFilter);
