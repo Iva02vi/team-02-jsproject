@@ -3,7 +3,7 @@ import iziToast from 'izitoast';
 
 import { prepareGiveRatingModal } from './give-rating';
 
-const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
+const svgStarUrl = new URL('/img/sprite.svg#icon-Star-5', import.meta.url);
 const backDrop = document.querySelector('.backdrop');
 
 export async function openModalWindEx(id) {
@@ -39,7 +39,7 @@ export async function renderExercise(id) {
         </li>`;
       } else {
         stars.innerHTML += `<li>
-          <svg class="modal-rating-stars-svg" width="18" height="18">
+          <svg class="modal-rating-stars-svg-unselected" width="18" height="18">
             <use href=${svgStarUrl}></use>
           </svg>
         </li>`;
