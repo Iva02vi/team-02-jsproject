@@ -21,8 +21,8 @@
 }
 
 .exercises-gallery-filter {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
   gap: 6px;
@@ -116,7 +116,7 @@
 }
 
 .page-buttons-container {
-  padding-top: 20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -311,8 +311,8 @@
   }
 
   .exercises-gallery-filter {
-    padding-top: 32px;
-    padding-bottom: 32px;
+    margin-top: 32px;
+    margin-bottom: 32px;
     display: flex;
     flex-direction: row;
     gap: 8px;
@@ -354,7 +354,7 @@
   }
 
   .page-buttons-container {
-    padding-top: 32px;
+    margin-top: 32px;
   }
 
   .gallery-item-list {
