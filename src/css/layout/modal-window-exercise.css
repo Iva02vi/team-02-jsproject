@@ -149,11 +149,11 @@
 }
 
 .modal-rating-stars-svg {
-  fill: #eea10c;
+  fill: rgba(27, 27, 27, 0.2);
 }
 
-.modal-rating-stars-svg-unselected {
-  fill: rgba(27, 27, 27, 0.2);
+.modal-rating-stars-svg-active {
+  fill: #eea10c;
 }
 
 .modal-info-list {

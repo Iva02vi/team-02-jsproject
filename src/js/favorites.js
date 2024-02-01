@@ -6,13 +6,13 @@ const exercisesNotFound = document.querySelector(
 const exercisesGallery = document.querySelector(
   '.favorites-page-items-gallery'
 );
-const favPageItems = document.querySelector(".favorites-page-items");
+const favPageItems = document.querySelector('.favorites-page-items');
 const mobilePagination = document.querySelector('.favorites-mobile-pagination');
 
 const svgArrowUrl = new URL('/img/sprite.svg#icon-arrow', import.meta.url);
 const KEY = 'favorites';
 const storageFetch = localStorage.getItem(KEY);
-const savedInStorageExercises = JSON.parse(storageFetch);
+let savedInStorageExercises = JSON.parse(storageFetch);
 const svgLigthUrl = new URL('/img/sprite.svg#icon-lighticon', import.meta.url);
 const svgTrashhUrl = new URL('/img/sprite.svg#icon-trash', import.meta.url);
 
@@ -28,20 +28,21 @@ let totalPages = Math.ceil(savedInStorageExercises.length / limitPerPage);
 
 function hideElem(elem) {
   elem.style.display = 'none';
-  if (elem === exercisesGallery && innerWidth > 768){
-    favPageItems.style.paddingRight = "48px";
+  if (elem === exercisesGallery && innerWidth > 768) {
+    favPageItems.style.paddingRight = '48px';
   }
 }
 function showElem(elem) {
   elem.style.display = 'flex';
-  if (elem === exercisesGallery && innerWidth > 768){
-    favPageItems.style.paddingRight = "0";
+  if (elem === exercisesGallery && innerWidth > 768) {
+    favPageItems.style.paddingRight = '0';
   }
 }
 
 if (window.innerWidth < 768) {
   showElem(mobilePagination);
 }
+
 function renderExerciseCards(arr) {
   exercisesGallery.innerHTML = '';
   const galleryItems = arr.reduce(
@@ -86,25 +87,70 @@ function renderExerciseCards(arr) {
     ''
   );
   exercisesGallery.innerHTML = galleryItems;
-}
 
-if (storageFetch === null || savedInStorageExercises.length === 0) {
-  hideElem(exercisesGallery);
-} else {
-  hideElem(exercisesNotFound);
-  renderExerciseCards(savedInStorageExercises);
-}
-
-exercisesGallery.addEventListener('click', async event => {
-  let id;
-  const clickedButton = event.target;
-  if (clickedButton.className !== 'delete-workout-btn') {
-    if (clickedButton && clickedButton.closest('.workout-box')) {
-      id = clickedButton.closest('.workout-box').getAttribute('id');
-      await openModalWindEx(id);
+  exercisesGallery.addEventListener('click', async event => {
+    let id;
+    const clickedButton = event.target;
+    if (clickedButton.className !== 'delete-workout-btn') {
+      if (clickedButton && clickedButton.closest('.workout-box')) {
+        id = clickedButton.closest('.workout-box').getAttribute('id');
+        await openModalWindEx(id);
+      }
     }
-  }
-});
+  });
+
+  exercisesGallery.addEventListener('click', event => {
+    event.preventDefault();
+    if (event.target.className === 'delete-workout-btn') {
+      newStorageFetch = localStorage.getItem(KEY);
+      actualExercisesList = JSON.parse(newStorageFetch);
+      const filteredArr = actualExercisesList.filter(
+        card => card._id !== event.target.id
+      );
+      localStorage.setItem(KEY, JSON.stringify(filteredArr));
+  
+      if (filteredArr.length === 0) {
+        hideElem(exercisesGallery);
+        showElem(exercisesNotFound);
+        window.scrollBy({
+          top: 700,
+          behavior: 'smooth',
+        });
+        if (window.innerWidth < 768) {
+          hideElem(mobilePagination);
+        }
+      } else {
+        if (window.innerWidth < 768) {
+          totalPages = Math.ceil(filteredArr.length / limitPerPage);
+          markup = '';
+          for (let i = 1; i <= totalPages; i++) {
+            if (i === Number(currentPage)) {
+              markup += `
+                <li>
+                  <button class="favorites-pagination-button fav-active-page" type="button" id="${i}">${i}</button>
+                </li>`;
+            } else {
+              markup += `
+                <li>
+                  <button class="favorites-pagination-button" type="button" id="${i}">${i}</button>
+                </li>`;
+            }
+          }
+          mobilePagination.innerHTML = markup;
+          lastIdx = currentPage * limitPerPage;
+          firstIdx = lastIdx - limitPerPage;
+          renderExerciseCards(filteredArr.slice(firstIdx, lastIdx));
+          window.scrollBy({
+            top: 700,
+            behavior: 'smooth',
+          });
+        } else {
+          renderExerciseCards(filteredArr);
+        }
+      }
+    }
+  });
+}
 
 if (window.innerWidth < 768) {
   markup = '';
@@ -157,62 +203,11 @@ if (window.innerWidth < 768) {
   });
 }
 
-exercisesGallery.addEventListener('click', event => {
-  event.preventDefault();
-  if (event.target.className === 'delete-workout-btn') {
-    newStorageFetch = localStorage.getItem(KEY);
-    actualExercisesList = JSON.parse(newStorageFetch);
-    const filteredArr = actualExercisesList.filter(
-      card => card._id !== event.target.id
-    );
-    localStorage.setItem(KEY, JSON.stringify(filteredArr));
-
-    if (filteredArr.length === 0) {
-      hideElem(exercisesGallery);
-      showElem(exercisesNotFound);
-      window.scrollBy({
-        top: 700,
-        behavior: 'smooth',
-      });
-      if (window.innerWidth < 768) {
-        hideElem(mobilePagination);
-      }
-    } else {
-      if (window.innerWidth < 768) {
-        totalPages = Math.ceil(filteredArr.length / limitPerPage);
-        markup = '';
-        for (let i = 1; i <= totalPages; i++) {
-          if (i === Number(currentPage)) {
-            markup += `
-              <li>
-                <button class="favorites-pagination-button fav-active-page" type="button" id="${i}">${i}</button>
-              </li>`;
-          } else {
-            markup += `
-              <li>
-                <button class="favorites-pagination-button" type="button" id="${i}">${i}</button>
-              </li>`;
-          }
-        }
-        mobilePagination.innerHTML = markup;
-        lastIdx = currentPage * limitPerPage;
-        firstIdx = lastIdx - limitPerPage;
-        renderExerciseCards(filteredArr.slice(firstIdx, lastIdx));
-        window.scrollBy({
-          top: 700,
-          behavior: 'smooth',
-        });
-      } else {
-        renderExerciseCards(filteredArr);
-      }
-    }
-  }
-});
-
 export const renderFavorites = () => {
   savedInStorageExercises = JSON.parse(localStorage.getItem(KEY)) || {};
   if (!savedInStorageExercises || savedInStorageExercises.length === 0) {
     hideElem(exercisesGallery);
+    showElem(exercisesNotFound);
   } else {
     hideElem(exercisesNotFound);
     renderExerciseCards(savedInStorageExercises);
