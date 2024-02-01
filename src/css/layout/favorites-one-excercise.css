@@ -63,7 +63,7 @@
 
 .start-button-wrap {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .start-arrow-icon {
