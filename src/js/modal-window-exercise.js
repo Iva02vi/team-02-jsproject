@@ -46,7 +46,7 @@ export async function renderExercise(id) {
       }
     }
 
-    document.getElementsByClassName('imgGif')[0].src = exerciseModalData.gifUrl;
+    document.getElementsByClassName('img-gif')[0].src = exerciseModalData.gifUrl;
     document.getElementsByClassName('modal-title')[0].innerHTML =
       exerciseModalData.name;
     document.getElementsByClassName(

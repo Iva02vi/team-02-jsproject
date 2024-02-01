@@ -52,6 +52,9 @@ const submitFormHandler = async event => {
       position: 'topRight',
       icon: '',
       zindex: 9999999999,
+      messageColor: 'var(--white)',
+      backgroundColor: 'var(--dark-gray)',
+      position: 'topRight',
     });
     giveRatingForm.reset();
     showModalExercise();
