@@ -33,7 +33,7 @@ import{o as L}from"./assets/mob-menu-fc4d99a8.js";import"./assets/vendor-8cce918
               </p>
           </div>
         </div>
-      </li>`,"");l.innerHTML=i}$===null||p.length===0?h(l):(h(w),u(p));l.addEventListener("click",async t=>{let i;const e=t.target;e&&e.closest(".workout-box")&&(i=e.closest(".workout-box").getAttribute("id"),await L(i))});if(window.innerWidth<768){a="",r.innerHTML="";for(let t=1;t<=m;t++)t===1?a+=`
+      </li>`,"");l.innerHTML=i}$===null||p.length===0?h(l):(h(w),u(p));l.addEventListener("click",async t=>{let i;const e=t.target;e.className!=="delete-workout-btn"&&e&&e.closest(".workout-box")&&(i=e.closest(".workout-box").getAttribute("id"),await L(i))});if(window.innerWidth<768){a="",r.innerHTML="";for(let t=1;t<=m;t++)t===1?a+=`
         <li>
           <button class="favorites-pagination-button fav-active-page" type="button" id="${t}">${t}</button>
         </li>`:a+=`
