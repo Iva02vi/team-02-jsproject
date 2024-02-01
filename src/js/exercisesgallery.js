@@ -172,7 +172,6 @@ async function getListExercisesByName(queryParams) {
       pageButtonsContainer.innerHTML = '';
       const ratingRow = ratingStarRow(image.rating);
       const ratingNumber = Number(image.rating).toFixed(1);
-      const name = adjustLengthName(image.name);
       return (
         html +
         `<li class="gallery-item-list" >
@@ -195,7 +194,7 @@ async function getListExercisesByName(queryParams) {
                         <svg  width="24" height="24" aria-label="run-man">
                             <use href=${svgLigthUrl}></use>
                         </svg>
-                        <p class="workout-name-item">${name}</p>
+                        <p class="workout-name-item">${image.name}</p>
                     </div>
                 <div class="workout-items-box">
                 
@@ -432,28 +431,6 @@ function adjustLimit() {
   return 8;
 }
 
-function adjustLengthName(name) {
-  const widthScreen = document.documentElement.clientWidth;
-  let fontSize = 20;
-  let boxWidth = 295;
-  let factor = 0.7;
-  if (widthScreen >= 1440) {
-    fontSize = 24;
-    boxWidth = 424;
-    factor = 0.85;
-  } else if (widthScreen >= 768) {
-    fontSize = 24;
-    boxWidth = 313;
-    factor = 0.8;
-  }
-
-  const maxCharacters = (boxWidth / (fontSize / 2)) * factor;
-  if (name.length > maxCharacters) {
-    return name.slice(0, maxCharacters) + '...';
-  }
-  return name;
-}
-
 closeErrorMessage();
 handleFilter(defaultFilter);
 
@@ -475,11 +452,9 @@ function handleWindowResize() {
   if (windowWidth >= 1440) {
     switch (toggle) {
       case 'filter':
-        exercisesGallery.style.cssText = '';
         exercisesGallery.style.rowGap = '40px';
         break;
       case 'workout':
-        exercisesGallery.style.cssText = '';
         exercisesGallery.style.rowGap = '28px';
         break;
       default:

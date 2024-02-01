@@ -61,8 +61,6 @@
 
 .exercises-item-background {
   position: relative;
-  width: 295px;
-  height: 232px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
@@ -274,12 +272,12 @@
 .workout-name-item {
   color: var(--black);
   font-size: 20px;
-  font-weight: 400;
-  line-height: 1.3em;
+  line-height: 1.33;
   margin-left: 16px;
+  max-width: 223px;
   overflow: hidden;
   text-overflow: ellipsis;
-  /******RENAMED****/
+  white-space: nowrap;
 }
 .workout-name-item::first-letter,
 .description-item-value::first-letter {
@@ -310,10 +308,6 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
-}
-workout-name::first-letter,
-.description-item-value::first-letter {
-  text-transform: capitalize;
 }
 
 @media screen and (min-width: 768px) {
@@ -387,6 +381,10 @@ workout-name::first-letter,
     width: 16px;
     height: 16px;
   }
+
+  .workout-name-item {
+    max-width: 239px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -416,5 +414,9 @@ workout-name::first-letter,
   .gallery-item-list {
     width: 424px;
     height: 141px;
+  }
+
+  .workout-name-item {
+    max-width: 352px;
   }
 }
