@@ -49,7 +49,7 @@ import{o as O}from"./assets/mob-menu-1dada32a.js";/* empty css                  
     </li>`);return n.insertAdjacentHTML("beforeend",t.join("")),e}function y(e,t){let r="";g.innerHTML="";for(let s=1;s<=e;s++)s==t?r+=`<li>
       <button class="page-button active" type="button" id="${s}">${s}</button>
     </li>`:r+=`<li>
-      <button class="page-button" type="button" id="${s}">${s}</button>`;g.insertAdjacentHTML("afterbegin",r)}function X(e){document.querySelectorAll(".page-button").forEach(r=>{if(r.id===e)switch(r.classList.add("active"),f){case"filter":i.page=e,K();break;case"workout":v=e;const s={limit:q(),page:v};s[l.content]=l.title,$(s);break}else r.classList.remove("active")})}function Z(){document.documentElement.clientWidth>=1440?(i.page=1,i.limit=12):(i.page=1,i.limit=8)}function ee(){L(),H(),n.innerHTML="",g.innerHTML=""}function te(e){let t="";e=Math.floor(e);for(let r=0;r<e;r++)t+=`
+      <button class="page-button" type="button" id="${s}">${s}</button>`;g.insertAdjacentHTML("afterbegin",r)}function X(e){document.querySelectorAll(".page-button").forEach(r=>{if(r.id===e)switch(r.classList.add("active"),f){case"filter":i.page=e,K();break;case"workout":v=e;const s={limit:q(),page:v};s[l.content]=l.title,$(s);break}else r.classList.remove("active")})}function Z(){document.documentElement.clientWidth>=1440?(i.page=1,i.limit=12):(i.page=1,i.limit=8)}function ee(){L(),H(),n.innerHTML="",g.innerHTML=""}function te(e){let t="";e=Math.round(e);for(let r=0;r<e;r++)t+=`
         <span class="rating-star-icon">
             <svg class="rating-star" width="18" height="18" aria-label="rating-star">
                    <use href=${G}></use>
