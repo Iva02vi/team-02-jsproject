@@ -40,7 +40,7 @@ export async function renderExercise(id) {
         </li>`;
       } else {
         stars.innerHTML += `<li>
-          <svg class="modal-rating-stars-svg" width="18" height="18">
+          <svg class="modal-rating-stars-svg-unselected" width="18" height="18">
             <use href=${svgStarUrl}></use>
           </svg>
         </li>`;
