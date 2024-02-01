@@ -324,7 +324,7 @@ function cleanAll() {
 
 function ratingStarRow(rating) {
   let row = '';
-  rating = Math.floor(rating);
+  rating = Math.round(rating);
   for (let index = 0; index < rating; index++) {
     row += `
         <span class="rating-star-icon">
