@@ -98,9 +98,11 @@ if (storageFetch === null || savedInStorageExercises.length === 0) {
 exercisesGallery.addEventListener('click', async event => {
   let id;
   const clickedButton = event.target;
-  if (clickedButton && clickedButton.closest('.workout-box')) {
-    id = clickedButton.closest('.workout-box').getAttribute('id');
-    await openModalWindEx(id);
+  if (clickedButton.className !== 'delete-workout-btn') {
+    if (clickedButton && clickedButton.closest('.workout-box')) {
+      id = clickedButton.closest('.workout-box').getAttribute('id');
+      await openModalWindEx(id);
+    }
   }
 });
 
