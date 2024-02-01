@@ -39,10 +39,6 @@ function showElem(elem) {
   }
 }
 
-if (window.innerWidth < 768) {
-  showElem(mobilePagination);
-}
-
 function renderExerciseCards(arr) {
   exercisesGallery.innerHTML = '';
   const galleryItems = arr.reduce(
@@ -108,7 +104,7 @@ function renderExerciseCards(arr) {
         card => card._id !== event.target.id
       );
       localStorage.setItem(KEY, JSON.stringify(filteredArr));
-  
+
       if (filteredArr.length === 0) {
         hideElem(exercisesGallery);
         showElem(exercisesNotFound);
@@ -152,58 +148,62 @@ function renderExerciseCards(arr) {
   });
 }
 
-if (window.innerWidth < 768) {
-  markup = '';
-  mobilePagination.innerHTML = '';
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === 1) {
-      markup += `
-        <li>
-          <button class="favorites-pagination-button fav-active-page" type="button" id="${i}">${i}</button>
-        </li>`;
-    } else {
-      markup += `
-        <li>
-          <button class="favorites-pagination-button" type="button" id="${i}">${i}</button>
-        </li>`;
-    }
-  }
-  mobilePagination.innerHTML = markup;
-
-  renderExerciseCards(savedInStorageExercises.slice(firstIdx, lastIdx));
-
-  mobilePagination.addEventListener('click', event => {
-    event.preventDefault();
-    if (event.target.classList.value.includes('favorites-pagination-button')) {
-      currentPage = event.target.id;
-      lastIdx = currentPage * limitPerPage;
-      firstIdx = lastIdx - limitPerPage;
-      newStorageFetch = localStorage.getItem(KEY);
-      actualExercisesList = JSON.parse(newStorageFetch);
-      renderExerciseCards(actualExercisesList.slice(firstIdx, lastIdx));
-
-      const clickedButton = event.target.closest(
-        '.favorites-pagination-button'
-      );
-      paginationButtons = document.querySelectorAll(
-        '.favorites-pagination-button'
-      );
-      paginationButtons.forEach(button => {
-        if (button.id === clickedButton.id) {
-          button.classList.add('fav-active-page');
-        } else {
-          button.classList.remove('fav-active-page');
-        }
-      });
-      window.scrollBy({
-        top: 700,
-        behavior: 'smooth',
-      });
-    }
-  });
-}
-
 export const renderFavorites = () => {
+  if (window.innerWidth < 768) {
+    showElem(mobilePagination);
+  }
+
+  if (window.innerWidth < 768) {
+    markup = '';
+    mobilePagination.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1) {
+        markup += `
+          <li>
+            <button class="favorites-pagination-button fav-active-page" type="button" id="${i}">${i}</button>
+          </li>`;
+      } else {
+        markup += `
+          <li>
+            <button class="favorites-pagination-button" type="button" id="${i}">${i}</button>
+          </li>`;
+      }
+    }
+    mobilePagination.innerHTML = markup;
+  
+    renderExerciseCards(savedInStorageExercises.slice(firstIdx, lastIdx));
+  
+    mobilePagination.addEventListener('click', event => {
+      event.preventDefault();
+      if (event.target.classList.value.includes('favorites-pagination-button')) {
+        currentPage = event.target.id;
+        lastIdx = currentPage * limitPerPage;
+        firstIdx = lastIdx - limitPerPage;
+        newStorageFetch = localStorage.getItem(KEY);
+        actualExercisesList = JSON.parse(newStorageFetch);
+        renderExerciseCards(actualExercisesList.slice(firstIdx, lastIdx));
+  
+        const clickedButton = event.target.closest(
+          '.favorites-pagination-button'
+        );
+        paginationButtons = document.querySelectorAll(
+          '.favorites-pagination-button'
+        );
+        paginationButtons.forEach(button => {
+          if (button.id === clickedButton.id) {
+            button.classList.add('fav-active-page');
+          } else {
+            button.classList.remove('fav-active-page');
+          }
+        });
+        window.scrollBy({
+          top: 700,
+          behavior: 'smooth',
+        });
+      }
+    });
+  }
+  
   savedInStorageExercises = JSON.parse(localStorage.getItem(KEY)) || {};
   if (!savedInStorageExercises || savedInStorageExercises.length === 0) {
     hideElem(exercisesGallery);
