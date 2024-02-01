@@ -1,7 +1,7 @@
 .exercises-gallery-background {
   background: var(--light-gray);
   padding: 40px 20px;
-  border-radius: 50px;
+  border-radius: 30px;
   margin-bottom: 16px;
   width: 100%;
 }
@@ -158,18 +158,23 @@
 
 /* **************WORKOUTSPACE******** */
 .gallery-item-list {
+  width: 295px;
+  height: 165px;
+  background-color: var(--white);
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.gallery-button-item {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  width: 295px;
-  height: 165px;
-  border-radius: 15px;
-  background-color: var(--white);
-  padding: 16px 16px 16px 16px;
-  box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  /*****RENAMED****/
+  padding: 16px;
+  border-color: transparent;
+  background-color: transparent;
 }
 
 .gallery-item-list:hover {
@@ -188,15 +193,12 @@
   display: flex;
   flex-direction: row;
   gap: 16px;
-  /****RENAMED****/
 }
 
 .workout-items-box {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  /*  RENAMED */
 }
 
 .rating-title-item {
@@ -208,8 +210,6 @@
   font-weight: 400;
   line-height: 1.5;
   align-items: center;
-
-  /*** RENAMED ***/
 }
 
 .workout-header {
@@ -239,28 +239,11 @@
 
   justify-content: center;
   align-items: center;
-
-  /*RENAMED*/
 }
 
 .start-button-wrap {
   display: flex;
   align-items: flex-start;
-}
-
-.start-button-item {
-  color: var(--black);
-
-  height: 18px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.28;
-  border-color: transparent;
-  background-color: transparent;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  /******RENAMED****/
 }
 
 /* ------WORKOUT TYPE STYLES -------*/
@@ -312,8 +295,10 @@
 
 @media screen and (min-width: 768px) {
   .exercises-gallery-background {
+    border-radius: 50px;
     padding: 64px 48px;
   }
+
   .exercises-gallery-label {
     font-size: 44px;
   }
