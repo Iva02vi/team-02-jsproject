@@ -156,6 +156,7 @@ export const renderFavorites = () => {
   if (window.innerWidth < 768) {
     markup = '';
     mobilePagination.innerHTML = '';
+    totalPages = Math.ceil(savedInStorageExercises.length / limitPerPage);
     for (let i = 1; i <= totalPages; i++) {
       if (i === 1) {
         markup += `
