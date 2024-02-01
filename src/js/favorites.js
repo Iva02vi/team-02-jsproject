@@ -100,8 +100,8 @@ if (storageFetch === null || savedInStorageExercises.length === 0) {
 exercisesGallery.addEventListener('click', async event => {
   let id;
   const clickedButton = event.target;
-  if (clickedButton && clickedButton.closest('.start-button')) {
-    id = clickedButton.closest('.start-button').getAttribute('id');
+  if (clickedButton && clickedButton.closest('.start-button-item')) {
+    id = clickedButton.closest('.start-button-item').getAttribute('id');
     await openModalWindEx(id);
   }
 });
