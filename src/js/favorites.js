@@ -24,7 +24,7 @@ let markup = '';
 let newStorageFetch;
 let actualExercisesList;
 let paginationButtons;
-let totalPages = Math.ceil(savedInStorageExercises.length / limitPerPage);
+let totalPages;
 
 function hideElem(elem) {
   elem.style.display = 'none';
