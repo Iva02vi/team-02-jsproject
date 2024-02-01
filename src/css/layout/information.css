@@ -19,6 +19,7 @@
   padding: 6px;
   width: 32px;
   height: 32px;
+  fill: var(--white-smoke);
 }
 
 .information-section-text-container {
