@@ -2,8 +2,9 @@ import axios from 'axios';
 import iziToast from 'izitoast';
 
 import { prepareGiveRatingModal } from './give-rating';
+import { renderFavorites } from './favorites';
 
-const svgStarUrl = new URL('/img/sprite.svg#icon-Star-1', import.meta.url);
+const svgStarUrl = new URL('/img/sprite.svg#icon-Star-2', import.meta.url);
 const backDrop = document.querySelector('.backdrop');
 
 export async function openModalWindEx(id) {
@@ -31,9 +32,9 @@ export async function renderExercise(id) {
     stars.innerHTML = exerciseModalData.rating;
 
     for (let i = 1; i <= 5; i++) {
-      if (i < exerciseModalData.rating) {
+      if (i <= Math.round(+exerciseModalData.rating)) {
         stars.innerHTML += `<li>
-          <svg class="modal-rating-stars-svg" width="18" height="18">
+          <svg class="modal-rating-stars-svg-active" width="18" height="18">
             <use href=${svgStarUrl}></use>
           </svg>
         </li>`;
@@ -46,7 +47,8 @@ export async function renderExercise(id) {
       }
     }
 
-    document.getElementsByClassName('img-gif')[0].src = exerciseModalData.gifUrl;
+    document.getElementsByClassName('img-gif')[0].src =
+      exerciseModalData.gifUrl;
     document.getElementsByClassName('modal-title')[0].innerHTML =
       exerciseModalData.name;
     document.getElementsByClassName(
@@ -79,11 +81,8 @@ export async function renderExercise(id) {
       exercise => exercise._id === exerciseModalData._id
     );
 
-    if (index !== -1) {
-      addToFavoritesText.innerText = 'Remove from favorites';
-    } else {
-      addToFavoritesText.innerText = 'Add to favorites';
-    }
+    addToFavoritesText.innerText =
+      index !== -1 ? 'Remove from favorites' : 'Add to favorites';
 
     addToFavoritesBtn.addEventListener('click', addToFavoritesClickHandler);
 
@@ -95,7 +94,7 @@ export async function renderExercise(id) {
       const index = favorites.findIndex(
         exercise => exercise._id === exerciseModalData._id
       );
-
+      
       if (index !== -1) {
         favorites.splice(index, 1);
         addToFavoritesText.innerText = 'Add to favorites';
@@ -125,6 +124,9 @@ export async function renderExercise(id) {
     closeBtn.addEventListener('click', closeModal);
 
     function closeModal() {
+      if (location.pathname.includes('favorites.html')) {
+        renderFavorites();
+      }
       backDrop.classList.remove('is-open');
       addToFavoritesBtn.removeEventListener(
         'click',
