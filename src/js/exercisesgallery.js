@@ -174,43 +174,42 @@ async function getListExercisesByName(queryParams) {
       const ratingNumber = Number(image.rating).toFixed(1);
       return (
         html +
-        `<li class="gallery-item-list" >
-                <div class="workout-header-wrap">
-                        <div class="workout-and-rating">
-                            <p class="workout-item-title">WORKOUT</p>
-                            <p class="rating-title-item">${ratingNumber}
-                                ${ratingRow}
-                            </p>
-                            </div>
-                        <div class="start-button-wrap">
-                            <button type="button" class="start-button-item" data-exercise-id=${image._id}>Start
-                                <svg class="start-workout-icon" width="14" height="14" aria-label="start-arrow">
-                                    <use href=${svgArrowUrl}></use>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                       <div class="workout-type-item">
-                        <svg  width="24" height="24" aria-label="run-man">
-                            <use href=${svgLigthUrl}></use>
-                        </svg>
-                        <p class="workout-name-item">${image.name}</p>
-                    </div>
-                <div class="workout-items-box">
-                
-                 
-                    <div class="workout-description">
-                        <p class="description-item-name">Burned calories:
-                            <span class="description-item-value">${image.burnedCalories} / ${image.time} min</span>
-                        </p>
-                        <p class="description-item-name">Body part:
-                            <span class="description-item-value">${image.bodyPart}</span>
-                        </p>
-                        <p class="description-item-name">Target:
-                            <span class="description-item-value">${image.target}</span>
-                        </p>
-                    </div> 
-            </li>`
+        `<li class="gallery-item-list">
+          <button type="button" class="gallery-button-item" data-exercise-id=${image._id}>
+              <div class="workout-header-wrap">
+                  <div class="workout-and-rating">
+                    <p class="workout-item-title">WORKOUT</p>
+                    <p class="rating-title-item">${ratingNumber}
+                        ${ratingRow}
+                    </p>
+                  </div>
+                  <div class="start-button-wrap">Start
+                      <svg class="start-workout-icon" width="14" height="14" aria-label="start-arrow">
+                          <use href=${svgArrowUrl}></use>
+                      </svg>
+                  </div>
+              </div>
+              <div class="workout-type-item">
+                <svg  width="24" height="24" aria-label="run-man">
+                    <use href=${svgLigthUrl}></use>
+                </svg>
+                <p class="workout-name-item">${image.name}</p>
+              </div>
+              <div class="workout-items-box">
+
+              <div class="workout-description">
+                  <p class="description-item-name">Burned calories:
+                      <span class="description-item-value">${image.burnedCalories} / ${image.time} min</span>
+                  </p>
+                  <p class="description-item-name">Body part:
+                      <span class="description-item-value">${image.bodyPart}</span>
+                  </p>
+                  <p class="description-item-name">Target:
+                      <span class="description-item-value">${image.target}</span>
+                  </p>
+              </div> 
+            </button>
+          </li>`
       );
     }, '');
 
@@ -222,9 +221,9 @@ async function getListExercisesByName(queryParams) {
     exercisesGallery.addEventListener('click', async event => {
       let id;
       const clickedButton = event.target;
-      if (event.target && event.target.closest('.start-button-item')) {
+      if (clickedButton && clickedButton.closest('.gallery-button-item')) {
         id = clickedButton
-          .closest('.start-button-item')
+          .closest('.gallery-button-item')
           .getAttribute('data-exercise-id');
         await openModalWindEx(id);
       }

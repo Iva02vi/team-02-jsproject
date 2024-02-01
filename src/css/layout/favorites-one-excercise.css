@@ -1,10 +1,20 @@
-.workout-box {
-  max-width: 295px;
+.gallery-list-item {
   border-radius: 15px;
   background-color: var(--white);
+  box-shadow: 5px 5px 10px rgba(27, 27, 27, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.workout-box {
+  max-width: 295px;
   display: flex;
   flex-direction: column;
   padding: 16px;
+}
+
+.gallery-list-item:hover {
+  box-shadow: 5px 10px 15px var(--dark-gray);
+  cursor: pointer;
 }
 
 /* ------WORKOUT HEADER STYLES------- */
@@ -54,20 +64,6 @@
 .start-button-wrap {
   display: flex;
   align-items: flex-start;
-}
-
-.start-button-item {
-  color: var(--black);
-  width: 54px;
-  height: 18px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.28;
-  border-color: transparent;
-  background-color: transparent;
-  padding: 0;
-  display: flex;
-  align-items: center;
 }
 
 .start-arrow-icon {
@@ -131,14 +127,6 @@
   .workout-box {
     max-width: 313px;
     height: 165px;
-  }
-
-  .start-button-item {
-    width: 61px;
-    height: 24px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--black);
   }
 
   .start-arrow-icon {
